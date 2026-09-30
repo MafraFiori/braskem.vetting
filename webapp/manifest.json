@@ -1,0 +1,127 @@
+{
+  "_version": "1.60.0",
+  "sap.app": {
+    "id": "braskem.zui5vetting",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.33.0",
+      "toolsId": "9e6d1645-cfb1-4ba0-adbd-08cb423d782e"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZGW_VETTING_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "zui5_vetting-Display": {
+          "semanticObject": "zui5_vetting",
+          "action": "Display",
+          "title": "{{zui5_vetting-Display.flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.120.39",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "braskem.zui5vetting.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {}
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "braskem.zui5vetting.view",
+        "async": true,
+        "viewPath": "braskem.zui5vetting.view"
+      },
+      "routes": [
+        {
+          "name": "RouteWelcome",
+          "pattern": ":?query:",
+          "target": [
+            "TargetWelcome"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetWelcome": {
+          "id": "Welcome",
+          "name": "Welcome"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "braskem.zui5vetting.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}

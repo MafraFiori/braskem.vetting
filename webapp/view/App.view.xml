@@ -1,0 +1,7 @@
+<mvc:View controllerName="braskem.zui5vetting.controller.App"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <App id="app">
+    </App>
+</mvc:View>

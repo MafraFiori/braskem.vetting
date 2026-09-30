@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZGW_VETTING_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Questionnaires" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdQuest"/>
+                    <PropertyRef Name="LoginOwner"/>
+                </Key>
+                <Property Name="IdQuest" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false"/>
+                <Property Name="LoginOwner" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false"/>
+                <Property Name="DtQuest" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Changed On"/>
+                <Property Name="HrQuest" Type="Edm.Time" Precision="0" sap:unicode="false" sap:label="Changed At"/>
+                <Property Name="StVettQuest" Type="Edm.String" MaxLength="2" sap:unicode="false"/>
+                <Property Name="IdVetting" Type="Edm.String" MaxLength="10" sap:unicode="false"/>
+                <Property Name="History" Type="Edm.Boolean" sap:unicode="false" sap:label="Indicator"/>
+                <Property Name="StVettQuestDesc" Type="Edm.String" MaxLength="10" sap:unicode="false"/>
+            </EntityType>
+            <EntityType Name="Questionnaires_1" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdQuest"/>
+                </Key>
+                <Property Name="IdQuest" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false"/>
+                <Property Name="LoginOwner" Type="Edm.String" MaxLength="20" sap:unicode="false"/>
+                <Property Name="StatusQuest" Type="Edm.String" MaxLength="2" sap:unicode="false"/>
+                <Property Name="DtQuest" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="HrQuest" Type="Edm.Time" Precision="0" sap:unicode="false"/>
+                <Property Name="ReqName" Type="Edm.String" MaxLength="30" sap:unicode="false"/>
+                <Property Name="ReqSmtp" Type="Edm.String" MaxLength="255" sap:unicode="false"/>
+                <Property Name="Quest11" Type="Edm.String" MaxLength="3" sap:unicode="false"/>
+                <Property Name="Quest111" Type="Edm.String" MaxLength="30" sap:unicode="false"/>
+                <Property Name="Quest121" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Port"/>
+                <Property Name="Quest122" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Port"/>
+                <Property Name="Quest123" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Port"/>
+                <Property Name="Quest124" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Port"/>
+                <Property Name="Quest125" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Port"/>
+                <Property Name="Quest131" Type="Edm.String" MaxLength="20" sap:unicode="false"/>
+                <Property Name="Quest132" Type="Edm.String" MaxLength="20" sap:unicode="false"/>
+                <Property Name="Quest133" Type="Edm.String" MaxLength="20" sap:unicode="false"/>
+                <Property Name="Quest134" Type="Edm.String" MaxLength="20" sap:unicode="false"/>
+                <Property Name="Quest135" Type="Edm.String" MaxLength="20" sap:unicode="false"/>
+                <Property Name="Quest14" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest15" Type="Edm.String" MaxLength="30" sap:unicode="false"/>
+                <Property Name="Quest16" Type="Edm.String" MaxLength="3" sap:unicode="false"/>
+                <Property Name="Quest17" Type="Edm.String" MaxLength="4" sap:unicode="false"/>
+                <Property Name="Quest21" Type="Edm.String" MaxLength="50" sap:unicode="false"/>
+                <Property Name="Quest22" Type="Edm.String" MaxLength="30" sap:unicode="false"/>
+                <Property Name="Quest23" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest24" Type="Edm.String" MaxLength="50" sap:unicode="false"/>
+                <Property Name="Quest25" Type="Edm.String" MaxLength="3" sap:unicode="false"/>
+                <Property Name="Quest251" Type="Edm.String" MaxLength="20" sap:unicode="false"/>
+                <Property Name="Quest26" Type="Edm.String" MaxLength="2" sap:unicode="false"/>
+                <Property Name="Quest27" Type="Edm.Decimal" Precision="6" Scale="3" sap:unicode="false"/>
+                <Property Name="Quest28" Type="Edm.Decimal" Precision="5" Scale="3" sap:unicode="false"/>
+                <Property Name="Quest29" Type="Edm.Decimal" Precision="5" Scale="3" sap:unicode="false"/>
+                <Property Name="Quest210" Type="Edm.Decimal" Precision="6" Scale="3" sap:unicode="false"/>
+                <Property Name="Quest211" Type="Edm.Decimal" Precision="9" Scale="3" sap:unicode="false"/>
+                <Property Name="Quest212" Type="Edm.Decimal" Precision="9" Scale="3" sap:unicode="false"/>
+                <Property Name="Quest213" Type="Edm.String" MaxLength="50" sap:unicode="false"/>
+                <Property Name="Quest214" Type="Edm.String" MaxLength="2" sap:unicode="false"/>
+                <Property Name="Quest215" Type="Edm.String" MaxLength="2" sap:unicode="false"/>
+                <Property Name="Quest2151" Type="Edm.String" MaxLength="30" sap:unicode="false"/>
+                <Property Name="Quest216" Type="Edm.String" MaxLength="2" sap:unicode="false"/>
+                <Property Name="Quest2161" Type="Edm.String" MaxLength="30" sap:unicode="false"/>
+                <Property Name="Quest216A" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false"/>
+                <Property Name="Quest216B" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false"/>
+                <Property Name="Quest216C" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false"/>
+                <Property Name="Quest31" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest32" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest33" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest34" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest35" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest36" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest37" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest38" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest39" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest310" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest311" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest312" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest313" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest314" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest41" Type="Edm.String" MaxLength="50" sap:unicode="false"/>
+                <Property Name="Quest42" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest43A" Type="Edm.String" MaxLength="15" sap:unicode="false"/>
+                <Property Name="Quest43B" Type="Edm.String" MaxLength="15" sap:unicode="false"/>
+                <Property Name="Quest43C" Type="Edm.String" MaxLength="15" sap:unicode="false"/>
+                <Property Name="Quest43D" Type="Edm.String" MaxLength="15" sap:unicode="false"/>
+                <Property Name="Quest44A" Type="Edm.Decimal" Precision="4" Scale="2" sap:unicode="false"/>
+                <Property Name="Quest44B" Type="Edm.Decimal" Precision="4" Scale="2" sap:unicode="false"/>
+                <Property Name="Quest44C" Type="Edm.Decimal" Precision="4" Scale="2" sap:unicode="false"/>
+                <Property Name="Quest44D" Type="Edm.Decimal" Precision="4" Scale="2" sap:unicode="false"/>
+                <Property Name="Quest45A" Type="Edm.Decimal" Precision="4" Scale="2" sap:unicode="false"/>
+                <Property Name="Quest45B" Type="Edm.Decimal" Precision="4" Scale="2" sap:unicode="false"/>
+                <Property Name="Quest45C" Type="Edm.Decimal" Precision="4" Scale="2" sap:unicode="false"/>
+                <Property Name="Quest45D" Type="Edm.Decimal" Precision="4" Scale="2" sap:unicode="false"/>
+                <Property Name="Quest46A" Type="Edm.String" MaxLength="2" sap:unicode="false"/>
+                <Property Name="Quest46B" Type="Edm.String" MaxLength="2" sap:unicode="false"/>
+                <Property Name="Quest46C" Type="Edm.String" MaxLength="2" sap:unicode="false"/>
+                <Property Name="Quest46D" Type="Edm.String" MaxLength="2" sap:unicode="false"/>
+                <Property Name="Quest47" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest471" Type="Edm.String" MaxLength="255" sap:unicode="false"/>
+                <Property Name="Quest48" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest51" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest52" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest53" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest54" Type="Edm.String" MaxLength="5" sap:unicode="false"/>
+                <Property Name="Quest61" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest611" Type="Edm.String" MaxLength="40" sap:unicode="false"/>
+                <Property Name="Quest612" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest613" Type="Edm.String" MaxLength="70" sap:unicode="false"/>
+                <Property Name="Quest62" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest621" Type="Edm.String" MaxLength="40" sap:unicode="false"/>
+                <Property Name="Quest622" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest623" Type="Edm.String" MaxLength="70" sap:unicode="false"/>
+                <Property Name="Quest63" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest64" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest65" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest66" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest661" Type="Edm.String" MaxLength="70" sap:unicode="false"/>
+            </EntityType>
+            <EntityType Name="Questionnaires_2" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdQuest"/>
+                </Key>
+                <Property Name="IdQuest" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false"/>
+                <Property Name="Quest7_1" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest7_1_1" Type="Edm.String" MaxLength="70" sap:unicode="false"/>
+                <Property Name="Quest7_2" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest7_3" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest7_4" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest7_5" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest8_1" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest811" Type="Edm.String" MaxLength="70" sap:unicode="false"/>
+                <Property Name="Quest8_2" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest8_3" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest8_4" Type="Edm.String" MaxLength="3" sap:unicode="false"/>
+                <Property Name="Quest8_5" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest8_6" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest8_7" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest8_8" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest8_8_1" Type="Edm.String" MaxLength="70" sap:unicode="false"/>
+                <Property Name="Quest8_9" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest8_1_0_A" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_8_1_0_B" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_8_1_0_C" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_8_1_0_D" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_8_1_0_E" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_8_1_1" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_8_1_1_1" Type="Edm.String" MaxLength="70" sap:unicode="false"/>
+                <Property Name="Quest_8_1_2" Type="Edm.String" MaxLength="20" sap:unicode="false"/>
+                <Property Name="Quest_8_1_3" Type="Edm.String" MaxLength="30" sap:unicode="false"/>
+                <Property Name="Quest_8_1_4_A" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_8_1_4_B" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest_8_1_4_C" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_8_1_4_C_1" Type="Edm.String" MaxLength="255" sap:unicode="false"/>
+                <Property Name="Quest_8_1_4_C_2" Type="Edm.String" MaxLength="255" sap:unicode="false"/>
+                <Property Name="Quest_8_1_4_D" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_8_1_4_E" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_9_1" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_9_2" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_9_3" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_9_4" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_9_5" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_9_6" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_9_7" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_10_1" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_10_2" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_10_3" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_11_1_A" Type="Edm.String" MaxLength="50" sap:unicode="false"/>
+                <Property Name="Quest_11_1_B" Type="Edm.String" MaxLength="30" sap:unicode="false"/>
+                <Property Name="Quest_11_1_C" Type="Edm.String" MaxLength="30" sap:unicode="false"/>
+                <Property Name="Quest_11_2_A" Type="Edm.String" MaxLength="50" sap:unicode="false"/>
+                <Property Name="Quest_11_2_B" Type="Edm.String" MaxLength="30" sap:unicode="false"/>
+                <Property Name="Quest_11_2_C" Type="Edm.String" MaxLength="30" sap:unicode="false"/>
+                <Property Name="Quest_11_3_A" Type="Edm.String" MaxLength="50" sap:unicode="false"/>
+                <Property Name="Quest_11_3_B" Type="Edm.String" MaxLength="30" sap:unicode="false"/>
+                <Property Name="Quest_11_3_C" Type="Edm.String" MaxLength="30" sap:unicode="false"/>
+                <Property Name="Quest_11_4" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest_11_5" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest_11_6" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest_11_7" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_11_7_1" Type="Edm.String" MaxLength="70" sap:unicode="false"/>
+                <Property Name="Quest_11_8" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_11_8_1" Type="Edm.String" MaxLength="40" sap:unicode="false"/>
+                <Property Name="Quest_11_8_2" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest_11_8_3" Type="Edm.String" MaxLength="70" sap:unicode="false"/>
+                <Property Name="Quest_11_8_4" Type="Edm.String" MaxLength="70" sap:unicode="false"/>
+                <Property Name="Quest_12" Type="Edm.Boolean" sap:unicode="false"/>
+                <Property Name="Quest_13_1" Type="Edm.String" MaxLength="50" sap:unicode="false"/>
+                <Property Name="Quest_13_2" Type="Edm.String" MaxLength="50" sap:unicode="false"/>
+                <Property Name="Quest_13_3" Type="Edm.String" MaxLength="30" sap:unicode="false"/>
+                <Property Name="Quest_13_4" Type="Edm.String" MaxLength="30" sap:unicode="false"/>
+                <Property Name="Quest_13_4_1" Type="Edm.DateTime" Precision="7" sap:unicode="false"/>
+                <Property Name="Quest_13_5" Type="Edm.String" MaxLength="20" sap:unicode="false"/>
+                <Property Name="Quest_13_6" Type="Edm.String" MaxLength="241" sap:unicode="false"/>
+                <Property Name="Quest_14_1" Type="Edm.String" MaxLength="100" sap:unicode="false"/>
+                <Property Name="Quest_14_2" Type="Edm.String" MaxLength="100" sap:unicode="false"/>
+                <Property Name="Quest_14_3" Type="Edm.String" MaxLength="100" sap:unicode="false"/>
+                <Property Name="Quest_14_4" Type="Edm.String" MaxLength="100" sap:unicode="false"/>
+                <Property Name="Quest_14_5" Type="Edm.String" MaxLength="100" sap:unicode="false"/>
+                <Property Name="Quest_14_6" Type="Edm.String" MaxLength="100" sap:unicode="false"/>
+                <Property Name="Quest_14_7" Type="Edm.String" MaxLength="100" sap:unicode="false"/>
+                <Property Name="Quest_14_8" Type="Edm.String" MaxLength="100" sap:unicode="false"/>
+                <Property Name="Quest_14_9" Type="Edm.String" MaxLength="100" sap:unicode="false"/>
+            </EntityType>
+            <EntityType Name="Questionnaires_files" m:HasStream="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdQuest"/>
+                    <PropertyRef Name="Filetype"/>
+                </Key>
+                <Property Name="IdQuest" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false"/>
+                <Property Name="Filetype" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false"/>
+                <Property Name="Filename" Type="Edm.String" MaxLength="100" sap:unicode="false"/>
+                <Property Name="DescrFiletype" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Text"/>
+                <Property Name="Descricao" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Text"/>
+            </EntityType>
+            <EntityContainer Name="ZGW_VETTING_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="QuestionnairesSet" EntityType="ZGW_VETTING_SRV.Questionnaires" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Questionnaires_1Set" EntityType="ZGW_VETTING_SRV.Questionnaires_1" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Questionnaires_2Set" EntityType="ZGW_VETTING_SRV.Questionnaires_2" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Questionnaires_filesSet" EntityType="ZGW_VETTING_SRV.Questionnaires_files" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <atom:link rel="self" href="/sap/opu/odata/sap/ZGW_VETTING_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="/sap/opu/odata/sap/ZGW_VETTING_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
