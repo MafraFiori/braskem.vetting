@@ -30,8 +30,7 @@
                 enableAutoColumnWidth="true"
                 useTablePersonalisation="true"
                 header="{i18n>Results}"
-                showRowCount="true"
-                initiallyVisibleFields="IdQuest,LoginOwner,DtQuest,HrQuest,StVettQuest,IdVetting,History">
+                showRowCount="true">
                 <smartTable:layoutData>
                     <FlexItemData growFactor="1" baseSize="0%" />
                 </smartTable:layoutData>
