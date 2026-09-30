@@ -17,14 +17,8 @@
                     entitySet="QuestionnairesSet"
                     enableBasicSearch="true"
                     basicSearchFieldName="IdQuest"
-                    persistencyKey="UniqueAndStablePersistencyKey">
-                    <sfb:controlConfiguration>
-                        <sfb:ControlConfiguration key="IdQuest" index="0"
-                            label="Questionnaires" groupId="_BASIC" width="auto"
-                            visibleInAdvancedArea="true">
-                        </sfb:ControlConfiguration>
-                    </sfb:controlConfiguration>
-                </sfb:SmartFilterBar>
+                    persistencyKey="UniqueAndStablePersistencyKey" />
+
             </f:DynamicPageHeader>
         </f:header>
         <f:content>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/sap/ZGW_VETTING_SRV/$metadata">
+        <edmx:Include Namespace="ZGW_VETTING_SRV" Alias="SAP"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="braskem.zui5vetting.annotations">
+
+            <!-- Questionnaires: SmartFilterBar + SmartTable (view Welcome) -->
+            <Annotations Target="SAP.Questionnaires">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>IdQuest</PropertyPath>
+                        <PropertyPath>LoginOwner</PropertyPath>
+                        <PropertyPath>StVettQuest</PropertyPath>
+                        <PropertyPath>IdVetting</PropertyPath>
+                        <PropertyPath>DtQuest</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="IdQuest"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="LoginOwner"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="DtQuest"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="HrQuest"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="StVettQuest"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="IdVetting"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="History"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+            <!-- Labels das propriedades (sobrescrevem sap:label do metadata) -->
+            <Annotations Target="SAP.Questionnaires/IdQuest">
+                <Annotation Term="Common.Label" String="Questionnaire"/>
+            </Annotations>
+            <Annotations Target="SAP.Questionnaires/LoginOwner">
+                <Annotation Term="Common.Label" String="Owner"/>
+            </Annotations>
+            <Annotations Target="SAP.Questionnaires/DtQuest">
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="SAP.Questionnaires/HrQuest">
+                <Annotation Term="Common.Label" String="Changed At"/>
+            </Annotations>
+            <Annotations Target="SAP.Questionnaires/StVettQuest">
+                <Annotation Term="Common.Label" String="Status"/>
+                <Annotation Term="Common.Text" Path="StVettQuestDesc">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst"/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP.Questionnaires/StVettQuestDesc">
+                <Annotation Term="Common.Label" String="Status Description"/>
+            </Annotations>
+            <Annotations Target="SAP.Questionnaires/IdVetting">
+                <Annotation Term="Common.Label" String="Vetting"/>
+            </Annotations>
+            <Annotations Target="SAP.Questionnaires/History">
+                <Annotation Term="Common.Label" String="History"/>
+            </Annotations>
+
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

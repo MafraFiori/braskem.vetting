@@ -20,9 +20,18 @@
         "uri": "/sap/opu/odata/sap/ZGW_VETTING_SRV/",
         "type": "OData",
         "settings": {
-          "annotations": [],
+          "annotations": [
+            "annotation"
+          ],
           "localUri": "localService/mainService/metadata.xml",
           "odataVersion": "2.0"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
         }
       }
     },
@@ -62,7 +71,9 @@
       "minUI5Version": "1.120.39",
       "libs": {
         "sap.m": {},
-        "sap.ui.core": {}
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.ui.comp": {}
       }
     },
     "contentDensities": {
