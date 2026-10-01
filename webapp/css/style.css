@@ -1,1 +1,50 @@
 /* Enter your custom styles here */
+
+/* ===== Questionnaire view ===== */
+
+/* Field block: label above control */
+.vetQuestionnaire .vetField {
+    margin-bottom: 1rem;
+}
+
+.vetQuestionnaire .vetField > .sapMLabel {
+    margin-bottom: 0.25rem;
+}
+
+/* Control widths for fields that span the full row (Figma: 1/4, 1/2 and textarea widths) */
+.vetQuestionnaire .vetCtrlS {
+    width: 100%;
+    max-width: 18rem;
+}
+
+.vetQuestionnaire .vetCtrlM {
+    width: 100%;
+    max-width: 36.5rem;
+}
+
+.vetQuestionnaire .vetCtrlTA {
+    max-width: 23rem;
+}
+
+/* Yes / No radios aligned with the label */
+.vetQuestionnaire .vetYesNo {
+    margin-left: -0.5rem;
+}
+
+/* Nested grid (1.3 Cargo destination port) */
+.vetQuestionnaire .vetInnerGrid {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+}
+
+/* Inline tables (4. Crew Management / 11. Operational History) */
+.vetQuestionnaire .vetGridTable .vetColHeader {
+    font-weight: bold;
+    white-space: pre-line;
+}
+
+.vetQuestionnaire .vetFootnote,
+.vetQuestionnaire .vetRemarks {
+    font-size: 0.75rem;
+    color: var(--sapContent_LabelColor);
+}

@@ -3,9 +3,11 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:form="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
     xmlns:uxap="sap.uxap">
 
     <uxap:ObjectPageLayout
+        class="vetQuestionnaire"
         upperCaseAnchorBar="false"
         showFooter="false"
         headerContentPinnable="true"
@@ -72,12 +74,12 @@
                     <form:formContainers>
                         <form:FormContainer>
                             <form:FormElement label="Braskem contact">
-                                <Input value="" editable="false" />
+                                <Input value="" placeholder="Braskem contact name" editable="false" />
                             </form:FormElement>
                         </form:FormContainer>
                         <form:FormContainer>
                             <form:FormElement label="Braskem contact e-mail">
-                                <Input value="" editable="false" />
+                                <Input value="" placeholder="email@braskem.com" editable="false" />
                             </form:FormElement>
                         </form:FormContainer>
                     </form:formContainers>
@@ -87,79 +89,1020 @@
 
         <!-- SEÇÕES -->
         <uxap:sections>
+            <!-- 1. Ship Nomination -->
             <uxap:ObjectPageSection titleUppercase="false" title="1. Ship Nomination">
                 <uxap:subSections>
-                    <uxap:ObjectPageSubSection title="1.1. Intended type of operation" titleUppercase="false">
+                    <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <Text text="Conteúdo 1.1" />
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection>
-                    <uxap:ObjectPageSubSection title="1.2. Terminal intended for Braskem operations" titleUppercase="false">
-                        <uxap:blocks>
-                            <Text text="Conteúdo 1.2" />
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection>
-					<uxap:ObjectPageSubSection title="1.3. Cargo destination port" titleUppercase="false">
-                        <uxap:blocks>
-                            <Text text="Conteúdo 1.2" />
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection><uxap:ObjectPageSubSection title="1.4. Estimated date of arrival" titleUppercase="false">
-                        <uxap:blocks>
-                            <Text text="Conteúdo 1.2" />
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection><uxap:ObjectPageSubSection title="1.5. Product" titleUppercase="false">
-                        <uxap:blocks>
-                            <Text text="Conteúdo 1.2" />
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection><uxap:ObjectPageSubSection title="1.6. Transit time" titleUppercase="false">
-                        <uxap:blocks>
-                            <Text text="Conteúdo 1.2" />
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection><uxap:ObjectPageSubSection title="1.7. Type of contract" titleUppercase="false">
-                        <uxap:blocks>
-                            <Text text="Conteúdo 1.2" />
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                                <l:content>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="1.1. Intended type of operation" required="true" wrapping="true" />
+                                        <Select width="100%" forceSelection="false" class="vetCtrlS">
+                                            <items>
+                                                <core:Item key="LOADING" text="LOADING" />
+                                                <core:Item key="DISCHARGE" text="DISCHARGE" />
+                                                <core:Item key="SHIP TO SHIP" text="SHIP TO SHIP" />
+                                                <core:Item key="LOADING / DISCHARGE" text="LOADING / DISCHARGE" />
+                                            </items>
+                                        </Select>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="1.2. Terminal intended for Braskem operations" required="true" wrapping="true" />
+                                        <Select width="100%" forceSelection="false" class="vetCtrlM" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="1.3. Cargo destination port" required="true" wrapping="true" />
+                                        <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0.5" hSpacing="1" class="vetInnerGrid">
+                                            <l:content>
+                                                <Input />
+                                                <Input />
+                                                <Input />
+                                                <Input>
+                                                    <layoutData><l:GridData linebreakXL="true" linebreakL="true" /></layoutData>
+                                                </Input>
+                                                <Input />
+                                            </l:content>
+                                        </l:Grid>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="1.4. Estimated date of arrival" required="true" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="1.5. Product" required="true" wrapping="true" />
+                                        <Select width="100%" forceSelection="false" class="vetCtrlM" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="1.6. Transit time" required="true" wrapping="true" />
+                                        <Input type="Number" placeholder="0000" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="1.7. Type of Contract" required="true" wrapping="true" />
+                                        <Select width="100%" forceSelection="false" class="vetCtrlS" />
+                                    </VBox>
+                                </l:content>
+                            </l:Grid>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>
             </uxap:ObjectPageSection>
 
-            <uxap:ObjectPageSection titleUppercase="false" title="1. Ship Nomination">
+            <!-- 2. General Information -->
+            <uxap:ObjectPageSection titleUppercase="false" title="2. General Information">
                 <uxap:subSections>
-                    <uxap:ObjectPageSubSection title="1.1. Intended type of operation" titleUppercase="false">
+                    <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <Text text="Conteúdo 1.1" />
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection>
-                    <uxap:ObjectPageSubSection title="1.2. Terminal intended for Braskem operations" titleUppercase="false">
-                        <uxap:blocks>
-                            <Text text="Conteúdo 1.2" />
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection>
-					<uxap:ObjectPageSubSection title="1.3. Cargo destination port" titleUppercase="false">
-                        <uxap:blocks>
-                            <Text text="Conteúdo 1.2" />
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection><uxap:ObjectPageSubSection title="1.4. Estimated date of arrival" titleUppercase="false">
-                        <uxap:blocks>
-                            <Text text="Conteúdo 1.2" />
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection><uxap:ObjectPageSubSection title="1.5. Product" titleUppercase="false">
-                        <uxap:blocks>
-                            <Text text="Conteúdo 1.2" />
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection><uxap:ObjectPageSubSection title="1.6. Transit time" titleUppercase="false">
-                        <uxap:blocks>
-                            <Text text="Conteúdo 1.2" />
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection><uxap:ObjectPageSubSection title="1.7. Type of contract" titleUppercase="false">
-                        <uxap:blocks>
-                            <Text text="Conteúdo 1.2" />
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                                <l:content>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="2.1. Vessel's name" required="true" wrapping="true" />
+                                        <Input placeholder="Vessel's Name" class="vetCtrlM" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
+                                        <Label text="2.2. IMO/LR Number" required="true" wrapping="true" />
+                                        <Input placeholder="12345678" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
+                                        <Label text="2.3. Delivered date" required="true" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL6 L6 M12 S12" /></layoutData>
+                                        <Label text="2.4. Owner" required="true" wrapping="true" />
+                                        <Input placeholder="Owner's Name" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="2.5. Type of vessel (chemical tanker, gas carrier, etc.)" required="true" wrapping="true" />
+                                        <Select width="100%" forceSelection="false" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="2.6. Hull and bottom configuration" required="true" wrapping="true" />
+                                        <Select width="100%" forceSelection="false" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
+                                        <Label text="2.7. Length over all (m)" required="true" wrapping="true" />
+                                        <Input type="Number" placeholder="123456789" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
+                                        <Label text="2.8. Beam (m)" required="true" wrapping="true" />
+                                        <Input type="Number" placeholder="123456789" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
+                                        <Label text="2.9. Summer draft" required="true" wrapping="true" />
+                                        <Input type="Number" placeholder="123456789" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
+                                        <Label text="2.10. Keel-to-masthead height (m)" required="true" wrapping="true" />
+                                        <Input type="Number" placeholder="123456789" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
+                                        <Label text="2.11. Maximum displacement (MT)" required="true" wrapping="true" />
+                                        <Input type="Number" placeholder="123456789" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
+                                        <Label text="2.12. Deadweight (MT)" required="true" wrapping="true" />
+                                        <Input type="Number" placeholder="123456789" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL6 L6 M12 S12" /></layoutData>
+                                        <Label text="2.13. Technical operator" required="true" wrapping="true" />
+                                        <Input placeholder="Ship manager name" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="2.14. How long has the technical operator been responsible for the vessel? (years)" required="true" wrapping="true" />
+                                        <Input type="Number" placeholder="e.g. 10" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="2.15. Classification society" required="true" wrapping="true" />
+                                        <Select width="100%" forceSelection="false" class="vetCtrlM" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="2.16. P&amp;I Club, full name" wrapping="true" />
+                                        <Select width="100%" forceSelection="false" class="vetCtrlM">
+                                            <items>
+                                                <core:Item key="Not Applicable" text="Not Applicable" />
+                                                <core:Item key="Others" text="Others" />
+                                            </items>
+                                        </Select>
+                                    </VBox>
+                                </l:content>
+                            </l:Grid>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>
             </uxap:ObjectPageSection>
 
-            <!-- Sections 3, 4, 5 no mesmo padrão, sempre com algo dentro de blocks -->
+            <!-- 3. Certification (Enter expiry date) -->
+            <uxap:ObjectPageSection titleUppercase="false" title="3. Certification (Enter expiry date)">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <l:Grid defaultSpan="XL4 L4 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                                <l:content>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <Label text="3.1. Certificate of Class - expiry date" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <Label text="3.2. International Load Line Certificate - expiry date" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <Label text="3.3. Cargo Ship Safety Construction Certificate - expiry date" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <Label text="3.4. Cargo Ship Safety Equipment Certificate - expiry date" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <Label text="3.5. Cargo Ship Safety Radio Certificate - expiry date" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <Label text="3.6. Document of Compliance (DOC/ISM) - expiry date" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <Label text="3.7. Safety Management Certificate (SMC/ISM) - expiry date" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <Label text="3.8. International Ship Security Certificate (ISSC/ISPS) - expiry date" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <Label text="3.9. International Oil Pollution Prevention Certificate (IOPPC) - expiry date" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <Label text="3.10. International Sewage Pollution Prevention Certificate (ISPP Certificate) - expiry date" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <Label text="3.11. International Air Pollution Prevention Certificate (IAPP Certificate) - expiry date" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="3.12. International Pollution Prevention Certificate for the Carriage of Noxious Liquid Substances in Bulk (NLS Certificate / IBC Code) - expiry date" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="3.13. Certificate of Fitness for the Carriage of Dangerous Chemicals or Liquefied Gases in Bulk (IBC/IGC Code) - expiry date" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="3.14. Civil Liability Convention (CLC) Certificate - expiry date" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                </l:content>
+                            </l:Grid>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <!-- 4. Crew Management -->
+            <uxap:ObjectPageSection titleUppercase="false" title="4. Crew Management">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                                <l:content>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="4.1. Number of persons on board, including officers and ratings" required="true" wrapping="true" />
+                                        <Input type="Number" placeholder="1234" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="4.2. Does the owner or technical operator ensure implementation of and compliance with a OCIMF-aligned Drug and Alcohol Policy?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Table class="vetGridTable" backgroundDesign="Transparent">
+                                            <columns>
+                                                <Column width="30%"><Text text="Officers Qualification" class="vetColHeader" /></Column>
+                                                <Column><Text text="Master" class="vetColHeader" /></Column>
+                                                <Column><Text text="C Officer" class="vetColHeader" /></Column>
+                                                <Column><Text text="C. Eng." class="vetColHeader" /></Column>
+                                                <Column><Text text="1st Eng." class="vetColHeader" /></Column>
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem vAlign="Middle">
+                                                    <cells>
+                                                        <Label text="4.3. Nationality" required="true" wrapping="true" />
+                                                        <Input />
+                                                        <Input />
+                                                        <Input />
+                                                        <Input />
+                                                    </cells>
+                                                </ColumnListItem>
+                                                <ColumnListItem vAlign="Middle">
+                                                    <cells>
+                                                        <Label text="4.4. Years in rank (sea time)" required="true" wrapping="true" />
+                                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" />
+                                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" />
+                                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" />
+                                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" />
+                                                    </cells>
+                                                </ColumnListItem>
+                                                <ColumnListItem vAlign="Middle">
+                                                    <cells>
+                                                        <Label text="4.5. Experience on this type of vessel (chemical tanker, gas carrier or other), in years" required="true" wrapping="true" />
+                                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" />
+                                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" />
+                                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" />
+                                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" />
+                                                    </cells>
+                                                </ColumnListItem>
+                                                <ColumnListItem vAlign="Middle">
+                                                    <cells>
+                                                        <Label text="4.6. English proficiency (good, fair, poor)" required="true" wrapping="true" />
+                                                        <Select width="100%" forceSelection="false">
+                                                            <items>
+                                                                <core:Item key="GOOD" text="Good" />
+                                                                <core:Item key="FAIR" text="Fair" />
+                                                                <core:Item key="POOR" text="Poor" />
+                                                            </items>
+                                                        </Select>
+                                                        <Select width="100%" forceSelection="false">
+                                                            <items>
+                                                                <core:Item key="GOOD" text="Good" />
+                                                                <core:Item key="FAIR" text="Fair" />
+                                                                <core:Item key="POOR" text="Poor" />
+                                                            </items>
+                                                        </Select>
+                                                        <Select width="100%" forceSelection="false">
+                                                            <items>
+                                                                <core:Item key="GOOD" text="Good" />
+                                                                <core:Item key="FAIR" text="Fair" />
+                                                                <core:Item key="POOR" text="Poor" />
+                                                            </items>
+                                                        </Select>
+                                                        <Select width="100%" forceSelection="false">
+                                                            <items>
+                                                                <core:Item key="GOOD" text="Good" />
+                                                                <core:Item key="FAIR" text="Fair" />
+                                                                <core:Item key="POOR" text="Poor" />
+                                                            </items>
+                                                        </Select>
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="4.7. Are the crew familiarization process and competency assessment completed before crew members assume their duties?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="4.8. Do all officers and ratings on board hold valid certificates and licenses appropriate to their ranks and qualifications, in accordance with the STCW Convention?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                </l:content>
+                            </l:Grid>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <!-- 5. Safety Management -->
+            <uxap:ObjectPageSection titleUppercase="false" title="5. Safety Management">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                                <l:content>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="5.1. Date of the most recent class survey" required="true" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="5.2. Date of the most recent dry dock" required="true" wrapping="true" />
+                                        <HBox alignItems="Center" wrap="Wrap">
+                                            <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS sapUiSmallMarginEnd" />
+                                            <CheckBox text="In case of not applicable" />
+                                        </HBox>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="5.3. Date of the ship superintendent's most recent visit on board" required="true" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="5.4. Confirm that, until completion of the operation, the vessel can provide safe access from a launch using the accommodation ladder alone, without a combination arrangement (accommodation ladder plus pilot ladder)." required="true" wrapping="true" />
+                                        <Input class="vetCtrlS" />
+                                    </VBox>
+                                </l:content>
+                            </l:Grid>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <!-- 6. Pollution Prevention -->
+            <uxap:ObjectPageSection titleUppercase="false" title="6. Pollution Prevention">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                                <l:content>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="6.1. Has the vessel been involved in any pollution incident during loading or discharge, or in any collision or grounding, within the last 12 months?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="6.2. Has the vessel been involved in any pollution incident during bunkering within the last 12 months?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="6.3. Date of the most recent pollution emergency preparedness drill (SOPEP, SMPEP or OPA 90, as applicable)" required="true" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="6.4. Are the applicable Oil Record Books up to date?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="6.5. Is the vessel equipped and operated in accordance with ISGOTT guidance (ICS/OCIMF)?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="6.6. Does the vessel comply with the fuel-oil sulphur limits applicable to the intended voyage under MARPOL Annex VI and any more stringent regional or local requirements?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                </l:content>
+                            </l:Grid>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <!-- 7. Operating Conditions and Maintenance -->
+            <uxap:ObjectPageSection titleUppercase="false" title="7. Operating Conditions and Maintenance">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                                <l:content>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="7.1. Is the vessel free from any intact stability restrictions?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="7.2. Are the cargo transfer pumps, booster pumps, ballast pumps, stripping system, compressors, cargo tank hatches, valves, piping and all other equipment involved in the operation maintained in satisfactory condition?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="7.3. Are all mooring lines and winches maintained in satisfactory condition?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="7.4. Is the vessel capable of operating at a single-point mooring (SPM) in accordance with the OCIMF Mooring Equipment Guidelines last edition?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="7.5. Is the vessel prepared to conduct ship-to-ship (STS) transfer operation, and does the vessel have on board a valid STS Operation Plan approved by the Flag Administration in accordance with MARPOL Annex I, Regulation 41?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                </l:content>
+                            </l:Grid>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <!-- 8. Cargo and Ballast Control System -->
+            <uxap:ObjectPageSection titleUppercase="false" title="8. Cargo and Ballast Control System">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                                <l:content>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="8.1. Does the cargo manifold comply with OCIMF recommendations?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="8.2. Is the vessel fitted with a vapor return line?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="8.3. Can the loading system be operated as a closed system in accordance with IMO and ISGOTT recommendations?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="8.4. How many cargo grades can simultaneously use the vapor return system?" required="true" wrapping="true" />
+                                        <Input type="Number" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="8.5. Are the cargo and ballast systems fully segregated?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="8.6. Is the vessel fitted with a cargo tank stripping system?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="8.7. Is the vessel fitted with a fully operational inert gas system?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="8.8. Is the vessel fitted with a closed gauging and sampling system?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="8.9. Are the cargo tanks fitted with local gauging systems, and are those systems calibrated and certified?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Title text="8.10. Is the vessel prepared to comply satisfactorily with the procedures for the following activities?" level="H6" titleStyle="H6" wrapping="true" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="a) Cargo transfer while moored or at anchor" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="b) Entry into the cargo pump room" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="c) Entry into cargo tanks" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="d) Entry into enclosed spaces" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="e) Hot work" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="8.11. Is the cargo transfer system effectively protected against backflow and overpressure?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="8.12. What is the maximum discharge rate for a homogeneous cargo through a common line? (m³/h)" required="true" wrapping="true" />
+                                        <Input type="Number" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="8.13. What is the maximum discharge pressure at the manifold when using a common line (kgf/cm²)? What is the normal operating discharge pressure at the manifold when using a common line (kgf/cm²)?" wrapping="true" />
+                                        <TextArea width="100%" rows="3" class="vetCtrlTA" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Title text="8.14. Regarding cargo tank pressure/vacuum relief valves:" level="H6" titleStyle="H6" wrapping="true" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="a) Are the cargo tank pressure/vacuum relief valves fully operational?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="b) Date of the most recent test" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="c) Is maintenance of the pressure/vacuum relief valves included in the Planned Maintenance System (PMS)?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="c.1) Describe the maintenance task and frequency, or provide the reason for its absence." required="true" wrapping="true" />
+                                        <TextArea width="100%" rows="3" class="vetCtrlTA" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="d) Are the officers aware of the valve settings?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="e) Do the officers know how to close or isolate the valves in an emergency?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                </l:content>
+                            </l:Grid>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <!-- 9. Procedures and Manuals -->
+            <uxap:ObjectPageSection titleUppercase="false" title="9. Procedures and Manuals">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                                <l:content>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="9.1. Does the vessel have written procedures on board for sea-going and inland navigation, as applicable, in accordance with IMO requirements?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="9.2. Does the vessel have written procedures for safe entry into potentially hazardous spaces, such as cargo pump rooms, cargo tanks and cofferdams, in accordance with ISGOTT guidance?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="9.3. Are clear cargo and ballast handling procedures available on board?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="9.4. Are manuals for navigation, cargo handling and pollution prevention available on board?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="9.5. Is the crew aware of the hazards associated with cargo tank cleaning and of the toxicity of the products carried?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="9.6. Is the crew aware of the requirements for controlling the cargo tank atmosphere during tank-cleaning operations?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="9.7. Is the crew aware of the risks of static electricity and the applicable precautions and procedures?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                </l:content>
+                            </l:Grid>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <!-- 10. Emergency and Firefighting -->
+            <uxap:ObjectPageSection titleUppercase="false" title="10. Emergency and Firefighting">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                                <l:content>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="10.1. Does all emergency and firefighting equipment on board comply with applicable local and international regulations?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="10.2. Is the vessel prepared to respond to cargo leakage or overflow?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="10.3. Are all responsible personnel familiar with the emergency procedures for leakage, spillage and fire?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                </l:content>
+                            </l:Grid>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <!-- 11. Operational and Inspection History -->
+            <uxap:ObjectPageSection titleUppercase="false" title="11. Operational and Inspection History">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                                <l:content>
+                                    <VBox>
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Table class="vetGridTable" backgroundDesign="Transparent">
+                                            <columns>
+                                                <Column width="40%"><Text text="Most recent cargo operation:&#10;cargo, load port and discharge port" class="vetColHeader" /></Column>
+                                                <Column><Text text="Cargo" class="vetColHeader" /></Column>
+                                                <Column><Text text="Load Port" class="vetColHeader" /></Column>
+                                                <Column><Text text="Discharge Port" class="vetColHeader" /></Column>
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem vAlign="Middle">
+                                                    <cells>
+                                                        <Label text="11.1. Most recent cargo operation: cargo, load port and discharge port" wrapping="true" />
+                                                        <Input />
+                                                        <Input />
+                                                        <Input />
+                                                    </cells>
+                                                </ColumnListItem>
+                                                <ColumnListItem vAlign="Middle">
+                                                    <cells>
+                                                        <Label text="11.2. Second most recent cargo operation: cargo, load port and discharge port" wrapping="true" />
+                                                        <Input />
+                                                        <Input />
+                                                        <Input />
+                                                    </cells>
+                                                </ColumnListItem>
+                                                <ColumnListItem vAlign="Middle">
+                                                    <cells>
+                                                        <Label text="11.3. Third most recent cargo operation: cargo, load port and discharge port" wrapping="true" />
+                                                        <Input />
+                                                        <Input />
+                                                        <Input />
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>
+                                        <Text text="(*) List the last three Ports, at least." class="vetFootnote sapUiTinyMarginTop" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Title text="Last Inspection Dates" level="H6" titleStyle="H6" wrapping="true" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="11.4. Date of the most recent CDI inspection" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="11.5. Date of the most recent SIRE inspection" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="11.6. Date of the most recent Port State Control (PSC) inspection" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" class="vetCtrlS" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="11.7. Were any deficiencies recorded during a Port State Control inspection within the last six months?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="11.8. Has the vessel been detained by Port State Control within the last 12 months?" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                </l:content>
+                            </l:Grid>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <!-- 12. Awareness -->
+            <uxap:ObjectPageSection titleUppercase="false" title="12. Awareness">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                                <l:content>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <Label text="Are the owner, technical operator and master aware that, under applicable Brazilian law, accidents causing environmental pollution may constitute environmental crimes subject to substantial fines and imprisonment?" required="true" wrapping="true" />
+                                        <RadioButtonGroup columns="2" selectedIndex="-1" class="vetYesNo">
+                                            <RadioButton text="Yes" />
+                                            <RadioButton text="No" />
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                </l:content>
+                            </l:Grid>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <!-- 13. Person Responsible for Completing this Questionnaire -->
+            <uxap:ObjectPageSection titleUppercase="false" title="13. Person Responsible for Completing this Questionnaire">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                                <l:content>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL6 L6 M12 S12" /></layoutData>
+                                        <Label text="Name of the person responsible for completing this questionnaire" wrapping="true" />
+                                        <Input placeholder="Person's Name" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL6 L6 M12 S12" /></layoutData>
+                                        <Label text="Company" wrapping="true" />
+                                        <Input placeholder="Company's Name" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL6 L6 M12 S12" /></layoutData>
+                                        <Label text="Position / role" wrapping="true" />
+                                        <Input placeholder="Person's Role" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL6 L6 M12 S12" /></layoutData>
+                                        <Label text="Place" wrapping="true" />
+                                        <Input placeholder="Place" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
+                                        <Label text="Date" wrapping="true" />
+                                        <DatePicker placeholder="mm/dd/yyyy" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
+                                        <Label text="Telephone number" wrapping="true" />
+                                        <Input type="Tel" />
+                                    </VBox>
+                                    <VBox class="vetField">
+                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
+                                        <Label text="Email address" wrapping="true" />
+                                        <Input type="Email" placeholder="email@company.com" />
+                                    </VBox>
+                                    <VBox>
+                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <FormattedText class="vetRemarks"
+                                            htmlText="&lt;strong&gt;Remarks&lt;/strong&gt;: Although this Questionnaire has been absolutely filled out, and the vessel is showing to be up to date, taking into account the presented reports validity, and fitting with all requirements and rules, as for the licenses, certificates and Inspection reports carried out according to CDI, SIRE, OCIMF, Port State Control, possessing also a valid Vetting Questionnaire issued by any other Company, the vessel may be inspected by Braskem Vetting Team or by any other appointed Surveyor, according to Braskem discretion. This inspection can be carried out prior chartering contract signature at any place worldwide, or when the vessel arrives to any Braskem installation for the first operation call, by means of physical and structural equipment maintenance, safety and operational condition as well as crew qualification. Vessels under a third party contract may also be inspected by Braskem Vetting Team, following the same criteria not only for the inspection but also for the vessel acceptance to operate at Braskem installations." />
+                                    </VBox>
+                                </l:content>
+                            </l:Grid>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <!-- 14. Documents Upload -->
+            <uxap:ObjectPageSection titleUppercase="false" title="14. Documents Upload">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <Table items="{path: 'documents>/', templateShareable: false}" noDataText="No documents uploaded">
+                                <headerToolbar>
+                                    <OverflowToolbar style="Clear">
+                                        <ToolbarSpacer />
+                                        <Button text="Add Document" icon="sap-icon://add" type="Emphasized" />
+                                    </OverflowToolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column><Text text="Filename" /></Column>
+                                    <Column><Text text="Type" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Description" /></Column>
+                                    <Column hAlign="End" width="7rem"><Text text="Actions" /></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem vAlign="Middle">
+                                        <cells>
+                                            <Link text="{documents>Filename}" />
+                                            <Text text="{documents>Type}" />
+                                            <Text text="{documents>Description}" />
+                                            <HBox justifyContent="End">
+                                                <Button icon="sap-icon://download" type="Transparent" tooltip="Download" />
+                                                <Button icon="sap-icon://delete" type="Transparent" tooltip="Delete" />
+                                            </HBox>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
         </uxap:sections>
     </uxap:ObjectPageLayout>
 </mvc:View>
