@@ -3,7 +3,16 @@
   "sap.app": {
     "id": "braskem.zui5vetting",
     "type": "application",
-    "i18n": "i18n/i18n.properties",
+    "i18n": {
+      "bundleName": "braskem.zui5vetting.i18n.i18n",
+      "supportedLocales": [
+        "",
+        "en",
+        "pt",
+        "es"
+      ],
+      "fallbackLocale": "en"
+    },
     "applicationVersion": {
       "version": "0.0.1"
     },
@@ -86,7 +95,14 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "braskem.zui5vetting.i18n.i18n"
+          "bundleName": "braskem.zui5vetting.i18n.i18n",
+          "supportedLocales": [
+            "",
+            "en",
+            "pt",
+            "es"
+          ],
+          "fallbackLocale": "en"
         }
       },
       "": {
