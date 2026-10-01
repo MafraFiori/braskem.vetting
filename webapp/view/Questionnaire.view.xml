@@ -1,47 +1,165 @@
 <mvc:View controllerName="braskem.zui5vetting.controller.Questionnaire"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m"
-	xmlns:core="sap.ui.core"
-	xmlns:f="sap.f"
-	xmlns:smartForm="sap.ui.comp.smartform"
-	xmlns:smartField="sap.ui.comp.smartfield"
->
-	<f:DynamicPage showFooter="true" backgroundDesign="Transparent">
-		<f:title>
-			<f:DynamicPageTitle>
-				<f:breadcrumbs>
-					<Breadcrumbs currentLocationText="{i18n>pages.VettingQuestionnaires}">
-						<Link text="{i18n>menu.Welcome}" press="navTo('RouteWelcome')" />
-					</Breadcrumbs>
-				</f:breadcrumbs>
-				<f:heading>
-					<Title text="{i18n>pages.VettingQuestionnaires}" />
-				</f:heading>
-				<f:snappedTitleOnMobile>
-					<Title text="{i18n>pages.VettingQuestionnaires}" />
-				</f:snappedTitleOnMobile>
-				<f:actions>
-					<Button
-						text="Save and submit"
-						type="Emphasized"
-						press=".toggleAreaPriority" />
-					<Button
-						text="Save draft"
-						type="Transparent" />
-				</f:actions>
-			</f:DynamicPageTitle>
-		</f:title>
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:uxap="sap.uxap">
 
-		<f:content>
-			<VBox justifyContent="SpaceBetween">
+    <uxap:ObjectPageLayout
+        upperCaseAnchorBar="false"
+        showFooter="false"
+        headerContentPinnable="true"
+        toggleHeaderOnTitleClick="true">
 
-				<MessageStrip
-					text="The responsible person for filling in, declare under the penalties of the law, that the information provided in this form is complete and undertakes to submit, when requested, the original documents."
-					type="Information"
-					showIcon="true"
-					class="sapUiMediumMarginBottom">
-</MessageStrip>
-			</VBox>
-		</f:content>
-	</f:DynamicPage>
-</mvc:View> 
+        <!-- TÍTULO -->
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+                <uxap:breadcrumbs>
+                    <Breadcrumbs currentLocationText="{i18n>pages.VettingQuestionnaires}">
+                        <Link text="{i18n>menu.Welcome}" press="navTo('RouteWelcome')" />
+                    </Breadcrumbs>
+                </uxap:breadcrumbs>
+                <uxap:heading>
+                    <Title text="{i18n>pages.VettingQuestionnaires}" />
+                </uxap:heading>
+                <uxap:actions>
+                    <Button text="Save and submit" type="Emphasized" press=".toggleAreaPriority" />
+                    <Button text="Save draft" type="Transparent" />
+                </uxap:actions>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+
+        <!-- HEADER (colapsável) -->
+        <uxap:headerContent>
+            <VBox width="100%">
+                <MessageStrip
+                    text="The responsible person for filling in, declare under the penalties of the law, that the information provided in this form is complete and undertakes to submit, when requested, the original documents."
+                    type="Information"
+                    showIcon="true"
+                    class="sapUiSmallMarginBottom" />
+
+                <form:Form>
+                    <form:layout>
+                        <form:ResponsiveGridLayout labelSpanXL="5" labelSpanL="5" labelSpanM="12" labelSpanS="12"
+                            adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+                            columnsXL="3" columnsL="3" columnsM="3" singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer>
+                            <form:FormElement label="Technical Operator/Owner">
+                                <Text text="VET_00654" />
+                            </form:FormElement>
+                        </form:FormContainer>
+                        <form:FormContainer>
+                            <form:FormElement label="ID Questionnaire">
+                                <Text text="006372" />
+                            </form:FormElement>
+                        </form:FormContainer>
+                        <form:FormContainer>
+                            <form:FormElement label="ID Vetting">
+                                <Text text="" />
+                            </form:FormElement>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+
+                <form:Form>
+                    <form:layout>
+                        <form:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="12" labelSpanS="12"
+                            adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+                            columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer>
+                            <form:FormElement label="Braskem contact">
+                                <Input value="" editable="false" />
+                            </form:FormElement>
+                        </form:FormContainer>
+                        <form:FormContainer>
+                            <form:FormElement label="Braskem contact e-mail">
+                                <Input value="" editable="false" />
+                            </form:FormElement>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+            </VBox>
+        </uxap:headerContent>
+
+        <!-- SEÇÕES -->
+        <uxap:sections>
+            <uxap:ObjectPageSection titleUppercase="false" title="1. Ship Nomination">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection title="1.1. Intended type of operation" titleUppercase="false">
+                        <uxap:blocks>
+                            <Text text="Conteúdo 1.1" />
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                    <uxap:ObjectPageSubSection title="1.2. Terminal intended for Braskem operations" titleUppercase="false">
+                        <uxap:blocks>
+                            <Text text="Conteúdo 1.2" />
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+					<uxap:ObjectPageSubSection title="1.3. Cargo destination port" titleUppercase="false">
+                        <uxap:blocks>
+                            <Text text="Conteúdo 1.2" />
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection><uxap:ObjectPageSubSection title="1.4. Estimated date of arrival" titleUppercase="false">
+                        <uxap:blocks>
+                            <Text text="Conteúdo 1.2" />
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection><uxap:ObjectPageSubSection title="1.5. Product" titleUppercase="false">
+                        <uxap:blocks>
+                            <Text text="Conteúdo 1.2" />
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection><uxap:ObjectPageSubSection title="1.6. Transit time" titleUppercase="false">
+                        <uxap:blocks>
+                            <Text text="Conteúdo 1.2" />
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection><uxap:ObjectPageSubSection title="1.7. Type of contract" titleUppercase="false">
+                        <uxap:blocks>
+                            <Text text="Conteúdo 1.2" />
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection titleUppercase="false" title="1. Ship Nomination">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection title="1.1. Intended type of operation" titleUppercase="false">
+                        <uxap:blocks>
+                            <Text text="Conteúdo 1.1" />
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                    <uxap:ObjectPageSubSection title="1.2. Terminal intended for Braskem operations" titleUppercase="false">
+                        <uxap:blocks>
+                            <Text text="Conteúdo 1.2" />
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+					<uxap:ObjectPageSubSection title="1.3. Cargo destination port" titleUppercase="false">
+                        <uxap:blocks>
+                            <Text text="Conteúdo 1.2" />
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection><uxap:ObjectPageSubSection title="1.4. Estimated date of arrival" titleUppercase="false">
+                        <uxap:blocks>
+                            <Text text="Conteúdo 1.2" />
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection><uxap:ObjectPageSubSection title="1.5. Product" titleUppercase="false">
+                        <uxap:blocks>
+                            <Text text="Conteúdo 1.2" />
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection><uxap:ObjectPageSubSection title="1.6. Transit time" titleUppercase="false">
+                        <uxap:blocks>
+                            <Text text="Conteúdo 1.2" />
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection><uxap:ObjectPageSubSection title="1.7. Type of contract" titleUppercase="false">
+                        <uxap:blocks>
+                            <Text text="Conteúdo 1.2" />
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <!-- Sections 3, 4, 5 no mesmo padrão, sempre com algo dentro de blocks -->
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+</mvc:View>
