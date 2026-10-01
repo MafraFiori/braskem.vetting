@@ -1,4 +1,4 @@
-<mvc:View controllerName="braskem.zui5vetting.controller.Welcome"
+<mvc:View xmlns:table="sap.ui.table" controllerName="braskem.zui5vetting.controller.Welcome"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:f="sap.f"
@@ -15,7 +15,7 @@
                     search="cmd:Enter"
                     id="smartFilterBar"
                     entitySet="QuestionnairesSet"
-                    enableBasicSearch="true"
+                    enableBasicSearch="false"
                     basicSearchFieldName="IdQuest"
                     persistencyKey="UniqueAndStablePersistencyKey" />
 
@@ -34,6 +34,27 @@
                 <smartTable:layoutData>
                     <FlexItemData growFactor="1" baseSize="0%" />
                 </smartTable:layoutData>
+                <smartTable:customToolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <Button text="Create questionnaire" icon="sap-icon://add" 
+                        press="onCreateQuestionnaires"/>
+                        <Button text="Refresh page" icon="sap-icon://synchronize"
+                            press="onRefreshPage" />
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+                <Table growing="true" growingThreshold="100" mode="None" id="table2"
+                    enableBusyIndicator="true" busyIndicatorDelay="100">
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Button icon="sap-icon:/show" />
+                                <Button icon="sap-icon:/edit" />
+                                <Button icon="sap-icon:/copy" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
             </smartTable:SmartTable>
         </f:content>
     </f:DynamicPage>

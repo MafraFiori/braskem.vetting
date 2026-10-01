@@ -119,12 +119,23 @@
           "target": [
             "TargetWelcome"
           ]
+        },
+        {
+          "name": "RouteCreateQuestionnaires",
+          "pattern": "CreateQuestionnaires",
+          "target": [
+            "TargetCreateQuestionnaires"
+          ]
         }
       ],
       "targets": {
         "TargetWelcome": {
           "id": "Welcome",
           "name": "Welcome"
+        },
+        "TargetCreateQuestionnaires": {
+          "id": "CreateQuestionnaires",
+          "name": "Questionnaire"
         }
       }
     },
