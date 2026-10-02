@@ -1,0 +1,38 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog id="appMessageDialog"
+            resizable="true"
+            contentHeight="24rem"
+            contentWidth="28rem"
+            verticalScrolling="false">
+        <customHeader>
+            <Bar id="appMessageDialogBar">
+                <contentLeft>
+                    <Button id="appMessageBackButton"
+                            icon="sap-icon://nav-back"
+                            visible="false"
+                            press=".onMessageBackPress" />
+                </contentLeft>
+                <contentMiddle>
+                    <Title id="appMessageDialogTitle" text="{i18n>messages.title}" level="H1" />
+                </contentMiddle>
+            </Bar>
+        </customHeader>
+        <content>
+            <MessageView id="appMessageView"
+                         showDetailsPageHeader="false"
+                         itemSelect=".onMessageItemSelect"
+                         items="{path: 'messages>/messages', templateShareable: true}">
+                <items>
+                    <MessageItem type="{messages>type}"
+                                 title="{messages>title}"
+                                 subtitle="{messages>date}"
+                                 description="{messages>description}" />
+                </items>
+            </MessageView>
+        </content>
+        <buttons>
+            <Button id="appMessageClearButton" text="{i18n>messages.clear}" press=".onMessageClearPress" />
+            <Button id="appMessageDialogCloseButton" text="{i18n>messages.close}" type="Emphasized" press=".onMessageDialogClosePress" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>
