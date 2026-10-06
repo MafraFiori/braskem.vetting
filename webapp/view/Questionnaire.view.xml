@@ -36,8 +36,9 @@
                         text="{= ${messages>/messages}.length > 0 ? ${messages>/messages}.length : '' }"
                         tooltip="{i18n>messages.title}"
                         press=".onMessagePopoverPress" />
-                    <Button text="{i18n>common.saveAndSubmit}" type="Emphasized" press="onSaveSubmit" />
-                    <Button text="{i18n>common.saveDraft}" type="Transparent" press="onSaveDraft"/>
+                    <Button text="{i18n>common.saveAndSubmit}" type="Emphasized"
+                        press="onSaveSubmit" />
+                    <Button text="{i18n>common.saveDraft}" type="Transparent" press="onSaveDraft" />
                 </uxap:actions>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
@@ -53,8 +54,10 @@
 
                 <form:Form>
                     <form:layout>
-                        <form:ResponsiveGridLayout labelSpanXL="5" labelSpanL="5" labelSpanM="12" labelSpanS="12"
-                            adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+                        <form:ResponsiveGridLayout labelSpanXL="5" labelSpanL="5" labelSpanM="12"
+                            labelSpanS="12"
+                            adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+                            emptySpanS="0"
                             columnsXL="3" columnsL="3" columnsM="3" singleContainerFullSize="false" />
                     </form:layout>
                     <form:formContainers>
@@ -78,19 +81,25 @@
 
                 <form:Form>
                     <form:layout>
-                        <form:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="12" labelSpanS="12"
-                            adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+                        <form:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="12"
+                            labelSpanS="12"
+                            adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+                            emptySpanS="0"
                             columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false" />
                     </form:layout>
                     <form:formContainers>
                         <form:FormContainer>
                             <form:FormElement label="{i18n>questionnaire.braskemContact}">
-                                <Input value="{q1>ReqName}" placeholder="{i18n>questionnaire.placeholder.braskemContactName}" editable="false" />
+                                <Input value="{q1>ReqName}"
+                                    placeholder="{i18n>questionnaire.placeholder.braskemContactName}"
+                                    editable="false" />
                             </form:FormElement>
                         </form:FormContainer>
                         <form:FormContainer>
                             <form:FormElement label="{i18n>questionnaire.braskemContactEmail}">
-                                <Input value="{q1>ReqSmtp}" placeholder="{i18n>questionnaire.placeholder.braskemEmail}" editable="false" />
+                                <Input value="{q1>ReqSmtp}"
+                                    placeholder="{i18n>questionnaire.placeholder.braskemEmail}"
+                                    editable="false" />
                             </form:FormElement>
                         </form:FormContainer>
                     </form:formContainers>
@@ -105,66 +114,111 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0"
+                                width="100%">
                                 <l:content>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q1_1}" required="true" wrapping="true" />
-                                        <Select selectedKey="{q1>Quest11}" width="100%" forceSelection="false" class="vetCtrlS">
-                                            <items>
-                                                <core:Item key="LOA" text="{i18n>questionnaire.option.loading}" />
-                                                <core:Item key="DIS" text="{i18n>questionnaire.option.discharge}" />
-                                                <core:Item key="STS" text="{i18n>questionnaire.option.shipToShip}" />
-                                                <core:Item key="LDI" text="{i18n>questionnaire.option.loadingDischarge}" />
-                                            </items>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q1_1}" required="true"
+                                            wrapping="true" />
+                                        <Select selectedKey="{q1>Quest11}" width="100%"
+                                            forceSelection="false" class="vetCtrlS"
+                                            items="{/OperationTypesSet}">
+                                            <core:ListItem key="{CodTipo}" text="{Descricao}" />
                                         </Select>
                                     </VBox>
-                                    <VBox visible="{= ${q1>Quest11} === 'STS' || ${q1>Quest11} === 'LDI' }">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                    <VBox
+                                        visible="{= ${q1>Quest11} === 'STS' || ${q1>Quest11} === 'LDI' }">
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q1_1_1}" required="true" wrapping="true" />
+                                            <Label text="{i18n>questionnaire.q1_1_1}"
+                                                required="true" wrapping="true" />
                                             <Input value="{q1>Quest111}" class="vetCtrlS" />
                                         </VBox>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q1_2}" required="true" wrapping="true" />
-                                        <Select selectedKey="{q1>Quest121}" width="100%" forceSelection="false" class="vetCtrlM" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q1_2}" required="true"
+                                            wrapping="true" />
+                                        <Select selectedKey="{q1>Quest121}" width="100%"
+                                            forceSelection="false" class="vetCtrlS"
+                                            items="{/PonPortosSet}">
+                                            <core:ListItem key="{CodPorto}" text="{Nome}" />
+                                        </Select>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{= ${q1>Quest11} === 'DIS' ? ${i18n>questionnaire.q1_3Origin} : ${i18n>questionnaire.q1_3} }" required="true" wrapping="true" app:requiredMode="any" />
-                                        <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0.5" hSpacing="1" class="vetInnerGrid">
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label
+                                            text="{= ${q1>Quest11} === 'DIS' ? ${i18n>questionnaire.q1_3Origin} : ${i18n>questionnaire.q1_3} }"
+                                            required="true" wrapping="true" app:requiredMode="any" />
+                                        <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true"
+                                            vSpacing="0.5" hSpacing="1" class="vetInnerGrid">
                                             <l:content>
                                                 <Input value="{q1>Quest131}" />
                                                 <Input value="{q1>Quest132}" />
                                                 <Input value="{q1>Quest133}" />
                                                 <Input value="{q1>Quest134}">
-                                                    <layoutData><l:GridData linebreakXL="true" linebreakL="true" /></layoutData>
+                                                    <layoutData>
+                                                        <l:GridData linebreakXL="true"
+                                                            linebreakL="true" />
+                                                    </layoutData>
                                                 </Input>
                                                 <Input value="{q1>Quest135}" />
                                             </l:content>
                                         </l:Grid>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q1_4}" required="true" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest14', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q1_4}" required="true"
+                                            wrapping="true" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest14', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q1_5}" required="true" wrapping="true" />
-                                        <Select selectedKey="{q1>Quest15}" width="100%" forceSelection="false" class="vetCtrlM" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q1_5}" required="true"
+                                            wrapping="true" />
+                                        <Select selectedKey="{q1>Quest15}" width="100%"
+                                            forceSelection="false" class="vetCtrlS"
+                                            items="{/TpCargosSet}">
+                                            <core:ListItem key="{TpCargo}" text="{TpCargo}" />
+                                        </Select>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q1_6}" required="true" wrapping="true" />
-                                        <Input value="{q1>Quest16}" type="Number" placeholder="{i18n>questionnaire.placeholder.transitTime}" class="vetCtrlS" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q1_6}" required="true"
+                                            wrapping="true" />
+                                        <Input value="{q1>Quest16}" type="Number"
+                                            placeholder="{i18n>questionnaire.placeholder.transitTime}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q1_7}" required="true" wrapping="true" />
-                                        <Select selectedKey="{q1>Quest17}" width="100%" forceSelection="false" class="vetCtrlS" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q1_7}" required="true"
+                                            wrapping="true" />
+                                        <Select selectedKey="{q1>Quest17}" width="100%"
+                                            forceSelection="false" class="vetCtrlS"
+                                            items="{/ContractKindsSet}">
+                                            <core:ListItem key="{Valpos}" text="{Ddtext}" />
+                                        </Select>
                                     </VBox>
                                 </l:content>
                             </l:Grid>
@@ -178,113 +232,199 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0"
+                                width="100%">
                                 <l:content>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q2_1}" required="true" wrapping="true" />
-                                        <Input value="{q1>Quest21}" placeholder="{i18n>questionnaire.placeholder.vesselName}" class="vetCtrlM" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q2_1}" required="true"
+                                            wrapping="true" />
+                                        <Input value="{q1>Quest21}"
+                                            placeholder="{i18n>questionnaire.placeholder.vesselName}"
+                                            class="vetCtrlM" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q2_2}" required="true" wrapping="true" />
-                                        <Input value="{q1>Quest22}" placeholder="{i18n>questionnaire.placeholder.imoNumber}" />
+                                        <layoutData>
+                                            <l:GridData span="XL3 L3 M6 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q2_2}" required="true"
+                                            wrapping="true" />
+                                        <Input value="{q1>Quest22}"
+                                            placeholder="{i18n>questionnaire.placeholder.imoNumber}" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q2_3}" required="true" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest23', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" />
+                                        <layoutData>
+                                            <l:GridData span="XL3 L3 M6 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q2_3}" required="true"
+                                            wrapping="true" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest23', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL6 L6 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q2_4}" required="true" wrapping="true" />
-                                        <Input value="{q1>Quest24}" placeholder="{i18n>questionnaire.placeholder.ownerName}" />
+                                        <layoutData>
+                                            <l:GridData span="XL6 L6 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q2_4}" required="true"
+                                            wrapping="true" />
+                                        <Input value="{q1>Quest24}"
+                                            placeholder="{i18n>questionnaire.placeholder.ownerName}" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q2_5}" required="true" wrapping="true" />
-                                        <Select selectedKey="{q1>Quest25}" width="100%" forceSelection="false" class="vetCtrlS" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q2_5}" required="true"
+                                            wrapping="true" />
+                                        <Select selectedKey="{q1>Quest25}" width="100%"
+                                            forceSelection="false" class="vetCtrlS"
+                                            items="{/ContractKindsSet}">
+                                            <core:ListItem key="{Valpos}" text="{Ddtext}" />
+                                        </Select>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q2_6}" required="true" wrapping="true" />
-                                        <Select selectedKey="{q1>Quest26}" width="100%" forceSelection="false" class="vetCtrlS" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q2_6}" required="true"
+                                            wrapping="true" />
+                                        <Select selectedKey="{q1>Quest26}" width="100%"
+                                            forceSelection="false" class="vetCtrlS"
+                                            items="{/HullTypesSet}">
+                                            <core:ListItem key="{Valpos}" text="{Ddtext}" />
+                                        </Select>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q2_7}" required="true" wrapping="true" />
-                                        <Input value="{q1>Quest27}" type="Number" placeholder="{i18n>questionnaire.placeholder.number}" />
+                                        <layoutData>
+                                            <l:GridData span="XL3 L3 M6 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q2_7}" required="true"
+                                            wrapping="true" />
+                                        <Input value="{q1>Quest27}" type="Number"
+                                            placeholder="{i18n>questionnaire.placeholder.number}" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q2_8}" required="true" wrapping="true" />
-                                        <Input value="{q1>Quest28}" type="Number" placeholder="{i18n>questionnaire.placeholder.number}" />
+                                        <layoutData>
+                                            <l:GridData span="XL3 L3 M6 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q2_8}" required="true"
+                                            wrapping="true" />
+                                        <Input value="{q1>Quest28}" type="Number"
+                                            placeholder="{i18n>questionnaire.placeholder.number}" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q2_9}" required="true" wrapping="true" />
-                                        <Input value="{q1>Quest29}" type="Number" placeholder="{i18n>questionnaire.placeholder.number}" />
+                                        <layoutData>
+                                            <l:GridData span="XL3 L3 M6 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q2_9}" required="true"
+                                            wrapping="true" />
+                                        <Input value="{q1>Quest29}" type="Number"
+                                            placeholder="{i18n>questionnaire.placeholder.number}" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q2_10}" required="true" wrapping="true" />
-                                        <Input value="{q1>Quest210}" type="Number" placeholder="{i18n>questionnaire.placeholder.number}" />
+                                        <layoutData>
+                                            <l:GridData span="XL3 L3 M6 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q2_10}" required="true"
+                                            wrapping="true" />
+                                        <Input value="{q1>Quest210}" type="Number"
+                                            placeholder="{i18n>questionnaire.placeholder.number}" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q2_11}" required="true" wrapping="true" />
-                                        <Input value="{q1>Quest211}" type="Number" placeholder="{i18n>questionnaire.placeholder.number}" />
+                                        <layoutData>
+                                            <l:GridData span="XL3 L3 M6 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q2_11}" required="true"
+                                            wrapping="true" />
+                                        <Input value="{q1>Quest211}" type="Number"
+                                            placeholder="{i18n>questionnaire.placeholder.number}" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q2_12}" required="true" wrapping="true" />
-                                        <Input value="{q1>Quest212}" type="Number" placeholder="{i18n>questionnaire.placeholder.number}" />
+                                        <layoutData>
+                                            <l:GridData span="XL3 L3 M6 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q2_12}" required="true"
+                                            wrapping="true" />
+                                        <Input value="{q1>Quest212}" type="Number"
+                                            placeholder="{i18n>questionnaire.placeholder.number}" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL6 L6 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q2_13}" required="true" wrapping="true" />
-                                        <Input value="{q1>Quest213}" placeholder="{i18n>questionnaire.placeholder.shipManagerName}" />
+                                        <layoutData>
+                                            <l:GridData span="XL6 L6 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q2_13}" required="true"
+                                            wrapping="true" />
+                                        <Input value="{q1>Quest213}"
+                                            placeholder="{i18n>questionnaire.placeholder.shipManagerName}" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q2_14}" required="true" wrapping="true" />
-                                        <Input value="{q1>Quest214}" type="Number" placeholder="{i18n>questionnaire.placeholder.years}" class="vetCtrlS" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q2_14}" required="true"
+                                            wrapping="true" />
+                                        <Input value="{q1>Quest214}" type="Number"
+                                            placeholder="{i18n>questionnaire.placeholder.years}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q2_15}" required="true" wrapping="true" />
-                                        <Select selectedKey="{q1>Quest215}" width="100%" forceSelection="false" class="vetCtrlM" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q2_15}" required="true"
+                                            wrapping="true" />
+                                        <Select selectedKey="{q1>Quest215}" width="100%"
+                                            forceSelection="false" class="vetCtrlS"
+                                            items="{/CodSociedClassSet}">
+                                            <core:ListItem key="{Valpos}" text="{Ddtext}" />
+                                        </Select>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q2_16}" wrapping="true" />
-                                        <Select selectedKey="{q1>Quest216}" width="100%" forceSelection="false" class="vetCtrlM">
-                                            <items>
-                                                <core:Item key="NA" text="{i18n>questionnaire.option.notApplicable}" />
-                                                <core:Item key="OT" text="{i18n>questionnaire.option.others}" />
-                                            </items>
+                                        <Select selectedKey="{q1>Quest216}" width="100%"
+                                            forceSelection="false" class="vetCtrlS"
+                                            items="{/CodPicLubSet}">
+                                            <core:ListItem key="{Valpos}" text="{Ddtext}" />
                                         </Select>
                                     </VBox>
                                     <VBox visible="{= ${q1>Quest216} === 'OT' }">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q2_16_1}" required="true" wrapping="true" />
+                                            <Label text="{i18n>questionnaire.q2_16_1}"
+                                                required="true" wrapping="true" />
                                             <Input value="{q1>Quest2161}" class="vetCtrlS" />
                                         </VBox>
                                     </VBox>
-                                    <VBox visible="{= !!${q1>Quest216} &amp;&amp; ${q1>Quest216} !== 'NA' }">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                    <VBox
+                                        visible="{= !!${q1>Quest216} &amp;&amp; ${q1>Quest216} !== 'NA' }">
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q2_16a}" required="true" wrapping="true" />
-                                            <Input value="{q1>Quest216A}" type="Number" class="vetCtrlS" />
+                                            <Label text="{i18n>questionnaire.q2_16a}"
+                                                required="true" wrapping="true" />
+                                            <Input value="{q1>Quest216A}" type="Number"
+                                                class="vetCtrlS" />
                                         </VBox>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q2_16b}" required="true" wrapping="true" />
-                                            <Input value="{q1>Quest216B}" type="Number" class="vetCtrlS" />
+                                            <Label text="{i18n>questionnaire.q2_16b}"
+                                                required="true" wrapping="true" />
+                                            <Input value="{q1>Quest216B}" type="Number"
+                                                class="vetCtrlS" />
                                         </VBox>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q2_16c}" wrapping="true" />
-                                            <Input value="{q1>Quest216C}" type="Number" class="vetCtrlS" />
+                                            <Label text="{i18n>questionnaire.q2_16c}"
+                                                wrapping="true" />
+                                            <Input value="{q1>Quest216C}" type="Number"
+                                                class="vetCtrlS" />
                                         </VBox>
                                     </VBox>
                                 </l:content>
@@ -299,77 +439,148 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <l:Grid defaultSpan="XL4 L4 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                            <l:Grid defaultSpan="XL4 L4 M6 S12" containerQuery="true" vSpacing="0"
+                                width="100%">
                                 <l:content>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL4 L4 M6 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q3_1}" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest31', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest31', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL4 L4 M6 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q3_2}" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest32', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest32', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL4 L4 M6 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q3_3}" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest33', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest33', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL4 L4 M6 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q3_4}" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest34', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest34', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL4 L4 M6 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q3_5}" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest35', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest35', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL4 L4 M6 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q3_6}" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest36', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest36', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL4 L4 M6 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q3_7}" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest37', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest37', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL4 L4 M6 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q3_8}" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest38', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest38', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL4 L4 M6 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q3_9}" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest39', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest39', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL4 L4 M6 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q3_10}" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest310', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest310', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL4 L4 M6 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL4 L4 M6 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q3_11}" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest311', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest311', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q3_12}" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest312', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest312', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q3_13}" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest313', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest313', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q3_14}" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest314', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest314', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                 </l:content>
                             </l:Grid>
@@ -383,35 +594,66 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0"
+                                width="100%">
                                 <l:content>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q4_1}" required="true" wrapping="true" />
-                                        <Input value="{q1>Quest41}" type="Number" placeholder="{i18n>questionnaire.placeholder.personsOnBoard}" class="vetCtrlS" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q4_1}" required="true"
+                                            wrapping="true" />
+                                        <Input value="{q1>Quest41}" type="Number"
+                                            placeholder="{i18n>questionnaire.placeholder.personsOnBoard}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q4_2}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q1>Quest42', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q1>Quest42', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Table class="vetGridTable" backgroundDesign="Transparent">
                                             <columns>
-                                                <Column width="30%"><Text text="{i18n>questionnaire.column.officersQualification}" class="vetColHeader" /></Column>
-                                                <Column><Text text="{i18n>questionnaire.column.master}" class="vetColHeader" /></Column>
-                                                <Column><Text text="{i18n>questionnaire.column.cOfficer}" class="vetColHeader" /></Column>
-                                                <Column><Text text="{i18n>questionnaire.column.cEng}" class="vetColHeader" /></Column>
-                                                <Column><Text text="{i18n>questionnaire.column.firstEng}" class="vetColHeader" /></Column>
+                                                <Column width="30%">
+                                                    <Text
+                                                        text="{i18n>questionnaire.column.officersQualification}"
+                                                        class="vetColHeader" />
+                                                </Column>
+                                                <Column>
+                                                    <Text text="{i18n>questionnaire.column.master}"
+                                                        class="vetColHeader" />
+                                                </Column>
+                                                <Column>
+                                                    <Text
+                                                        text="{i18n>questionnaire.column.cOfficer}"
+                                                        class="vetColHeader" />
+                                                </Column>
+                                                <Column>
+                                                    <Text text="{i18n>questionnaire.column.cEng}"
+                                                        class="vetColHeader" />
+                                                </Column>
+                                                <Column>
+                                                    <Text
+                                                        text="{i18n>questionnaire.column.firstEng}"
+                                                        class="vetColHeader" />
+                                                </Column>
                                             </columns>
                                             <items>
                                                 <ColumnListItem vAlign="Middle">
                                                     <cells>
-                                                        <Label text="{i18n>questionnaire.q4_3}" required="true" wrapping="true" />
+                                                        <Label text="{i18n>questionnaire.q4_3}"
+                                                            required="true" wrapping="true" />
                                                         <Input value="{q1>Quest43A}" />
                                                         <Input value="{q1>Quest43B}" />
                                                         <Input value="{q1>Quest43C}" />
@@ -420,7 +662,8 @@
                                                 </ColumnListItem>
                                                 <ColumnListItem vAlign="Middle">
                                                     <cells>
-                                                        <Label text="{i18n>questionnaire.q4_4}" required="true" wrapping="true" />
+                                                        <Label text="{i18n>questionnaire.q4_4}"
+                                                            required="true" wrapping="true" />
                                                         <Input type="Number" value="{q1>Quest44A}" />
                                                         <Input type="Number" value="{q1>Quest44B}" />
                                                         <Input type="Number" value="{q1>Quest44C}" />
@@ -429,7 +672,8 @@
                                                 </ColumnListItem>
                                                 <ColumnListItem vAlign="Middle">
                                                     <cells>
-                                                        <Label text="{i18n>questionnaire.q4_5}" required="true" wrapping="true" />
+                                                        <Label text="{i18n>questionnaire.q4_5}"
+                                                            required="true" wrapping="true" />
                                                         <Input type="Number" value="{q1>Quest45A}" />
                                                         <Input type="Number" value="{q1>Quest45B}" />
                                                         <Input type="Number" value="{q1>Quest45C}" />
@@ -438,33 +682,50 @@
                                                 </ColumnListItem>
                                                 <ColumnListItem vAlign="Middle">
                                                     <cells>
-                                                        <Label text="{i18n>questionnaire.q4_6}" required="true" wrapping="true" />
-                                                        <Select selectedKey="{q1>Quest46A}" width="100%" forceSelection="false">
+                                                        <Label text="{i18n>questionnaire.q4_6}"
+                                                            required="true" wrapping="true" />
+                                                        <Select selectedKey="{q1>Quest46A}"
+                                                            width="100%" forceSelection="false">
                                                             <items>
-                                                                <core:Item key="G" text="{i18n>questionnaire.option.good}" />
-                                                                <core:Item key="F" text="{i18n>questionnaire.option.fair}" />
-                                                                <core:Item key="P" text="{i18n>questionnaire.option.poor}" />
+                                                                <core:Item key="G"
+                                                                    text="{i18n>questionnaire.option.good}" />
+                                                                <core:Item key="F"
+                                                                    text="{i18n>questionnaire.option.fair}" />
+                                                                <core:Item key="P"
+                                                                    text="{i18n>questionnaire.option.poor}" />
                                                             </items>
                                                         </Select>
-                                                        <Select selectedKey="{q1>Quest46B}" width="100%" forceSelection="false">
+                                                        <Select selectedKey="{q1>Quest46B}"
+                                                            width="100%" forceSelection="false">
                                                             <items>
-                                                                <core:Item key="G" text="{i18n>questionnaire.option.good}" />
-                                                                <core:Item key="F" text="{i18n>questionnaire.option.fair}" />
-                                                                <core:Item key="P" text="{i18n>questionnaire.option.poor}" />
+                                                                <core:Item key="G"
+                                                                    text="{i18n>questionnaire.option.good}" />
+                                                                <core:Item key="F"
+                                                                    text="{i18n>questionnaire.option.fair}" />
+                                                                <core:Item key="P"
+                                                                    text="{i18n>questionnaire.option.poor}" />
                                                             </items>
                                                         </Select>
-                                                        <Select selectedKey="{q1>Quest46C}" width="100%" forceSelection="false">
+                                                        <Select selectedKey="{q1>Quest46C}"
+                                                            width="100%" forceSelection="false">
                                                             <items>
-                                                                <core:Item key="G" text="{i18n>questionnaire.option.good}" />
-                                                                <core:Item key="F" text="{i18n>questionnaire.option.fair}" />
-                                                                <core:Item key="P" text="{i18n>questionnaire.option.poor}" />
+                                                                <core:Item key="G"
+                                                                    text="{i18n>questionnaire.option.good}" />
+                                                                <core:Item key="F"
+                                                                    text="{i18n>questionnaire.option.fair}" />
+                                                                <core:Item key="P"
+                                                                    text="{i18n>questionnaire.option.poor}" />
                                                             </items>
                                                         </Select>
-                                                        <Select selectedKey="{q1>Quest46D}" width="100%" forceSelection="false">
+                                                        <Select selectedKey="{q1>Quest46D}"
+                                                            width="100%" forceSelection="false">
                                                             <items>
-                                                                <core:Item key="G" text="{i18n>questionnaire.option.good}" />
-                                                                <core:Item key="F" text="{i18n>questionnaire.option.fair}" />
-                                                                <core:Item key="P" text="{i18n>questionnaire.option.poor}" />
+                                                                <core:Item key="G"
+                                                                    text="{i18n>questionnaire.option.good}" />
+                                                                <core:Item key="F"
+                                                                    text="{i18n>questionnaire.option.fair}" />
+                                                                <core:Item key="P"
+                                                                    text="{i18n>questionnaire.option.poor}" />
                                                             </items>
                                                         </Select>
                                                     </cells>
@@ -473,24 +734,36 @@
                                         </Table>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q4_7}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q1>Quest47', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q1>Quest47', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox visible="{= ${q1>Quest47} === true }">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q4_7_1}" wrapping="true" />
-                                            <TextArea value="{q1>Quest471}" width="100%" rows="3" class="vetCtrlTA" />
+                                            <Label text="{i18n>questionnaire.q4_7_1}"
+                                                wrapping="true" />
+                                            <TextArea value="{q1>Quest471}" width="100%" rows="3"
+                                                class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q4_8}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q1>Quest48', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q1>Quest48', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
@@ -507,29 +780,53 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0"
+                                width="100%">
                                 <l:content>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q5_1}" required="true" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest51', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q5_1}" required="true"
+                                            wrapping="true" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest51', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q5_2}" required="true" wrapping="true" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q5_2}" required="true"
+                                            wrapping="true" />
                                         <HBox alignItems="Center" wrap="Wrap">
-                                            <DatePicker value="{path: 'q1>Quest52', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" enabled="{= !${form>/q5_2NotApplicable} }" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS sapUiSmallMarginEnd" />
-                                            <CheckBox selected="{form>/q5_2NotApplicable}" text="{i18n>questionnaire.inCaseOfNotApplicable}" />
+                                            <DatePicker
+                                                value="{path: 'q1>Quest52', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                                enabled="{= !${form>/q5_2NotApplicable} }"
+                                                placeholder="{i18n>common.datePlaceholder}"
+                                                class="vetCtrlS sapUiSmallMarginEnd" />
+                                            <CheckBox selected="{form>/q5_2NotApplicable}"
+                                                text="{i18n>questionnaire.inCaseOfNotApplicable}" />
                                         </HBox>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q5_3}" required="true" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest53', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q5_3}" required="true"
+                                            wrapping="true" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest53', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q5_4}" required="true" wrapping="true" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q5_4}" required="true"
+                                            wrapping="true" />
                                         <Input value="{q1>Quest54}" class="vetCtrlS" />
                                     </VBox>
                                 </l:content>
@@ -544,88 +841,137 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0"
+                                width="100%">
                                 <l:content>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q6_1}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q1>Quest61', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q1>Quest61', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox visible="{= ${q1>Quest61} === true }">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q6_1_1}" required="true" wrapping="true" />
+                                            <Label text="{i18n>questionnaire.q6_1_1}"
+                                                required="true" wrapping="true" />
                                             <Input value="{q1>Quest611}" class="vetCtrlS" />
                                         </VBox>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q6_1_2}" required="true" wrapping="true" />
-                                            <DatePicker value="{path: 'q1>Quest612', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                            <Label text="{i18n>questionnaire.q6_1_2}"
+                                                required="true" wrapping="true" />
+                                            <DatePicker
+                                                value="{path: 'q1>Quest612', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                                placeholder="{i18n>common.datePlaceholder}"
+                                                class="vetCtrlS" />
                                         </VBox>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q6_1_3}" wrapping="true" />
-                                            <TextArea value="{q1>Quest613}" width="100%" rows="3" class="vetCtrlTA" />
+                                            <Label text="{i18n>questionnaire.q6_1_3}"
+                                                wrapping="true" />
+                                            <TextArea value="{q1>Quest613}" width="100%" rows="3"
+                                                class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q6_2}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q1>Quest62', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q1>Quest62', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox visible="{= ${q1>Quest62} === true }">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q6_2_1}" required="true" wrapping="true" />
+                                            <Label text="{i18n>questionnaire.q6_2_1}"
+                                                required="true" wrapping="true" />
                                             <Input value="{q1>Quest621}" class="vetCtrlS" />
                                         </VBox>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q6_2_2}" required="true" wrapping="true" />
-                                            <DatePicker value="{path: 'q1>Quest622', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                            <Label text="{i18n>questionnaire.q6_2_2}"
+                                                required="true" wrapping="true" />
+                                            <DatePicker
+                                                value="{path: 'q1>Quest622', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                                placeholder="{i18n>common.datePlaceholder}"
+                                                class="vetCtrlS" />
                                         </VBox>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q6_2_3}" wrapping="true" />
-                                            <TextArea value="{q1>Quest623}" width="100%" rows="3" class="vetCtrlTA" />
+                                            <Label text="{i18n>questionnaire.q6_2_3}"
+                                                wrapping="true" />
+                                            <TextArea value="{q1>Quest623}" width="100%" rows="3"
+                                                class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q6_3}" required="true" wrapping="true" />
-                                        <DatePicker value="{path: 'q1>Quest63', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q6_3}" required="true"
+                                            wrapping="true" />
+                                        <DatePicker
+                                            value="{path: 'q1>Quest63', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q6_4}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q1>Quest64', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q1>Quest64', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q6_5}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q1>Quest65', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q1>Quest65', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q6_6}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q1>Quest66', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q1>Quest66', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox visible="{= ${q1>Quest66} === true }">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q6_6_1}" required="true" wrapping="true" />
-                                            <TextArea value="{q1>Quest661}" width="100%" rows="3" class="vetCtrlTA" />
+                                            <Label text="{i18n>questionnaire.q6_6_1}"
+                                                required="true" wrapping="true" />
+                                            <TextArea value="{q1>Quest661}" width="100%" rows="3"
+                                                class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
                                 </l:content>
@@ -640,51 +986,76 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0"
+                                width="100%">
                                 <l:content>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q7_1}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest7_1', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest7_1', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox visible="{= ${q2>Quest7_1} === false }">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q7_1_1}" required="true" wrapping="true" />
-                                            <TextArea value="{q2>Quest7_1_1}" width="100%" rows="3" class="vetCtrlTA" />
+                                            <Label text="{i18n>questionnaire.q7_1_1}"
+                                                required="true" wrapping="true" />
+                                            <TextArea value="{q2>Quest7_1_1}" width="100%" rows="3"
+                                                class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q7_2}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest7_2', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest7_2', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q7_3}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest7_3', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest7_3', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q7_4}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest7_4', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest7_4', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q7_5}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest7_5', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest7_5', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
@@ -701,207 +1072,323 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0"
+                                width="100%">
                                 <l:content>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_1}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest8_1', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest8_1', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox visible="{= ${q2>Quest8_1} === false }">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q8_1_1}" required="true" wrapping="true" />
-                                            <TextArea value="{q2>Quest811}" width="100%" rows="3" class="vetCtrlTA" />
+                                            <Label text="{i18n>questionnaire.q8_1_1}"
+                                                required="true" wrapping="true" />
+                                            <TextArea value="{q2>Quest811}" width="100%" rows="3"
+                                                class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_2}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest8_2', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest8_2', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_3}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest8_3', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest8_3', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q8_4}" required="true" wrapping="true" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q8_4}" required="true"
+                                            wrapping="true" />
                                         <Input value="{q2>Quest8_4}" type="Number" class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_5}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest8_5', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest8_5', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_6}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest8_6', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest8_6', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_7}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest8_7', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest8_7', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_8}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest8_8', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest8_8', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox visible="{= ${q2>Quest8_8} === false }">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q8_8_1}" required="true" wrapping="true" />
-                                            <TextArea value="{q2>Quest8_8_1}" width="100%" rows="3" class="vetCtrlTA" />
+                                            <Label text="{i18n>questionnaire.q8_8_1}"
+                                                required="true" wrapping="true" />
+                                            <TextArea value="{q2>Quest8_8_1}" width="100%" rows="3"
+                                                class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_9}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest8_9', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest8_9', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Title text="{i18n>questionnaire.q8_10}" level="H6" titleStyle="H6" wrapping="true" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Title text="{i18n>questionnaire.q8_10}" level="H6"
+                                            titleStyle="H6" wrapping="true" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_10a}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest8_1_0_A', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest8_1_0_A', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_10b}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_8_1_0_B', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_8_1_0_B', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_10c}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_8_1_0_C', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_8_1_0_C', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_10d}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_8_1_0_D', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_8_1_0_D', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_10e}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_8_1_0_E', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_8_1_0_E', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_11}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_8_1_1', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_8_1_1', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox visible="{= ${q2>Quest_8_1_1} === true }">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q8_11_1}" wrapping="true" />
-                                            <TextArea value="{q2>Quest_8_1_1_1}" width="100%" rows="3" class="vetCtrlTA" />
+                                            <Label text="{i18n>questionnaire.q8_11_1}"
+                                                wrapping="true" />
+                                            <TextArea value="{q2>Quest_8_1_1_1}" width="100%"
+                                                rows="3" class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q8_12}" required="true" wrapping="true" />
-                                        <Input value="{q2>Quest_8_1_2}" type="Number" class="vetCtrlS" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q8_12}" required="true"
+                                            wrapping="true" />
+                                        <Input value="{q2>Quest_8_1_2}" type="Number"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_13}" wrapping="true" />
-                                        <TextArea value="{q2>Quest_8_1_3}" width="100%" rows="3" class="vetCtrlTA" />
+                                        <TextArea value="{q2>Quest_8_1_3}" width="100%" rows="3"
+                                            class="vetCtrlTA" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Title text="{i18n>questionnaire.q8_14}" level="H6" titleStyle="H6" wrapping="true" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Title text="{i18n>questionnaire.q8_14}" level="H6"
+                                            titleStyle="H6" wrapping="true" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_14a}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_8_1_4_A', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_8_1_4_A', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_14b}" wrapping="true" />
-                                        <DatePicker value="{path: 'q2>Quest_8_1_4_B', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q2>Quest_8_1_4_B', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_14c}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_8_1_4_C', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_8_1_4_C', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
-                                    <VBox class="vetField" visible="{= ${q2>Quest_8_1_4_C} === true }">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q8_14c1Yes}" required="true" wrapping="true" />
-                                        <TextArea value="{q2>Quest_8_1_4_C_1}" width="100%" rows="3" class="vetCtrlTA" />
+                                    <VBox class="vetField"
+                                        visible="{= ${q2>Quest_8_1_4_C} === true }">
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q8_14c1Yes}"
+                                            required="true" wrapping="true" />
+                                        <TextArea value="{q2>Quest_8_1_4_C_1}" width="100%" rows="3"
+                                            class="vetCtrlTA" />
                                     </VBox>
-                                    <VBox class="vetField" visible="{= ${q2>Quest_8_1_4_C} === false }">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q8_14c1}" required="true" wrapping="true" />
-                                        <TextArea value="{q2>Quest_8_1_4_C_2}" width="100%" rows="3" class="vetCtrlTA" />
+                                    <VBox class="vetField"
+                                        visible="{= ${q2>Quest_8_1_4_C} === false }">
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q8_14c1}" required="true"
+                                            wrapping="true" />
+                                        <TextArea value="{q2>Quest_8_1_4_C_2}" width="100%" rows="3"
+                                            class="vetCtrlTA" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_14d}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_8_1_4_D', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_8_1_4_D', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q8_14e}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_8_1_4_E', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_8_1_4_E', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
@@ -918,60 +1405,89 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0"
+                                width="100%">
                                 <l:content>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q9_1}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_9_1', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_9_1', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q9_2}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_9_2', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_9_2', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q9_3}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_9_3', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_9_3', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q9_4}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_9_4', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_9_4', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q9_5}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_9_5', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_9_5', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q9_6}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_9_6', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_9_6', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q9_7}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_9_7', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_9_7', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
@@ -988,28 +1504,41 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0"
+                                width="100%">
                                 <l:content>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q10_1}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_10_1', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_10_1', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q10_2}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_10_2', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_10_2', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q10_3}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_10_3', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_10_3', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
@@ -1026,21 +1555,40 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0"
+                                width="100%">
                                 <l:content>
                                     <VBox>
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Table class="vetGridTable" backgroundDesign="Transparent">
                                             <columns>
-                                                <Column width="40%"><Text text="{i18n>questionnaire.column.recentCargoOperation}" class="vetColHeader" /></Column>
-                                                <Column><Text text="{i18n>questionnaire.column.cargo}" class="vetColHeader" /></Column>
-                                                <Column><Text text="{i18n>questionnaire.column.loadPort}" class="vetColHeader" /></Column>
-                                                <Column><Text text="{i18n>questionnaire.column.dischargePort}" class="vetColHeader" /></Column>
+                                                <Column width="40%">
+                                                    <Text
+                                                        text="{i18n>questionnaire.column.recentCargoOperation}"
+                                                        class="vetColHeader" />
+                                                </Column>
+                                                <Column>
+                                                    <Text text="{i18n>questionnaire.column.cargo}"
+                                                        class="vetColHeader" />
+                                                </Column>
+                                                <Column>
+                                                    <Text
+                                                        text="{i18n>questionnaire.column.loadPort}"
+                                                        class="vetColHeader" />
+                                                </Column>
+                                                <Column>
+                                                    <Text
+                                                        text="{i18n>questionnaire.column.dischargePort}"
+                                                        class="vetColHeader" />
+                                                </Column>
                                             </columns>
                                             <items>
                                                 <ColumnListItem vAlign="Middle">
                                                     <cells>
-                                                        <Label text="{i18n>questionnaire.q11_1}" wrapping="true" />
+                                                        <Label text="{i18n>questionnaire.q11_1}"
+                                                            wrapping="true" />
                                                         <Input value="{q2>Quest_11_1_A}" />
                                                         <Input value="{q2>Quest_11_1_B}" />
                                                         <Input value="{q2>Quest_11_1_C}" />
@@ -1048,7 +1596,8 @@
                                                 </ColumnListItem>
                                                 <ColumnListItem vAlign="Middle">
                                                     <cells>
-                                                        <Label text="{i18n>questionnaire.q11_2}" wrapping="true" />
+                                                        <Label text="{i18n>questionnaire.q11_2}"
+                                                            wrapping="true" />
                                                         <Input value="{q2>Quest_11_2_A}" />
                                                         <Input value="{q2>Quest_11_2_B}" />
                                                         <Input value="{q2>Quest_11_2_C}" />
@@ -1056,7 +1605,8 @@
                                                 </ColumnListItem>
                                                 <ColumnListItem vAlign="Middle">
                                                     <cells>
-                                                        <Label text="{i18n>questionnaire.q11_3}" wrapping="true" />
+                                                        <Label text="{i18n>questionnaire.q11_3}"
+                                                            wrapping="true" />
                                                         <Input value="{q2>Quest_11_3_A}" />
                                                         <Input value="{q2>Quest_11_3_B}" />
                                                         <Input value="{q2>Quest_11_3_C}" />
@@ -1064,67 +1614,109 @@
                                                 </ColumnListItem>
                                             </items>
                                         </Table>
-                                        <Text text="{i18n>questionnaire.portsFootnote}" class="vetFootnote sapUiTinyMarginTop" />
+                                        <Text text="{i18n>questionnaire.portsFootnote}"
+                                            class="vetFootnote sapUiTinyMarginTop" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Title text="{i18n>questionnaire.lastInspectionDates}" level="H6" titleStyle="H6" wrapping="true" />
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Title text="{i18n>questionnaire.lastInspectionDates}"
+                                            level="H6" titleStyle="H6" wrapping="true" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q11_4}" wrapping="true" />
-                                        <DatePicker value="{path: 'q2>Quest_11_4', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q2>Quest_11_4', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q11_5}" wrapping="true" />
-                                        <DatePicker value="{path: 'q2>Quest_11_5', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q2>Quest_11_5', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q11_6}" wrapping="true" />
-                                        <DatePicker value="{path: 'q2>Quest_11_6', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                        <DatePicker
+                                            value="{path: 'q2>Quest_11_6', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}"
+                                            class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q11_7}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_11_7', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_11_7', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox visible="{= ${q2>Quest_11_7} === true }">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q11_7_1}" wrapping="true" />
-                                            <TextArea value="{q2>Quest_11_7_1}" width="100%" rows="3" class="vetCtrlTA" />
+                                            <Label text="{i18n>questionnaire.q11_7_1}"
+                                                wrapping="true" />
+                                            <TextArea value="{q2>Quest_11_7_1}" width="100%"
+                                                rows="3" class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.q11_8}" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_11_8', type: 'YesNo'}" class="vetYesNo">
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_11_8', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
                                     </VBox>
                                     <VBox visible="{= ${q2>Quest_11_8} === true }">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q11_8_1}" wrapping="true" />
+                                            <Label text="{i18n>questionnaire.q11_8_1}"
+                                                wrapping="true" />
                                             <Input value="{q2>Quest_11_8_1}" class="vetCtrlS" />
                                         </VBox>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q11_8_2}" wrapping="true" />
-                                            <DatePicker value="{path: 'q2>Quest_11_8_2', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" class="vetCtrlS" />
+                                            <Label text="{i18n>questionnaire.q11_8_2}"
+                                                wrapping="true" />
+                                            <DatePicker
+                                                value="{path: 'q2>Quest_11_8_2', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                                placeholder="{i18n>common.datePlaceholder}"
+                                                class="vetCtrlS" />
                                         </VBox>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q11_8_3}" wrapping="true" />
-                                            <TextArea value="{q2>Quest_11_8_3}" width="100%" rows="3" class="vetCtrlTA" />
+                                            <Label text="{i18n>questionnaire.q11_8_3}"
+                                                wrapping="true" />
+                                            <TextArea value="{q2>Quest_11_8_3}" width="100%"
+                                                rows="3" class="vetCtrlTA" />
                                         </VBox>
                                         <VBox class="vetField">
-                                            <Label text="{i18n>questionnaire.q11_8_4}" wrapping="true" />
-                                            <TextArea value="{q2>Quest_11_8_4}" width="100%" rows="3" class="vetCtrlTA" />
+                                            <Label text="{i18n>questionnaire.q11_8_4}"
+                                                wrapping="true" />
+                                            <TextArea value="{q2>Quest_11_8_4}" width="100%"
+                                                rows="3" class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
                                 </l:content>
@@ -1139,12 +1731,18 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0"
+                                width="100%">
                                 <l:content>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.q12}" required="true" wrapping="true" />
-                                        <RadioButtonGroup columns="2" selectedIndex="{path: 'q2>Quest_12', type: 'YesNo'}" class="vetYesNo">
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.q12}" required="true"
+                                            wrapping="true" />
+                                        <RadioButtonGroup columns="2"
+                                            selectedIndex="{path: 'q2>Quest_12', type: 'YesNo'}"
+                                            class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
                                             <RadioButton text="{i18n>common.no}" />
                                         </RadioButtonGroup>
@@ -1161,45 +1759,73 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0" width="100%">
+                            <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true" vSpacing="0"
+                                width="100%">
                                 <l:content>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL6 L6 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.responsibleName}" wrapping="true" />
-                                        <Input value="{q2>Quest_13_1}" placeholder="{i18n>questionnaire.placeholder.personName}" />
+                                        <layoutData>
+                                            <l:GridData span="XL6 L6 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.responsibleName}"
+                                            wrapping="true" />
+                                        <Input value="{q2>Quest_13_1}"
+                                            placeholder="{i18n>questionnaire.placeholder.personName}" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL6 L6 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL6 L6 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.company}" wrapping="true" />
-                                        <Input value="{q2>Quest_13_2}" placeholder="{i18n>questionnaire.placeholder.companyName}" />
+                                        <Input value="{q2>Quest_13_2}"
+                                            placeholder="{i18n>questionnaire.placeholder.companyName}" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL6 L6 M12 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.positionRole}" wrapping="true" />
-                                        <Input value="{q2>Quest_13_3}" placeholder="{i18n>questionnaire.placeholder.personRole}" />
+                                        <layoutData>
+                                            <l:GridData span="XL6 L6 M12 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.positionRole}"
+                                            wrapping="true" />
+                                        <Input value="{q2>Quest_13_3}"
+                                            placeholder="{i18n>questionnaire.placeholder.personRole}" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL6 L6 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL6 L6 M12 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.place}" wrapping="true" />
-                                        <Input value="{q2>Quest_13_4}" placeholder="{i18n>questionnaire.placeholder.place}" />
+                                        <Input value="{q2>Quest_13_4}"
+                                            placeholder="{i18n>questionnaire.placeholder.place}" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL3 L3 M6 S12" />
+                                        </layoutData>
                                         <Label text="{i18n>questionnaire.date}" wrapping="true" />
-                                        <DatePicker value="{path: 'q2>Quest_13_4_1', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}" placeholder="{i18n>common.datePlaceholder}" />
+                                        <DatePicker
+                                            value="{path: 'q2>Quest_13_4_1', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
+                                            placeholder="{i18n>common.datePlaceholder}" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.telephoneNumber}" wrapping="true" />
+                                        <layoutData>
+                                            <l:GridData span="XL3 L3 M6 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.telephoneNumber}"
+                                            wrapping="true" />
                                         <Input value="{q2>Quest_13_5}" type="Tel" />
                                     </VBox>
                                     <VBox class="vetField">
-                                        <layoutData><l:GridData span="XL3 L3 M6 S12" /></layoutData>
-                                        <Label text="{i18n>questionnaire.emailAddress}" wrapping="true" />
-                                        <Input value="{q2>Quest_13_6}" type="Email" placeholder="{i18n>questionnaire.placeholder.email}" />
+                                        <layoutData>
+                                            <l:GridData span="XL3 L3 M6 S12" />
+                                        </layoutData>
+                                        <Label text="{i18n>questionnaire.emailAddress}"
+                                            wrapping="true" />
+                                        <Input value="{q2>Quest_13_6}" type="Email"
+                                            placeholder="{i18n>questionnaire.placeholder.email}" />
                                     </VBox>
                                     <VBox>
-                                        <layoutData><l:GridData span="XL12 L12 M12 S12" /></layoutData>
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
                                         <FormattedText class="vetRemarks"
                                             htmlText="{i18n>questionnaire.remarks}" />
                                     </VBox>
@@ -1215,18 +1841,28 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <Table items="{path: 'documents>/', templateShareable: false}" noDataText="{i18n>questionnaire.noDocuments}">
+                            <Table items="{path: 'documents>/', templateShareable: false}"
+                                noDataText="{i18n>questionnaire.noDocuments}">
                                 <headerToolbar>
                                     <OverflowToolbar style="Clear">
                                         <ToolbarSpacer />
-                                        <Button text="{i18n>questionnaire.addDocument}" icon="sap-icon://add" type="Emphasized" />
+                                        <Button text="{i18n>questionnaire.addDocument}"
+                                            icon="sap-icon://add" type="Emphasized" />
                                     </OverflowToolbar>
                                 </headerToolbar>
                                 <columns>
-                                    <Column><Text text="{i18n>questionnaire.column.filename}" /></Column>
-                                    <Column><Text text="{i18n>questionnaire.column.type}" /></Column>
-                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="{i18n>questionnaire.column.description}" /></Column>
-                                    <Column hAlign="End" width="7rem"><Text text="{i18n>questionnaire.column.actions}" /></Column>
+                                    <Column>
+                                        <Text text="{i18n>questionnaire.column.filename}" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="{i18n>questionnaire.column.type}" />
+                                    </Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true">
+                                        <Text text="{i18n>questionnaire.column.description}" />
+                                    </Column>
+                                    <Column hAlign="End" width="7rem">
+                                        <Text text="{i18n>questionnaire.column.actions}" />
+                                    </Column>
                                 </columns>
                                 <items>
                                     <ColumnListItem vAlign="Middle">
@@ -1235,8 +1871,11 @@
                                             <Text text="{documents>Type}" />
                                             <Text text="{documents>Description}" />
                                             <HBox justifyContent="End">
-                                                <Button icon="sap-icon://download" type="Transparent" tooltip="{i18n>common.download}" />
-                                                <Button icon="sap-icon://delete" type="Transparent" tooltip="{i18n>common.delete}" />
+                                                <Button icon="sap-icon://download"
+                                                    type="Transparent"
+                                                    tooltip="{i18n>common.download}" />
+                                                <Button icon="sap-icon://delete" type="Transparent"
+                                                    tooltip="{i18n>common.delete}" />
                                             </HBox>
                                         </cells>
                                     </ColumnListItem>
