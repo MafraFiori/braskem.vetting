@@ -14,7 +14,7 @@ sap.ui.define([
     // Each one has its own deferred group, because Questionnaires_2 can only be sent after the backend generates the IdQuest
     const ENTITIES = {
         // IdQuest is a placeholder, the backend replaces it with the generated number
-        q1: { path: "/Questionnaires_1Set", entityType: "Questionnaires_1", groupId: "questionnaire1", properties: { IdQuest: "000000", Quest216: "NA" } },
+        q1: { path: "/Questionnaires_1Set", entityType: "Questionnaires_1", groupId: "questionnaire1", properties: { IdQuest: "000000" } },
         q2: { path: "/Questionnaires_2Set", entityType: "Questionnaires_2", groupId: "questionnaire2", properties: {} }
     }
 
