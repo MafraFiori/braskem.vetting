@@ -3,8 +3,11 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox",
     "sap/m/MessageToast",
-    "sap/ui/core/EventBus"
-], (BaseController, JSONModel, MessageBox, MessageToast, EventBus) => {
+    "sap/ui/core/EventBus",
+    "sap/ui/core/Element",
+    "sap/ui/core/Messaging",
+    "braskem/zui5vetting/model/fieldFormats"
+], (BaseController, JSONModel, MessageBox, MessageToast, EventBus, Element, Messaging, fieldFormats) => {
     "use strict";
 
     // The form reads two entities: q1> = Questionnaires_1Set (sections 1-6), q2> = Questionnaires_2Set (sections 7-13)
@@ -52,6 +55,9 @@ sap.ui.define([
             }), { "*": { groupId: "changes" } }))
             // Same ODataModel under two names, so each entity has its own binding context on the view
             Object.keys(ENTITIES).forEach((sName) => oView.setModel(oModel, sName))
+
+            // Lengths / precision / scale of the fields from the service metadata
+            fieldFormats.apply(oView, oModel, Object.fromEntries(Object.entries(ENTITIES).map(([sName, oEntity]) => [sName, oEntity.path.slice(1)])))
 
             // Opens the MessageView whenever a new message arrives (OData errors, save errors)
             EventBus.getInstance().subscribe("messages", "added", this.openMessageDialog, this)
@@ -112,6 +118,7 @@ sap.ui.define([
                 q5_2NotApplicable: false,
                 editable: sMode !== MODE.DISPLAY
             })
+            Messaging.removeMessages(this._getValidationMessages())
             this.getView().findAggregatedObjects(true, (oControl) => oControl.isA(FIELD_TYPES))
                 .forEach((oField) => this._setFieldError(oField, false))
             this.byId("questionnairePage").scrollToSection(this.byId("questionnairePage").getSections()[0]?.getId(), 0)
@@ -162,14 +169,65 @@ sap.ui.define([
         },
 
         onSaveDraft() {
+            if (!this._validateFieldFormats()) {
+                return
+            }
             return this._save(STATUS.DRAFT)
         },
 
         onSaveSubmit() {
-            if (!this._validateRequiredFields()) {
+            if (!this._validateFieldFormats() || !this._validateRequiredFields()) {
                 return
             }
             return this._save(STATUS.SUBMITTED)
+        },
+
+        // Errors of the field types (invalid number/date, too many digits) raised by the bindings (handleValidation)
+        _getValidationMessages() {
+            return Messaging.getMessageModel().getData().filter((oMessage) => oMessage.getType() === "Error"
+                && oMessage.getMessageProcessor()?.isA("sap.ui.core.message.ControlMessageProcessor"))
+        },
+
+        /**
+         * Blocks the save while a field has a value the backend would reject: type errors of the bindings
+         * (e.g. more integer digits than the Edm.Decimal allows) and Select keys longer than the field (fieldFormats).
+         * @returns {boolean} true when all field values are valid
+         */
+        _validateFieldFormats() {
+            const aInvalid = this._getValidationMessages()
+                .map((oMessage) => ({ field: Element.getElementById(oMessage.getControlIds()[0]), text: oMessage.getMessage() }))
+                .filter((oInvalid) => oInvalid.field && this._isVisible(oInvalid.field))
+
+            this.getView().findAggregatedObjects(true, (oControl) => oControl.isA("sap.m.Select") && oControl.data("maxLength"))
+                .filter((oSelect) => oSelect.getSelectedKey().length > oSelect.data("maxLength"))
+                .forEach((oSelect) => {
+                    const sText = this.getText("questionnaire.msg.keyTooLong", [oSelect.getSelectedKey(), oSelect.data("maxLength")])
+                    this._setFieldError(oSelect, true, sText)
+                    aInvalid.push({ field: oSelect, text: sText })
+                })
+
+            if (!aInvalid.length) {
+                return true
+            }
+
+            this.addMessage({
+                type: "Error",
+                title: this.getText("questionnaire.msg.invalidTitle", [aInvalid.length]),
+                description: aInvalid.map((oInvalid) => `${this._getFieldLabel(oInvalid.field)}: ${oInvalid.text}`).join("\n")
+            })
+            this._focusField(aInvalid[0].field)
+            return false
+        },
+
+        // Text of the Label next to the field (same VBox or table row)
+        _getFieldLabel(oField) {
+            for (let oParent = oField.getParent(); oParent && oParent !== this.getView(); oParent = oParent.getParent()) {
+                const oLabel = oParent.findAggregatedObjects(false, (oControl) => oControl.isA("sap.m.Label"))[0]
+                if (oLabel) {
+                    return oLabel.getText()
+                }
+            }
+            return ""
         },
 
         // Questionnaires_1 first (it generates the IdQuest on create), then Questionnaires_2 with that IdQuest.
@@ -272,9 +330,9 @@ sap.ui.define([
         },
 
         // Marks the field in red until the user changes it
-        _setFieldError(oField, bError) {
+        _setFieldError(oField, bError, sText = this.getText("questionnaire.msg.requiredField")) {
             oField.setValueState(bError ? "Error" : "None")
-            oField.setValueStateText?.(bError ? this.getText("questionnaire.msg.requiredField") : "")
+            oField.setValueStateText?.(bError ? sText : "")
             if (bError) {
                 const sEvent = oField.isA("sap.m.RadioButtonGroup") ? "select"
                     : oField.isA("sap.m.Select") || oField.isA("sap.m.DatePicker") ? "change" : "liveChange"
