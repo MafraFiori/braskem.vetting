@@ -146,6 +146,13 @@
           "target": [
             "TargetCreateQuestionnaires"
           ]
+        },
+        {
+          "name": "RouteQuestionnaire",
+          "pattern": "Questionnaire/{IdQuest}/{mode}",
+          "target": [
+            "TargetCreateQuestionnaires"
+          ]
         }
       ],
       "targets": {

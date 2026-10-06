@@ -30,6 +30,7 @@
                 enableAutoColumnWidth="true"
                 useTablePersonalisation="true"
                 header="{i18n>Results}"
+                requestAtLeastFields="IdQuest,StVettQuest"
                 showRowCount="true">
                 <smartTable:layoutData>
                     <FlexItemData growFactor="1" baseSize="0%" />
@@ -45,12 +46,28 @@
                 </smartTable:customToolbar>
                 <Table growing="true" growingThreshold="100" mode="None" id="table2"
                     enableBusyIndicator="true" busyIndicatorDelay="100">
+                    <columns>
+                        <Column width="9rem">
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey": "actions", "columnIndex": 0}' />
+                            </customData>
+                            <Text text="{i18n>welcome.actions}" />
+                        </Column>
+                    </columns>
                     <items>
                         <ColumnListItem>
                             <cells>
-                                <Button icon="sap-icon:/show" />
-                                <Button icon="sap-icon:/edit" />
-                                <Button icon="sap-icon:/copy" />
+                                <HBox>
+                                    <Button icon="sap-icon://show" type="Transparent"
+                                        tooltip="{i18n>welcome.display}" press=".onDisplayQuestionnaire" />
+                                    <!-- Only questionnaires "Em Edição" (01) can be changed -->
+                                    <Button icon="sap-icon://edit" type="Transparent"
+                                        tooltip="{i18n>welcome.edit}" enabled="{= ${StVettQuest} === '01' }"
+                                        press=".onEditQuestionnaire" />
+                                    <Button icon="sap-icon://copy" type="Transparent"
+                                        tooltip="{i18n>welcome.copy}" press=".onCopyQuestionnaire" />
+                                </HBox>
                             </cells>
                         </ColumnListItem>
                     </items>

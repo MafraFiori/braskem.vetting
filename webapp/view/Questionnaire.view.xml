@@ -37,8 +37,9 @@
                         tooltip="{i18n>messages.title}"
                         press=".onMessagePopoverPress" />
                     <Button text="{i18n>common.saveAndSubmit}" type="Emphasized"
-                        press="onSaveSubmit" />
-                    <Button text="{i18n>common.saveDraft}" type="Transparent" press="onSaveDraft" />
+                        visible="{form>/editable}" press="onSaveSubmit" />
+                    <Button text="{i18n>common.saveDraft}" type="Transparent"
+                        visible="{form>/editable}" press="onSaveDraft" />
                 </uxap:actions>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
@@ -123,7 +124,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q1_1}" required="true"
                                             wrapping="true" />
-                                        <Select selectedKey="{q1>Quest11}" width="100%"
+                                        <Select editable="{form>/editable}" selectedKey="{q1>Quest11}" width="100%"
                                             forceSelection="false" class="vetCtrlS"
                                             items="{/OperationTypesSet}">
                                             <core:ListItem key="{CodTipo}" text="{Descricao}" />
@@ -137,7 +138,7 @@
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q1_1_1}"
                                                 required="true" wrapping="true" />
-                                            <Input value="{q1>Quest111}" class="vetCtrlS" />
+                                            <Input editable="{form>/editable}" value="{q1>Quest111}" class="vetCtrlS" />
                                         </VBox>
                                     </VBox>
                                     <VBox class="vetField">
@@ -146,7 +147,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q1_2}" required="true"
                                             wrapping="true" />
-                                        <Select selectedKey="{q1>Quest121}" width="100%"
+                                        <Select editable="{form>/editable}" selectedKey="{q1>Quest121}" width="100%"
                                             forceSelection="false" class="vetCtrlS"
                                             items="{/PonPortosSet}">
                                             <core:ListItem key="{CodPorto}" text="{Nome}" />
@@ -162,16 +163,16 @@
                                         <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true"
                                             vSpacing="0.5" hSpacing="1" class="vetInnerGrid">
                                             <l:content>
-                                                <Input value="{q1>Quest131}" />
-                                                <Input value="{q1>Quest132}" />
-                                                <Input value="{q1>Quest133}" />
-                                                <Input value="{q1>Quest134}">
+                                                <Input editable="{form>/editable}" value="{q1>Quest131}" />
+                                                <Input editable="{form>/editable}" value="{q1>Quest132}" />
+                                                <Input editable="{form>/editable}" value="{q1>Quest133}" />
+                                                <Input editable="{form>/editable}" value="{q1>Quest134}">
                                                     <layoutData>
                                                         <l:GridData linebreakXL="true"
                                                             linebreakL="true" />
                                                     </layoutData>
                                                 </Input>
-                                                <Input value="{q1>Quest135}" />
+                                                <Input editable="{form>/editable}" value="{q1>Quest135}" />
                                             </l:content>
                                         </l:Grid>
                                     </VBox>
@@ -181,7 +182,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q1_4}" required="true"
                                             wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest14', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -192,7 +193,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q1_5}" required="true"
                                             wrapping="true" />
-                                        <Select selectedKey="{q1>Quest15}" width="100%"
+                                        <Select editable="{form>/editable}" selectedKey="{q1>Quest15}" width="100%"
                                             forceSelection="false" class="vetCtrlS"
                                             items="{/TpCargosSet}">
                                             <core:ListItem key="{TpCargo}" text="{TpCargo}" />
@@ -204,7 +205,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q1_6}" required="true"
                                             wrapping="true" />
-                                        <Input value="{q1>Quest16}" type="Number"
+                                        <Input editable="{form>/editable}" value="{q1>Quest16}" type="Number"
                                             placeholder="{i18n>questionnaire.placeholder.transitTime}"
                                             class="vetCtrlS" />
                                     </VBox>
@@ -214,7 +215,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q1_7}" required="true"
                                             wrapping="true" />
-                                        <Select selectedKey="{q1>Quest17}" width="100%"
+                                        <Select editable="{form>/editable}" selectedKey="{q1>Quest17}" width="100%"
                                             forceSelection="false" class="vetCtrlS"
                                             items="{/ContractKindsSet}">
                                             <core:ListItem key="{Valpos}" text="{Ddtext}" />
@@ -241,7 +242,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q2_1}" required="true"
                                             wrapping="true" />
-                                        <Input value="{q1>Quest21}"
+                                        <Input editable="{form>/editable}" value="{q1>Quest21}"
                                             placeholder="{i18n>questionnaire.placeholder.vesselName}"
                                             class="vetCtrlM" />
                                     </VBox>
@@ -251,7 +252,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q2_2}" required="true"
                                             wrapping="true" />
-                                        <Input value="{q1>Quest22}"
+                                        <Input editable="{form>/editable}" value="{q1>Quest22}"
                                             placeholder="{i18n>questionnaire.placeholder.imoNumber}" />
                                     </VBox>
                                     <VBox class="vetField">
@@ -260,7 +261,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q2_3}" required="true"
                                             wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest23', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}" />
                                     </VBox>
@@ -270,7 +271,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q2_4}" required="true"
                                             wrapping="true" />
-                                        <Input value="{q1>Quest24}"
+                                        <Input editable="{form>/editable}" value="{q1>Quest24}"
                                             placeholder="{i18n>questionnaire.placeholder.ownerName}" />
                                     </VBox>
                                     <VBox class="vetField">
@@ -279,7 +280,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q2_5}" required="true"
                                             wrapping="true" />
-                                        <Select selectedKey="{q1>Quest25}" width="100%"
+                                        <Select editable="{form>/editable}" selectedKey="{q1>Quest25}" width="100%"
                                             forceSelection="false" class="vetCtrlS"
                                             items="{/ContractKindsSet}">
                                             <core:ListItem key="{Valpos}" text="{Ddtext}" />
@@ -291,7 +292,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q2_6}" required="true"
                                             wrapping="true" />
-                                        <Select selectedKey="{q1>Quest26}" width="100%"
+                                        <Select editable="{form>/editable}" selectedKey="{q1>Quest26}" width="100%"
                                             forceSelection="false" class="vetCtrlS"
                                             items="{/HullTypesSet}">
                                             <core:ListItem key="{Valpos}" text="{Ddtext}" />
@@ -303,7 +304,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q2_7}" required="true"
                                             wrapping="true" />
-                                        <Input value="{q1>Quest27}" type="Number"
+                                        <Input editable="{form>/editable}" value="{q1>Quest27}" type="Number"
                                             placeholder="{i18n>questionnaire.placeholder.number}" />
                                     </VBox>
                                     <VBox class="vetField">
@@ -312,7 +313,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q2_8}" required="true"
                                             wrapping="true" />
-                                        <Input value="{q1>Quest28}" type="Number"
+                                        <Input editable="{form>/editable}" value="{q1>Quest28}" type="Number"
                                             placeholder="{i18n>questionnaire.placeholder.number}" />
                                     </VBox>
                                     <VBox class="vetField">
@@ -321,7 +322,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q2_9}" required="true"
                                             wrapping="true" />
-                                        <Input value="{q1>Quest29}" type="Number"
+                                        <Input editable="{form>/editable}" value="{q1>Quest29}" type="Number"
                                             placeholder="{i18n>questionnaire.placeholder.number}" />
                                     </VBox>
                                     <VBox class="vetField">
@@ -330,7 +331,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q2_10}" required="true"
                                             wrapping="true" />
-                                        <Input value="{q1>Quest210}" type="Number"
+                                        <Input editable="{form>/editable}" value="{q1>Quest210}" type="Number"
                                             placeholder="{i18n>questionnaire.placeholder.number}" />
                                     </VBox>
                                     <VBox class="vetField">
@@ -339,7 +340,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q2_11}" required="true"
                                             wrapping="true" />
-                                        <Input value="{q1>Quest211}" type="Number"
+                                        <Input editable="{form>/editable}" value="{q1>Quest211}" type="Number"
                                             placeholder="{i18n>questionnaire.placeholder.number}" />
                                     </VBox>
                                     <VBox class="vetField">
@@ -348,7 +349,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q2_12}" required="true"
                                             wrapping="true" />
-                                        <Input value="{q1>Quest212}" type="Number"
+                                        <Input editable="{form>/editable}" value="{q1>Quest212}" type="Number"
                                             placeholder="{i18n>questionnaire.placeholder.number}" />
                                     </VBox>
                                     <VBox class="vetField">
@@ -357,7 +358,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q2_13}" required="true"
                                             wrapping="true" />
-                                        <Input value="{q1>Quest213}"
+                                        <Input editable="{form>/editable}" value="{q1>Quest213}"
                                             placeholder="{i18n>questionnaire.placeholder.shipManagerName}" />
                                     </VBox>
                                     <VBox class="vetField">
@@ -366,7 +367,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q2_14}" required="true"
                                             wrapping="true" />
-                                        <Input value="{q1>Quest214}" type="Number"
+                                        <Input editable="{form>/editable}" value="{q1>Quest214}" type="Number"
                                             placeholder="{i18n>questionnaire.placeholder.years}"
                                             class="vetCtrlS" />
                                     </VBox>
@@ -376,7 +377,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q2_15}" required="true"
                                             wrapping="true" />
-                                        <Select selectedKey="{q1>Quest215}" width="100%"
+                                        <Select editable="{form>/editable}" selectedKey="{q1>Quest215}" width="100%"
                                             forceSelection="false" class="vetCtrlS"
                                             items="{/CodSociedClassSet}">
                                             <core:ListItem key="{Valpos}" text="{Ddtext}" />
@@ -387,7 +388,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q2_16}" wrapping="true" />
-                                        <Select selectedKey="{q1>Quest216}" width="100%"
+                                        <Select editable="{form>/editable}" selectedKey="{q1>Quest216}" width="100%"
                                             forceSelection="false" class="vetCtrlS"
                                             items="{/CodPicLubSet}">
                                             <core:ListItem key="{Valpos}" text="{Ddtext}" />
@@ -400,7 +401,7 @@
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q2_16_1}"
                                                 required="true" wrapping="true" />
-                                            <Input value="{q1>Quest2161}" class="vetCtrlS" />
+                                            <Input editable="{form>/editable}" value="{q1>Quest2161}" class="vetCtrlS" />
                                         </VBox>
                                     </VBox>
                                     <VBox
@@ -411,19 +412,19 @@
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q2_16a}"
                                                 required="true" wrapping="true" />
-                                            <Input value="{q1>Quest216A}" type="Number"
+                                            <Input editable="{form>/editable}" value="{q1>Quest216A}" type="Number"
                                                 class="vetCtrlS" />
                                         </VBox>
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q2_16b}"
                                                 required="true" wrapping="true" />
-                                            <Input value="{q1>Quest216B}" type="Number"
+                                            <Input editable="{form>/editable}" value="{q1>Quest216B}" type="Number"
                                                 class="vetCtrlS" />
                                         </VBox>
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q2_16c}"
                                                 wrapping="true" />
-                                            <Input value="{q1>Quest216C}" type="Number"
+                                            <Input editable="{form>/editable}" value="{q1>Quest216C}" type="Number"
                                                 class="vetCtrlS" />
                                         </VBox>
                                     </VBox>
@@ -447,7 +448,7 @@
                                             <l:GridData span="XL4 L4 M6 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q3_1}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest31', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -457,7 +458,7 @@
                                             <l:GridData span="XL4 L4 M6 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q3_2}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest32', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -467,7 +468,7 @@
                                             <l:GridData span="XL4 L4 M6 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q3_3}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest33', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -477,7 +478,7 @@
                                             <l:GridData span="XL4 L4 M6 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q3_4}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest34', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -487,7 +488,7 @@
                                             <l:GridData span="XL4 L4 M6 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q3_5}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest35', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -497,7 +498,7 @@
                                             <l:GridData span="XL4 L4 M6 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q3_6}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest36', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -507,7 +508,7 @@
                                             <l:GridData span="XL4 L4 M6 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q3_7}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest37', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -517,7 +518,7 @@
                                             <l:GridData span="XL4 L4 M6 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q3_8}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest38', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -527,7 +528,7 @@
                                             <l:GridData span="XL4 L4 M6 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q3_9}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest39', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -537,7 +538,7 @@
                                             <l:GridData span="XL4 L4 M6 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q3_10}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest310', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -547,7 +548,7 @@
                                             <l:GridData span="XL4 L4 M6 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q3_11}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest311', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -557,7 +558,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q3_12}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest312', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -567,7 +568,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q3_13}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest313', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -577,7 +578,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q3_14}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest314', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -603,7 +604,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q4_1}" required="true"
                                             wrapping="true" />
-                                        <Input value="{q1>Quest41}" type="Number"
+                                        <Input editable="{form>/editable}" value="{q1>Quest41}" type="Number"
                                             placeholder="{i18n>questionnaire.placeholder.personsOnBoard}"
                                             class="vetCtrlS" />
                                     </VBox>
@@ -612,7 +613,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q4_2}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q1>Quest42', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -654,37 +655,37 @@
                                                     <cells>
                                                         <Label text="{i18n>questionnaire.q4_3}"
                                                             required="true" wrapping="true" />
-                                                        <Input value="{q1>Quest43A}" />
-                                                        <Input value="{q1>Quest43B}" />
-                                                        <Input value="{q1>Quest43C}" />
-                                                        <Input value="{q1>Quest43D}" />
+                                                        <Input editable="{form>/editable}" value="{q1>Quest43A}" />
+                                                        <Input editable="{form>/editable}" value="{q1>Quest43B}" />
+                                                        <Input editable="{form>/editable}" value="{q1>Quest43C}" />
+                                                        <Input editable="{form>/editable}" value="{q1>Quest43D}" />
                                                     </cells>
                                                 </ColumnListItem>
                                                 <ColumnListItem vAlign="Middle">
                                                     <cells>
                                                         <Label text="{i18n>questionnaire.q4_4}"
                                                             required="true" wrapping="true" />
-                                                        <Input type="Number" value="{q1>Quest44A}" />
-                                                        <Input type="Number" value="{q1>Quest44B}" />
-                                                        <Input type="Number" value="{q1>Quest44C}" />
-                                                        <Input type="Number" value="{q1>Quest44D}" />
+                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest44A}" />
+                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest44B}" />
+                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest44C}" />
+                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest44D}" />
                                                     </cells>
                                                 </ColumnListItem>
                                                 <ColumnListItem vAlign="Middle">
                                                     <cells>
                                                         <Label text="{i18n>questionnaire.q4_5}"
                                                             required="true" wrapping="true" />
-                                                        <Input type="Number" value="{q1>Quest45A}" />
-                                                        <Input type="Number" value="{q1>Quest45B}" />
-                                                        <Input type="Number" value="{q1>Quest45C}" />
-                                                        <Input type="Number" value="{q1>Quest45D}" />
+                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest45A}" />
+                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest45B}" />
+                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest45C}" />
+                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest45D}" />
                                                     </cells>
                                                 </ColumnListItem>
                                                 <ColumnListItem vAlign="Middle">
                                                     <cells>
                                                         <Label text="{i18n>questionnaire.q4_6}"
                                                             required="true" wrapping="true" />
-                                                        <Select selectedKey="{q1>Quest46A}"
+                                                        <Select editable="{form>/editable}" selectedKey="{q1>Quest46A}"
                                                             width="100%" forceSelection="false">
                                                             <items>
                                                                 <core:Item key="G"
@@ -695,7 +696,7 @@
                                                                     text="{i18n>questionnaire.option.poor}" />
                                                             </items>
                                                         </Select>
-                                                        <Select selectedKey="{q1>Quest46B}"
+                                                        <Select editable="{form>/editable}" selectedKey="{q1>Quest46B}"
                                                             width="100%" forceSelection="false">
                                                             <items>
                                                                 <core:Item key="G"
@@ -706,7 +707,7 @@
                                                                     text="{i18n>questionnaire.option.poor}" />
                                                             </items>
                                                         </Select>
-                                                        <Select selectedKey="{q1>Quest46C}"
+                                                        <Select editable="{form>/editable}" selectedKey="{q1>Quest46C}"
                                                             width="100%" forceSelection="false">
                                                             <items>
                                                                 <core:Item key="G"
@@ -717,7 +718,7 @@
                                                                     text="{i18n>questionnaire.option.poor}" />
                                                             </items>
                                                         </Select>
-                                                        <Select selectedKey="{q1>Quest46D}"
+                                                        <Select editable="{form>/editable}" selectedKey="{q1>Quest46D}"
                                                             width="100%" forceSelection="false">
                                                             <items>
                                                                 <core:Item key="G"
@@ -738,7 +739,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q4_7}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q1>Quest47', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -752,7 +753,7 @@
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q4_7_1}"
                                                 wrapping="true" />
-                                            <TextArea value="{q1>Quest471}" width="100%" rows="3"
+                                            <TextArea editable="{form>/editable}" value="{q1>Quest471}" width="100%" rows="3"
                                                 class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
@@ -761,7 +762,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q4_8}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q1>Quest48', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -789,7 +790,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q5_1}" required="true"
                                             wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest51', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -801,12 +802,12 @@
                                         <Label text="{i18n>questionnaire.q5_2}" required="true"
                                             wrapping="true" />
                                         <HBox alignItems="Center" wrap="Wrap">
-                                            <DatePicker
+                                            <DatePicker editable="{form>/editable}"
                                                 value="{path: 'q1>Quest52', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                                 enabled="{= !${form>/q5_2NotApplicable} }"
                                                 placeholder="{i18n>common.datePlaceholder}"
                                                 class="vetCtrlS sapUiSmallMarginEnd" />
-                                            <CheckBox selected="{form>/q5_2NotApplicable}"
+                                            <CheckBox editable="{form>/editable}" selected="{form>/q5_2NotApplicable}"
                                                 text="{i18n>questionnaire.inCaseOfNotApplicable}" />
                                         </HBox>
                                     </VBox>
@@ -816,7 +817,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q5_3}" required="true"
                                             wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest53', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -827,7 +828,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q5_4}" required="true"
                                             wrapping="true" />
-                                        <Input value="{q1>Quest54}" class="vetCtrlS" />
+                                        <Input editable="{form>/editable}" value="{q1>Quest54}" class="vetCtrlS" />
                                     </VBox>
                                 </l:content>
                             </l:Grid>
@@ -849,7 +850,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q6_1}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q1>Quest61', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -863,12 +864,12 @@
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q6_1_1}"
                                                 required="true" wrapping="true" />
-                                            <Input value="{q1>Quest611}" class="vetCtrlS" />
+                                            <Input editable="{form>/editable}" value="{q1>Quest611}" class="vetCtrlS" />
                                         </VBox>
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q6_1_2}"
                                                 required="true" wrapping="true" />
-                                            <DatePicker
+                                            <DatePicker editable="{form>/editable}"
                                                 value="{path: 'q1>Quest612', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                                 placeholder="{i18n>common.datePlaceholder}"
                                                 class="vetCtrlS" />
@@ -876,7 +877,7 @@
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q6_1_3}"
                                                 wrapping="true" />
-                                            <TextArea value="{q1>Quest613}" width="100%" rows="3"
+                                            <TextArea editable="{form>/editable}" value="{q1>Quest613}" width="100%" rows="3"
                                                 class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
@@ -885,7 +886,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q6_2}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q1>Quest62', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -899,12 +900,12 @@
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q6_2_1}"
                                                 required="true" wrapping="true" />
-                                            <Input value="{q1>Quest621}" class="vetCtrlS" />
+                                            <Input editable="{form>/editable}" value="{q1>Quest621}" class="vetCtrlS" />
                                         </VBox>
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q6_2_2}"
                                                 required="true" wrapping="true" />
-                                            <DatePicker
+                                            <DatePicker editable="{form>/editable}"
                                                 value="{path: 'q1>Quest622', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                                 placeholder="{i18n>common.datePlaceholder}"
                                                 class="vetCtrlS" />
@@ -912,7 +913,7 @@
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q6_2_3}"
                                                 wrapping="true" />
-                                            <TextArea value="{q1>Quest623}" width="100%" rows="3"
+                                            <TextArea editable="{form>/editable}" value="{q1>Quest623}" width="100%" rows="3"
                                                 class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
@@ -922,7 +923,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q6_3}" required="true"
                                             wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q1>Quest63', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -932,7 +933,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q6_4}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q1>Quest64', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -944,7 +945,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q6_5}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q1>Quest65', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -956,7 +957,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q6_6}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q1>Quest66', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -970,7 +971,7 @@
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q6_6_1}"
                                                 required="true" wrapping="true" />
-                                            <TextArea value="{q1>Quest661}" width="100%" rows="3"
+                                            <TextArea editable="{form>/editable}" value="{q1>Quest661}" width="100%" rows="3"
                                                 class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
@@ -994,7 +995,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q7_1}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest7_1', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1008,7 +1009,7 @@
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q7_1_1}"
                                                 required="true" wrapping="true" />
-                                            <TextArea value="{q2>Quest7_1_1}" width="100%" rows="3"
+                                            <TextArea editable="{form>/editable}" value="{q2>Quest7_1_1}" width="100%" rows="3"
                                                 class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
@@ -1017,7 +1018,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q7_2}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest7_2', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1029,7 +1030,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q7_3}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest7_3', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1041,7 +1042,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q7_4}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest7_4', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1053,7 +1054,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q7_5}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest7_5', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1080,7 +1081,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_1}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest8_1', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1094,7 +1095,7 @@
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q8_1_1}"
                                                 required="true" wrapping="true" />
-                                            <TextArea value="{q2>Quest811}" width="100%" rows="3"
+                                            <TextArea editable="{form>/editable}" value="{q2>Quest811}" width="100%" rows="3"
                                                 class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
@@ -1103,7 +1104,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_2}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest8_2', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1115,7 +1116,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_3}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest8_3', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1128,14 +1129,14 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_4}" required="true"
                                             wrapping="true" />
-                                        <Input value="{q2>Quest8_4}" type="Number" class="vetCtrlS" />
+                                        <Input editable="{form>/editable}" value="{q2>Quest8_4}" type="Number" class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
                                         <layoutData>
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_5}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest8_5', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1147,7 +1148,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_6}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest8_6', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1159,7 +1160,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_7}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest8_7', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1171,7 +1172,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_8}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest8_8', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1185,7 +1186,7 @@
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q8_8_1}"
                                                 required="true" wrapping="true" />
-                                            <TextArea value="{q2>Quest8_8_1}" width="100%" rows="3"
+                                            <TextArea editable="{form>/editable}" value="{q2>Quest8_8_1}" width="100%" rows="3"
                                                 class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
@@ -1194,7 +1195,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_9}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest8_9', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1213,7 +1214,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_10a}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest8_1_0_A', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1225,7 +1226,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_10b}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_8_1_0_B', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1237,7 +1238,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_10c}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_8_1_0_C', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1249,7 +1250,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_10d}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_8_1_0_D', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1261,7 +1262,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_10e}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_8_1_0_E', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1273,7 +1274,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_11}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_8_1_1', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1287,7 +1288,7 @@
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q8_11_1}"
                                                 wrapping="true" />
-                                            <TextArea value="{q2>Quest_8_1_1_1}" width="100%"
+                                            <TextArea editable="{form>/editable}" value="{q2>Quest_8_1_1_1}" width="100%"
                                                 rows="3" class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
@@ -1297,7 +1298,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_12}" required="true"
                                             wrapping="true" />
-                                        <Input value="{q2>Quest_8_1_2}" type="Number"
+                                        <Input editable="{form>/editable}" value="{q2>Quest_8_1_2}" type="Number"
                                             class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
@@ -1305,7 +1306,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_13}" wrapping="true" />
-                                        <TextArea value="{q2>Quest_8_1_3}" width="100%" rows="3"
+                                        <TextArea editable="{form>/editable}" value="{q2>Quest_8_1_3}" width="100%" rows="3"
                                             class="vetCtrlTA" />
                                     </VBox>
                                     <VBox class="vetField">
@@ -1320,7 +1321,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_14a}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_8_1_4_A', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1332,7 +1333,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_14b}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q2>Quest_8_1_4_B', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -1342,7 +1343,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_14c}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_8_1_4_C', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1356,7 +1357,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_14c1Yes}"
                                             required="true" wrapping="true" />
-                                        <TextArea value="{q2>Quest_8_1_4_C_1}" width="100%" rows="3"
+                                        <TextArea editable="{form>/editable}" value="{q2>Quest_8_1_4_C_1}" width="100%" rows="3"
                                             class="vetCtrlTA" />
                                     </VBox>
                                     <VBox class="vetField"
@@ -1366,7 +1367,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_14c1}" required="true"
                                             wrapping="true" />
-                                        <TextArea value="{q2>Quest_8_1_4_C_2}" width="100%" rows="3"
+                                        <TextArea editable="{form>/editable}" value="{q2>Quest_8_1_4_C_2}" width="100%" rows="3"
                                             class="vetCtrlTA" />
                                     </VBox>
                                     <VBox class="vetField">
@@ -1374,7 +1375,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_14d}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_8_1_4_D', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1386,7 +1387,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q8_14e}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_8_1_4_E', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1413,7 +1414,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q9_1}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_9_1', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1425,7 +1426,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q9_2}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_9_2', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1437,7 +1438,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q9_3}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_9_3', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1449,7 +1450,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q9_4}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_9_4', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1461,7 +1462,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q9_5}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_9_5', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1473,7 +1474,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q9_6}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_9_6', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1485,7 +1486,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q9_7}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_9_7', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1512,7 +1513,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q10_1}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_10_1', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1524,7 +1525,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q10_2}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_10_2', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1536,7 +1537,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q10_3}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_10_3', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1589,27 +1590,27 @@
                                                     <cells>
                                                         <Label text="{i18n>questionnaire.q11_1}"
                                                             wrapping="true" />
-                                                        <Input value="{q2>Quest_11_1_A}" />
-                                                        <Input value="{q2>Quest_11_1_B}" />
-                                                        <Input value="{q2>Quest_11_1_C}" />
+                                                        <Input editable="{form>/editable}" value="{q2>Quest_11_1_A}" />
+                                                        <Input editable="{form>/editable}" value="{q2>Quest_11_1_B}" />
+                                                        <Input editable="{form>/editable}" value="{q2>Quest_11_1_C}" />
                                                     </cells>
                                                 </ColumnListItem>
                                                 <ColumnListItem vAlign="Middle">
                                                     <cells>
                                                         <Label text="{i18n>questionnaire.q11_2}"
                                                             wrapping="true" />
-                                                        <Input value="{q2>Quest_11_2_A}" />
-                                                        <Input value="{q2>Quest_11_2_B}" />
-                                                        <Input value="{q2>Quest_11_2_C}" />
+                                                        <Input editable="{form>/editable}" value="{q2>Quest_11_2_A}" />
+                                                        <Input editable="{form>/editable}" value="{q2>Quest_11_2_B}" />
+                                                        <Input editable="{form>/editable}" value="{q2>Quest_11_2_C}" />
                                                     </cells>
                                                 </ColumnListItem>
                                                 <ColumnListItem vAlign="Middle">
                                                     <cells>
                                                         <Label text="{i18n>questionnaire.q11_3}"
                                                             wrapping="true" />
-                                                        <Input value="{q2>Quest_11_3_A}" />
-                                                        <Input value="{q2>Quest_11_3_B}" />
-                                                        <Input value="{q2>Quest_11_3_C}" />
+                                                        <Input editable="{form>/editable}" value="{q2>Quest_11_3_A}" />
+                                                        <Input editable="{form>/editable}" value="{q2>Quest_11_3_B}" />
+                                                        <Input editable="{form>/editable}" value="{q2>Quest_11_3_C}" />
                                                     </cells>
                                                 </ColumnListItem>
                                             </items>
@@ -1629,7 +1630,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q11_4}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q2>Quest_11_4', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -1639,7 +1640,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q11_5}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q2>Quest_11_5', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -1649,7 +1650,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q11_6}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q2>Quest_11_6', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}"
                                             class="vetCtrlS" />
@@ -1659,7 +1660,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q11_7}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_11_7', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1673,7 +1674,7 @@
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q11_7_1}"
                                                 wrapping="true" />
-                                            <TextArea value="{q2>Quest_11_7_1}" width="100%"
+                                            <TextArea editable="{form>/editable}" value="{q2>Quest_11_7_1}" width="100%"
                                                 rows="3" class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
@@ -1682,7 +1683,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q11_8}" wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_11_8', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1696,12 +1697,12 @@
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q11_8_1}"
                                                 wrapping="true" />
-                                            <Input value="{q2>Quest_11_8_1}" class="vetCtrlS" />
+                                            <Input editable="{form>/editable}" value="{q2>Quest_11_8_1}" class="vetCtrlS" />
                                         </VBox>
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q11_8_2}"
                                                 wrapping="true" />
-                                            <DatePicker
+                                            <DatePicker editable="{form>/editable}"
                                                 value="{path: 'q2>Quest_11_8_2', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                                 placeholder="{i18n>common.datePlaceholder}"
                                                 class="vetCtrlS" />
@@ -1709,13 +1710,13 @@
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q11_8_3}"
                                                 wrapping="true" />
-                                            <TextArea value="{q2>Quest_11_8_3}" width="100%"
+                                            <TextArea editable="{form>/editable}" value="{q2>Quest_11_8_3}" width="100%"
                                                 rows="3" class="vetCtrlTA" />
                                         </VBox>
                                         <VBox class="vetField">
                                             <Label text="{i18n>questionnaire.q11_8_4}"
                                                 wrapping="true" />
-                                            <TextArea value="{q2>Quest_11_8_4}" width="100%"
+                                            <TextArea editable="{form>/editable}" value="{q2>Quest_11_8_4}" width="100%"
                                                 rows="3" class="vetCtrlTA" />
                                         </VBox>
                                     </VBox>
@@ -1740,7 +1741,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q12}" required="true"
                                             wrapping="true" />
-                                        <RadioButtonGroup columns="2"
+                                        <RadioButtonGroup editable="{form>/editable}" columns="2"
                                             selectedIndex="{path: 'q2>Quest_12', type: 'YesNo'}"
                                             class="vetYesNo">
                                             <RadioButton text="{i18n>common.yes}" />
@@ -1768,7 +1769,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.responsibleName}"
                                             wrapping="true" />
-                                        <Input value="{q2>Quest_13_1}"
+                                        <Input editable="{form>/editable}" value="{q2>Quest_13_1}"
                                             placeholder="{i18n>questionnaire.placeholder.personName}" />
                                     </VBox>
                                     <VBox class="vetField">
@@ -1776,7 +1777,7 @@
                                             <l:GridData span="XL6 L6 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.company}" wrapping="true" />
-                                        <Input value="{q2>Quest_13_2}"
+                                        <Input editable="{form>/editable}" value="{q2>Quest_13_2}"
                                             placeholder="{i18n>questionnaire.placeholder.companyName}" />
                                     </VBox>
                                     <VBox class="vetField">
@@ -1785,7 +1786,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.positionRole}"
                                             wrapping="true" />
-                                        <Input value="{q2>Quest_13_3}"
+                                        <Input editable="{form>/editable}" value="{q2>Quest_13_3}"
                                             placeholder="{i18n>questionnaire.placeholder.personRole}" />
                                     </VBox>
                                     <VBox class="vetField">
@@ -1793,7 +1794,7 @@
                                             <l:GridData span="XL6 L6 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.place}" wrapping="true" />
-                                        <Input value="{q2>Quest_13_4}"
+                                        <Input editable="{form>/editable}" value="{q2>Quest_13_4}"
                                             placeholder="{i18n>questionnaire.placeholder.place}" />
                                     </VBox>
                                     <VBox class="vetField">
@@ -1801,7 +1802,7 @@
                                             <l:GridData span="XL3 L3 M6 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.date}" wrapping="true" />
-                                        <DatePicker
+                                        <DatePicker editable="{form>/editable}"
                                             value="{path: 'q2>Quest_13_4_1', type: 'DateType', constraints: {displayFormat: 'Date'}, formatOptions: {pattern: 'MM/dd/yyyy'}}"
                                             placeholder="{i18n>common.datePlaceholder}" />
                                     </VBox>
@@ -1811,7 +1812,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.telephoneNumber}"
                                             wrapping="true" />
-                                        <Input value="{q2>Quest_13_5}" type="Tel" />
+                                        <Input editable="{form>/editable}" value="{q2>Quest_13_5}" type="Tel" />
                                     </VBox>
                                     <VBox class="vetField">
                                         <layoutData>
@@ -1819,7 +1820,7 @@
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.emailAddress}"
                                             wrapping="true" />
-                                        <Input value="{q2>Quest_13_6}" type="Email"
+                                        <Input editable="{form>/editable}" value="{q2>Quest_13_6}" type="Email"
                                             placeholder="{i18n>questionnaire.placeholder.email}" />
                                     </VBox>
                                     <VBox>
