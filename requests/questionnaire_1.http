@@ -1,15 +1,17 @@
 #
 # Find which field makes the RFC dump with CX_SY_CONVERSION_NO_NUMBER on POST Questionnaires_1Set.
 #
-# How to use (REST Client extension - humao.rest-client):
-#   1. Start the app with "npm start" (the requests go through its proxy on port 8080, which uses the destination)
-#   2. Run "0. CSRF token" first, then the tests ("Send Request" above each one)
-#   3. Each test sends the minimum payload + ONE field. The test that returns 500 is the field the RFC cannot convert
+# How to use in BAS (REST Client extension - humao.rest-client):
+#   1. Run "0. CSRF token" first, then the tests ("Send Request" above each one)
+#   2. Each test sends the minimum payload + ONE field. The test that returns 500 is the field the RFC cannot convert
+#
+# The host "<destination>.dest" is resolved by BAS with the destination of ui5.yaml (s4h_backend_cap),
+# including its authentication. The public URL https://portXXXX-workspaces-...cloud.sap returns 401 here.
 #
 # Note: the requests that succeed create draft questionnaires (StatusQuest 01) in QAS.
 #
 
-@host = https://port8083-workspaces-ws-ltjnc.br10.applicationstudio.cloud.sap
+@host = http://s4h_backend_cap.dest
 @service = /sap/opu/odata/sap/ZGW_VETTING_SRV
 @token = {{csrf.response.headers.x-csrf-token}}
 
