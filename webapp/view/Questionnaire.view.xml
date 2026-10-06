@@ -282,7 +282,7 @@
                                             wrapping="true" />
                                         <Select editable="{form>/editable}" selectedKey="{q1>Quest25}" width="100%"
                                             forceSelection="false" class="vetCtrlS"
-                                            items="{/ContractKindsSet}">
+                                            items="{/ShipTypesSet}">
                                             <core:ListItem key="{DomvalueL}" text="{Ddtext}" />
                                         </Select>
                                     </VBox>
@@ -688,44 +688,44 @@
                                                         <Select editable="{form>/editable}" selectedKey="{q1>Quest46A}"
                                                             width="100%" forceSelection="false">
                                                             <items>
-                                                                <core:Item key="G"
+                                                                <core:Item key="01"
                                                                     text="{i18n>questionnaire.option.good}" />
-                                                                <core:Item key="F"
+                                                                <core:Item key="02"
                                                                     text="{i18n>questionnaire.option.fair}" />
-                                                                <core:Item key="P"
+                                                                <core:Item key="03"
                                                                     text="{i18n>questionnaire.option.poor}" />
                                                             </items>
                                                         </Select>
                                                         <Select editable="{form>/editable}" selectedKey="{q1>Quest46B}"
                                                             width="100%" forceSelection="false">
                                                             <items>
-                                                                <core:Item key="G"
+                                                                <core:Item key="01"
                                                                     text="{i18n>questionnaire.option.good}" />
-                                                                <core:Item key="F"
+                                                                <core:Item key="02"
                                                                     text="{i18n>questionnaire.option.fair}" />
-                                                                <core:Item key="P"
+                                                                <core:Item key="03"
                                                                     text="{i18n>questionnaire.option.poor}" />
                                                             </items>
                                                         </Select>
                                                         <Select editable="{form>/editable}" selectedKey="{q1>Quest46C}"
                                                             width="100%" forceSelection="false">
                                                             <items>
-                                                                <core:Item key="G"
+                                                                <core:Item key="01"
                                                                     text="{i18n>questionnaire.option.good}" />
-                                                                <core:Item key="F"
+                                                                <core:Item key="02"
                                                                     text="{i18n>questionnaire.option.fair}" />
-                                                                <core:Item key="P"
+                                                                <core:Item key="03"
                                                                     text="{i18n>questionnaire.option.poor}" />
                                                             </items>
                                                         </Select>
                                                         <Select editable="{form>/editable}" selectedKey="{q1>Quest46D}"
                                                             width="100%" forceSelection="false">
                                                             <items>
-                                                                <core:Item key="G"
+                                                                <core:Item key="01"
                                                                     text="{i18n>questionnaire.option.good}" />
-                                                                <core:Item key="F"
+                                                                <core:Item key="02"
                                                                     text="{i18n>questionnaire.option.fair}" />
-                                                                <core:Item key="P"
+                                                                <core:Item key="03"
                                                                     text="{i18n>questionnaire.option.poor}" />
                                                             </items>
                                                         </Select>
