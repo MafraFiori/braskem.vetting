@@ -686,48 +686,24 @@
                                                         <Label text="{i18n>questionnaire.q4_6}"
                                                             required="true" wrapping="true" />
                                                         <Select editable="{form>/editable}" selectedKey="{q1>Quest46A}"
-                                                            width="100%" forceSelection="false">
-                                                            <items>
-                                                                <core:Item key="01"
-                                                                    text="{i18n>questionnaire.option.good}" />
-                                                                <core:Item key="02"
-                                                                    text="{i18n>questionnaire.option.fair}" />
-                                                                <core:Item key="03"
-                                                                    text="{i18n>questionnaire.option.poor}" />
-                                                            </items>
+                                                            width="100%" forceSelection="false"
+                                                            items="{/EnProficiencysSet}">
+                                                            <core:ListItem key="{DomvalueL}" text="{Ddtext}" />
                                                         </Select>
                                                         <Select editable="{form>/editable}" selectedKey="{q1>Quest46B}"
-                                                            width="100%" forceSelection="false">
-                                                            <items>
-                                                                <core:Item key="01"
-                                                                    text="{i18n>questionnaire.option.good}" />
-                                                                <core:Item key="02"
-                                                                    text="{i18n>questionnaire.option.fair}" />
-                                                                <core:Item key="03"
-                                                                    text="{i18n>questionnaire.option.poor}" />
-                                                            </items>
+                                                            width="100%" forceSelection="false"
+                                                            items="{/EnProficiencysSet}">
+                                                            <core:ListItem key="{DomvalueL}" text="{Ddtext}" />
                                                         </Select>
                                                         <Select editable="{form>/editable}" selectedKey="{q1>Quest46C}"
-                                                            width="100%" forceSelection="false">
-                                                            <items>
-                                                                <core:Item key="01"
-                                                                    text="{i18n>questionnaire.option.good}" />
-                                                                <core:Item key="02"
-                                                                    text="{i18n>questionnaire.option.fair}" />
-                                                                <core:Item key="03"
-                                                                    text="{i18n>questionnaire.option.poor}" />
-                                                            </items>
+                                                            width="100%" forceSelection="false"
+                                                            items="{/EnProficiencysSet}">
+                                                            <core:ListItem key="{DomvalueL}" text="{Ddtext}" />
                                                         </Select>
                                                         <Select editable="{form>/editable}" selectedKey="{q1>Quest46D}"
-                                                            width="100%" forceSelection="false">
-                                                            <items>
-                                                                <core:Item key="01"
-                                                                    text="{i18n>questionnaire.option.good}" />
-                                                                <core:Item key="02"
-                                                                    text="{i18n>questionnaire.option.fair}" />
-                                                                <core:Item key="03"
-                                                                    text="{i18n>questionnaire.option.poor}" />
-                                                            </items>
+                                                            width="100%" forceSelection="false"
+                                                            items="{/EnProficiencysSet}">
+                                                            <core:ListItem key="{DomvalueL}" text="{Ddtext}" />
                                                         </Select>
                                                     </cells>
                                                 </ColumnListItem>
