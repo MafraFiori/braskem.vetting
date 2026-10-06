@@ -1,0 +1,143 @@
+#
+# Find which field makes the RFC dump with CX_SY_CONVERSION_NO_NUMBER on POST Questionnaires_1Set.
+#
+# How to use (REST Client extension - humao.rest-client):
+#   1. Start the app with "npm start" (the requests go through its proxy on port 8080, which uses the destination)
+#   2. Run "0. CSRF token" first, then the tests ("Send Request" above each one)
+#   3. Each test sends the minimum payload + ONE field. The test that returns 500 is the field the RFC cannot convert
+#
+# Note: the requests that succeed create draft questionnaires (StatusQuest 01) in QAS.
+#
+
+@host = https://port8083-workspaces-ws-ltjnc.br10.applicationstudio.cloud.sap
+@service = /sap/opu/odata/sap/ZGW_VETTING_SRV
+@token = {{csrf.response.headers.x-csrf-token}}
+
+### 0. CSRF token (run first)
+# @name csrf
+GET {{host}}{{service}}/
+x-csrf-token: Fetch
+Accept: application/json
+
+### 1. Baseline: only the required fields (must return 201)
+POST {{host}}{{service}}/Questionnaires_1Set
+Content-Type: application/json
+Accept: application/json
+x-csrf-token: {{token}}
+
+{ "IdQuest": "000000", "StatusQuest": "01" }
+
+### 2. Quest17 - 1.7 Type of contract (ContractKindsSet)
+POST {{host}}{{service}}/Questionnaires_1Set
+Content-Type: application/json
+Accept: application/json
+x-csrf-token: {{token}}
+
+{ "IdQuest": "000000", "StatusQuest": "01", "Quest17": "COA" }
+
+### 3. Quest121 - 1.2 Terminal (PonPortosSet)
+POST {{host}}{{service}}/Questionnaires_1Set
+Content-Type: application/json
+Accept: application/json
+x-csrf-token: {{token}}
+
+{ "IdQuest": "000000", "StatusQuest": "01", "Quest121": "A CORUNA" }
+
+### 4. Quest15 - 1.5 Product (TpCargosSet)
+POST {{host}}{{service}}/Questionnaires_1Set
+Content-Type: application/json
+Accept: application/json
+x-csrf-token: {{token}}
+
+{ "IdQuest": "000000", "StatusQuest": "01", "Quest15": "ACRYLONITRILE" }
+
+### 5. Quest26 - 2.6 Hull and bottom configuration (HullTypesSet)
+POST {{host}}{{service}}/Questionnaires_1Set
+Content-Type: application/json
+Accept: application/json
+x-csrf-token: {{token}}
+
+{ "IdQuest": "000000", "StatusQuest": "01", "Quest26": "DH" }
+
+### 6. Quest131 - 1.3 Ports (typed)
+POST {{host}}{{service}}/Questionnaires_1Set
+Content-Type: application/json
+Accept: application/json
+x-csrf-token: {{token}}
+
+{ "IdQuest": "000000", "StatusQuest": "01", "Quest131": "SP" }
+
+### 7. Quest43A-D - 4.3 Nationality (typed)
+POST {{host}}{{service}}/Questionnaires_1Set
+Content-Type: application/json
+Accept: application/json
+x-csrf-token: {{token}}
+
+{ "IdQuest": "000000", "StatusQuest": "01", "Quest43A": "sp", "Quest43B": "sp", "Quest43C": "sp", "Quest43D": "sp" }
+
+### 8. Free text fields - 2.1 / 2.4 / 2.13
+POST {{host}}{{service}}/Questionnaires_1Set
+Content-Type: application/json
+Accept: application/json
+x-csrf-token: {{token}}
+
+{ "IdQuest": "000000", "StatusQuest": "01", "Quest21": "ADSA", "Quest24": "SASDA", "Quest213": "TESTE" }
+
+### 9. Full payload sent by the app (reproduces the error)
+POST {{host}}{{service}}/Questionnaires_1Set
+Content-Type: application/json
+Accept: application/json
+x-csrf-token: {{token}}
+
+{
+    "IdQuest": "000000",
+    "Quest11": "200",
+    "Quest121": "A CORUNA",
+    "Quest131": "SP",
+    "Quest14": "\/Date(1791244800000)\/",
+    "Quest15": "ACRYLONITRILE",
+    "Quest16": "1",
+    "Quest17": "COA",
+    "Quest21": "ADSA",
+    "Quest22": "231312",
+    "Quest23": "\/Date(1791244800000)\/",
+    "Quest24": "SASDA",
+    "Quest25": "001",
+    "Quest26": "DH",
+    "Quest27": "12",
+    "Quest28": "12",
+    "Quest29": "12",
+    "Quest210": "12",
+    "Quest211": "12",
+    "Quest212": "12",
+    "Quest213": "TESTE",
+    "Quest214": "12",
+    "Quest215": "01",
+    "Quest216": "01",
+    "Quest216A": "12",
+    "Quest216B": "12",
+    "Quest216C": "12",
+    "Quest41": "12",
+    "Quest46A": "01",
+    "Quest46B": "01",
+    "Quest46C": "01",
+    "Quest46D": "01",
+    "Quest51": "\/Date(1791244800000)\/",
+    "Quest52": "\/Date(1791244800000)\/",
+    "Quest53": "\/Date(1791244800000)\/",
+    "Quest54": "1",
+    "Quest43A": "sp",
+    "Quest43B": "sp",
+    "Quest43C": "sp",
+    "Quest43D": "sp",
+    "Quest44A": "1",
+    "Quest44B": "1",
+    "Quest44C": "1",
+    "Quest44D": "1",
+    "Quest45A": "1",
+    "Quest45B": "1",
+    "Quest45C": "1",
+    "Quest45D": "1",
+    "Quest63": "\/Date(1791244800000)\/",
+    "StatusQuest": "02"
+}
