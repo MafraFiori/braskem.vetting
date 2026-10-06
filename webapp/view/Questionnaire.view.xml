@@ -218,7 +218,7 @@
                                         <Select editable="{form>/editable}" selectedKey="{q1>Quest17}" width="100%"
                                             forceSelection="false" class="vetCtrlS"
                                             items="{/ContractKindsSet}">
-                                            <core:ListItem key="{Valpos}" text="{Ddtext}" />
+                                            <core:ListItem key="{DomvalueL}" text="{Ddtext}" />
                                         </Select>
                                     </VBox>
                                 </l:content>
@@ -283,7 +283,7 @@
                                         <Select editable="{form>/editable}" selectedKey="{q1>Quest25}" width="100%"
                                             forceSelection="false" class="vetCtrlS"
                                             items="{/ContractKindsSet}">
-                                            <core:ListItem key="{Valpos}" text="{Ddtext}" />
+                                            <core:ListItem key="{DomvalueL}" text="{Ddtext}" />
                                         </Select>
                                     </VBox>
                                     <VBox class="vetField">
@@ -295,7 +295,7 @@
                                         <Select editable="{form>/editable}" selectedKey="{q1>Quest26}" width="100%"
                                             forceSelection="false" class="vetCtrlS"
                                             items="{/HullTypesSet}">
-                                            <core:ListItem key="{Valpos}" text="{Ddtext}" />
+                                            <core:ListItem key="{DomvalueL}" text="{Ddtext}" />
                                         </Select>
                                     </VBox>
                                     <VBox class="vetField">
@@ -380,7 +380,7 @@
                                         <Select editable="{form>/editable}" selectedKey="{q1>Quest215}" width="100%"
                                             forceSelection="false" class="vetCtrlS"
                                             items="{/CodSociedClassSet}">
-                                            <core:ListItem key="{Valpos}" text="{Ddtext}" />
+                                            <core:ListItem key="{DomvalueL}" text="{Ddtext}" />
                                         </Select>
                                     </VBox>
                                     <VBox class="vetField">
@@ -391,7 +391,7 @@
                                         <Select editable="{form>/editable}" selectedKey="{q1>Quest216}" width="100%"
                                             forceSelection="false" class="vetCtrlS"
                                             items="{/CodPicLubSet}">
-                                            <core:ListItem key="{Valpos}" text="{Ddtext}" />
+                                            <core:ListItem key="{DomvalueL}" text="{Ddtext}" />
                                         </Select>
                                     </VBox>
                                     <VBox visible="{= ${q1>Quest216} === 'OT' }">
