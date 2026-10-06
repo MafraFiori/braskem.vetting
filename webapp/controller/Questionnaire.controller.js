@@ -113,7 +113,6 @@ sap.ui.define([
         },
 
         _resetForm(sMode) {
-            this._sMode = sMode
             this.getView().getModel("form").setData({
                 q5_2NotApplicable: false,
                 editable: sMode !== MODE.DISPLAY

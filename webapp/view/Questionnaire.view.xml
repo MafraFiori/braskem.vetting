@@ -131,7 +131,7 @@
                                         </Select>
                                     </VBox>
                                     <VBox
-                                        visible="{= ${q1>Quest11} === 'STS' || ${q1>Quest11} === 'LDI' }">
+                                        visible="{= ${q1>Quest11} === '300' || ${q1>Quest11} === '700' }">
                                         <layoutData>
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
@@ -158,7 +158,7 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label
-                                            text="{= ${q1>Quest11} === 'DIS' ? ${i18n>questionnaire.q1_3Origin} : ${i18n>questionnaire.q1_3} }"
+                                            text="{= ${q1>Quest11} === '200' ? ${i18n>questionnaire.q1_3Origin} : ${i18n>questionnaire.q1_3} }"
                                             required="true" wrapping="true" app:requiredMode="any" />
                                         <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true"
                                             vSpacing="0.5" hSpacing="1" class="vetInnerGrid">
