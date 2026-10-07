@@ -1,0 +1,29 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified">
+    <Dialog id="uploadDocumentDialog" title="{i18n>questionnaire.upload.title}" contentWidth="32rem">
+        <content>
+            <form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4"
+                labelSpanS="12" columnsL="1" columnsM="1">
+                <Label text="{i18n>questionnaire.upload.filetype}" />
+                <!-- Document types from the backend value help; loaded when the dialog is opened -->
+                <Select id="uploadFiletype" width="100%" forceSelection="false"
+                    items="{path: '/FileTypesSet', templateShareable: false}">
+                    <core:ListItem key="{DomvalueL}" text="{Ddtext}" />
+                </Select>
+                <Label text="{i18n>questionnaire.upload.description}" />
+                <Input id="uploadDescription" maxLength="60" />
+                <Label text="{i18n>questionnaire.upload.file}" />
+                <u:FileUploader id="uploadFile" width="100%" sendXHR="true" useMultipart="false"
+                    httpRequestMethod="Post" uploadComplete=".onUploadComplete"
+                    placeholder="{i18n>questionnaire.upload.filePlaceholder}" />
+            </form:SimpleForm>
+        </content>
+        <beginButton>
+            <Button id="uploadDocumentButton" text="{i18n>questionnaire.upload.send}" type="Emphasized"
+                press=".onUploadDocument" />
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>messages.close}" press=".onCloseUploadDialog" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

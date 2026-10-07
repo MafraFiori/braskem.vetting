@@ -90,7 +90,8 @@
         "sap.f": {},
         "sap.ui.comp": {},
         "sap.ui.layout": {},
-        "sap.uxap": {}
+        "sap.uxap": {},
+        "sap.ui.unified": {}
       }
     },
     "contentDensities": {

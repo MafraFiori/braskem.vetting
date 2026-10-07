@@ -1818,13 +1818,21 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <Table items="{path: 'documents>/', templateShareable: false}"
+                            <!-- Files of the questionnaire (Questionnaires_filesSet, key IdQuest + Filetype).
+                                 Bound by the controller (_bindFiles) once the questionnaire has an IdQuest -->
+                            <Table id="filesTable"
+                                items="{path: '/Questionnaires_filesSet', suspended: true, templateShareable: true}"
                                 noDataText="{i18n>questionnaire.noDocuments}">
                                 <headerToolbar>
                                     <OverflowToolbar style="Clear">
+                                        <Text text="{i18n>questionnaire.upload.saveFirst}"
+                                            visible="{= ${form>/editable} &amp;&amp; !${form>/idQuest} }" />
                                         <ToolbarSpacer />
                                         <Button text="{i18n>questionnaire.addDocument}"
-                                            icon="sap-icon://add" type="Emphasized" />
+                                            icon="sap-icon://add" type="Emphasized"
+                                            visible="{form>/editable}"
+                                            enabled="{= !!${form>/idQuest} }"
+                                            press=".onAddDocument" />
                                     </OverflowToolbar>
                                 </headerToolbar>
                                 <columns>
@@ -1844,15 +1852,18 @@
                                 <items>
                                     <ColumnListItem vAlign="Middle">
                                         <cells>
-                                            <Link text="{documents>Filename}" />
-                                            <Text text="{documents>Type}" />
-                                            <Text text="{documents>Description}" />
+                                            <Link text="{Filename}" press=".onDownloadDocument" />
+                                            <Text text="{DescrFiletype}" />
+                                            <Text text="{Descricao}" />
                                             <HBox justifyContent="End">
                                                 <Button icon="sap-icon://download"
                                                     type="Transparent"
-                                                    tooltip="{i18n>common.download}" />
+                                                    tooltip="{i18n>common.download}"
+                                                    press=".onDownloadDocument" />
                                                 <Button icon="sap-icon://delete" type="Transparent"
-                                                    tooltip="{i18n>common.delete}" />
+                                                    tooltip="{i18n>common.delete}"
+                                                    visible="{form>/editable}"
+                                                    press=".onDeleteDocument" />
                                             </HBox>
                                         </cells>
                                     </ColumnListItem>

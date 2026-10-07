@@ -41,6 +41,8 @@ function (JSONModel, Device) {
     }
 
     return {
+        extractODataErrorMessage,
+
         /**
          * Provides runtime information for the device the UI5 app is running on as a JSONModel.
          * @returns {sap.ui.model.json.JSONModel} The device model.

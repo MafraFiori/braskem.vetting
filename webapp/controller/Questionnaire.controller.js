@@ -3,8 +3,15 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/Element",
     "sap/ui/core/Messaging",
-    "braskem/zui5vetting/model/fieldFormats"
-], (BaseController, JSONModel, Element, Messaging, fieldFormats) => {
+    "sap/ui/core/Fragment",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+    "sap/ui/unified/FileUploaderParameter",
+    "sap/m/library",
+    "braskem/zui5vetting/model/fieldFormats",
+    "braskem/zui5vetting/model/models"
+], (BaseController, JSONModel, Element, Messaging, Fragment, Filter, FilterOperator, FileUploaderParameter, mobileLibrary,
+    fieldFormats, models) => {
     "use strict";
 
     // The form reads two entities: q1> = Questionnaires_1Set (sections 1-6), q2> = Questionnaires_2Set (sections 7-13)
@@ -35,6 +42,9 @@ sap.ui.define([
     // Controls checked by the required-field validation
     const FIELD_TYPES = ["sap.m.InputBase", "sap.m.Select", "sap.m.RadioButtonGroup"]
 
+    // Files of the questionnaire (section 14). Deletes are sent at once (not deferred like the questionnaire changes)
+    const FILES = { path: "/Questionnaires_filesSet", groupId: "files" }
+
     return BaseController.extend("braskem.zui5vetting.controller.Questionnaire", {
 
         onInit() {
@@ -58,6 +68,9 @@ sap.ui.define([
 
             // Opens the MessageView when an error / warning arrives (OData errors, save errors)
             this.attachMessages()
+
+            // Template of the files table, bound per questionnaire in _bindFiles
+            this._oFilesTemplate = this.byId("filesTable").getBindingInfo("items").template
 
             this._mContexts = {}
             this.getRouter().getRoute("RouteCreateQuestionnaires").attachPatternMatched(this.newObject, this)
@@ -100,6 +113,7 @@ sap.ui.define([
                         this._mContexts[sName] = oContext
                         oView.setBindingContext(oContext, sName)
                     })
+                    this._bindFiles(sIdQuest)
                 }
             } catch {
                 // The reason was already added to the messages by the requestFailed handler
@@ -112,8 +126,10 @@ sap.ui.define([
         _resetForm(sMode) {
             this.getView().getModel("form").setData({
                 q5_2NotApplicable: false,
-                editable: sMode !== MODE.DISPLAY
+                editable: sMode !== MODE.DISPLAY,
+                idQuest: ""     // IdQuest of a saved questionnaire: enables the files (section 14)
             })
+            this._bindFiles("")
             Messaging.removeMessages(this._getValidationMessages())
             this.getView().findAggregatedObjects(true, (oControl) => oControl.isA(FIELD_TYPES))
                 .forEach((oField) => this._setFieldError(oField, false))
@@ -238,6 +254,9 @@ sap.ui.define([
                 oModel.setProperty("StatusQuest", sStatus, oContext1)
                 await this._submitEntity("q1")
                 const sIdQuest = oContext1.getProperty("IdQuest")
+                if (!this.getView().getModel("form").getProperty("/idQuest")) {
+                    this._bindFiles(sIdQuest)
+                }
 
                 if (oContext2.isTransient()) {
                     oModel.setProperty("IdQuest", sIdQuest, oContext2)
@@ -368,6 +387,122 @@ sap.ui.define([
                     },
                     error: reject
                 })
+            })
+        },
+
+        // ---- Section 14: files (Questionnaires_filesSet) ----
+
+        // Lists the files of the questionnaire; without IdQuest (not saved yet) the table is empty
+        _bindFiles(sIdQuest) {
+            const oTable = this.byId("filesTable")
+            this.getView().getModel("form").setProperty("/idQuest", sIdQuest)
+            if (!sIdQuest) {
+                oTable.unbindItems()
+                return
+            }
+            oTable.bindItems({
+                path: FILES.path,
+                filters: [new Filter("IdQuest", FilterOperator.EQ, sIdQuest)],
+                template: this._oFilesTemplate,
+                templateShareable: true
+            })
+        },
+
+        onAddDocument() {
+            if (!this._pUploadDialog) {
+                this._pUploadDialog = Fragment.load({
+                    id: this.getView().getId(),
+                    name: "braskem.zui5vetting.view.fragment.UploadDocumentDialog",
+                    controller: this
+                }).then((oDialog) => {
+                    this.getView().addDependent(oDialog)
+                    return oDialog
+                })
+            }
+            this._pUploadDialog.then((oDialog) => {
+                this.byId("uploadFiletype").setSelectedKey("").setValueState("None")
+                this.byId("uploadDescription").setValue("")
+                this.byId("uploadFile").clear().setValueState("None")
+                oDialog.open()
+            })
+        },
+
+        onCloseUploadDialog() {
+            this.byId("uploadDocumentDialog").close()
+        },
+
+        /**
+         * Sends the file as media (POST Questionnaires_filesSet, body = file content), handled by CREATE_STREAM.
+         * The other fields go in the "slug" header: IdQuest|Filetype|Filename|Description, each one URI-encoded.
+         */
+        async onUploadDocument() {
+            const oModel = this.getOwnerComponent().getModel()
+            const oFiletype = this.byId("uploadFiletype")
+            const oUploader = this.byId("uploadFile")
+
+            oFiletype.setValueState(oFiletype.getSelectedKey() ? "None" : "Error")
+            oUploader.setValueState(oUploader.getValue() ? "None" : "Error")
+            if (!oFiletype.getSelectedKey() || !oUploader.getValue()) {
+                return
+            }
+
+            const sSlug = [
+                this.getView().getModel("form").getProperty("/idQuest"),
+                oFiletype.getSelectedKey(),
+                oUploader.getValue(),
+                this.byId("uploadDescription").getValue()
+            ].map(encodeURIComponent).join("|")
+
+            oUploader.setUploadUrl(oModel.sServiceUrl + FILES.path)
+            oUploader.destroyHeaderParameters()
+            Object.entries({
+                "x-csrf-token": await oModel.securityTokenAvailable(),
+                slug: sSlug,
+                Accept: "application/json"
+            }).forEach(([sName, sValue]) => oUploader.addHeaderParameter(new FileUploaderParameter({ name: sName, value: sValue })))
+
+            this.byId("uploadDocumentDialog").setBusy(true)
+            oUploader.checkFileReadable()
+                .then(() => oUploader.upload())
+                .catch(() => {
+                    this.byId("uploadDocumentDialog").setBusy(false)
+                    oUploader.setValueState("Error")
+                })
+        },
+
+        onUploadComplete(oEvent) {
+            const iStatus = oEvent.getParameter("status")
+            const sFilename = this.byId("uploadFile").getValue()
+            this.byId("uploadDocumentDialog").setBusy(false)
+
+            if (iStatus >= 200 && iStatus < 300) {
+                this.addMessage({ type: "Success", title: this.getText("questionnaire.msg.documentUploaded", [sFilename]) })
+                this.byId("uploadDocumentDialog").close()
+                this.byId("filesTable").getBinding("items")?.refresh()
+            } else {
+                this.addMessage({
+                    type: "Error",
+                    title: this.getText("questionnaire.msg.documentUploadError", [sFilename]),
+                    description: models.extractODataErrorMessage({
+                        body: oEvent.getParameter("responseRaw"),
+                        statusCode: iStatus
+                    })
+                })
+            }
+        },
+
+        // GET_STREAM: the file content is at <entity>/$value
+        onDownloadDocument(oEvent) {
+            const oModel = this.getOwnerComponent().getModel()
+            mobileLibrary.URLHelper.redirect(oModel.sServiceUrl + oEvent.getSource().getBindingContext().getPath() + "/$value", true)
+        },
+
+        onDeleteDocument(oEvent) {
+            const oContext = oEvent.getSource().getBindingContext()
+            const sFilename = oContext.getProperty("Filename")
+            this.getOwnerComponent().getModel().remove(oContext.getPath(), {
+                groupId: FILES.groupId,
+                success: () => this.addMessage({ type: "Success", title: this.getText("questionnaire.msg.documentDeleted", [sFilename]) })
             })
         },
 
