@@ -78,7 +78,7 @@
                                         tooltip="{i18n>welcome.copy}" press=".onCopyQuestionnaire" />
                                 </HBox>
                                 <ObjectStatus
-                                    text="{parts: ['StVettQuest', 'StVettQuestDesc'], formatter: 'formatter.statusText'}"
+                                    text="{parts: ['StVettQuest', 'StVettQuestDesc'], formatter: '.formatStatusText'}"
                                     state="{path: 'StVettQuest', formatter: 'formatter.statusState'}"
                                     icon="{path: 'StVettQuest', formatter: 'formatter.statusIcon'}"
                                     inverted="true" />

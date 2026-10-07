@@ -77,6 +77,11 @@
   "sap.ui5": {
     "flexEnabled": false,
     "handleValidation": true,
+    "commands": {
+      "Enter": {
+        "shortcut": "Enter"
+      }
+    },
     "dependencies": {
       "minUI5Version": "1.120.39",
       "libs": {

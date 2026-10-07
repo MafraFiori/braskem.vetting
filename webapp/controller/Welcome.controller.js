@@ -37,6 +37,13 @@ sap.ui.define([
             this._navToQuestionnaire(oEvent, "copy")
         },
 
+        // Translated status text (i18n "status.<code>"); unknown codes show the backend description
+        formatStatusText(sStatus, sDescription) {
+            const sKey = `status.${sStatus}`
+            const oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle()
+            return oBundle.hasText(sKey) ? oBundle.getText(sKey) : (sDescription || sStatus || "")
+        },
+
         _navToQuestionnaire(oEvent, sMode) {
             const sIdQuest = oEvent.getSource().getBindingContext().getProperty("IdQuest")
             this.getRouter().navTo("RouteQuestionnaire", { IdQuest: sIdQuest, mode: sMode })

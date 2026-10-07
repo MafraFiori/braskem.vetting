@@ -2,6 +2,7 @@ sap.ui.define([], () => {
     "use strict";
 
     // Questionnaire status (StVettQuest, domain values): criticality + icon shown in the list
+    // (the translated text is formatted by the controller, it needs the i18n bundle)
     const STATUS = {
         "01": { state: "None", icon: "sap-icon://edit" },             // Em Edição
         "02": { state: "Information", icon: "sap-icon://paper-plane" }, // Enviado
@@ -17,14 +18,6 @@ sap.ui.define([], () => {
 
         statusIcon(sStatus) {
             return STATUS[sStatus]?.icon ?? ""
-        },
-
-        // Translated text (i18n "status.<code>"); unknown codes show the backend description. "this" is the control
-        statusText(sStatus, sDescription) {
-            if (!STATUS[sStatus]) {
-                return sDescription || sStatus || ""
-            }
-            return this.getModel("i18n").getResourceBundle().getText(`status.${sStatus}`)
         }
     };
 });
