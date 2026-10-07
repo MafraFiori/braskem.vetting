@@ -29,6 +29,30 @@ x-csrf-token: {{token}}
 
 { "IdQuest": "000000", "StatusQuest": "01" }
 
+### 1a. Empty body (if it also returns 500, the dump does not depend on the payload)
+POST {{host}}{{service}}/Questionnaires_1Set
+Content-Type: application/json
+Accept: application/json
+x-csrf-token: {{token}}
+
+{}
+
+### 1b. Only IdQuest
+POST {{host}}{{service}}/Questionnaires_1Set
+Content-Type: application/json
+Accept: application/json
+x-csrf-token: {{token}}
+
+{ "IdQuest": "000000" }
+
+### 1c. Only StatusQuest
+POST {{host}}{{service}}/Questionnaires_1Set
+Content-Type: application/json
+Accept: application/json
+x-csrf-token: {{token}}
+
+{ "StatusQuest": "01" }
+
 ### 2. Quest17 - 1.7 Type of contract (ContractKindsSet)
 POST {{host}}{{service}}/Questionnaires_1Set
 Content-Type: application/json

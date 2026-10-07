@@ -30,7 +30,7 @@
                 enableAutoColumnWidth="true"
                 useTablePersonalisation="true"
                 header="{i18n>Results}"
-                requestAtLeastFields="IdQuest,StVettQuest"
+                requestAtLeastFields="IdQuest,StVettQuest,StVettQuestDesc"
                 showRowCount="true">
                 <smartTable:layoutData>
                     <FlexItemData growFactor="1" baseSize="0%" />
@@ -45,7 +45,8 @@
                     </OverflowToolbar>
                 </smartTable:customToolbar>
                 <Table growing="true" growingThreshold="100" mode="None" id="table2"
-                    enableBusyIndicator="true" busyIndicatorDelay="100">
+                    enableBusyIndicator="true" busyIndicatorDelay="100"
+                    core:require="{ formatter: 'braskem/zui5vetting/model/formatter' }">
                     <columns>
                         <Column width="9rem">
                             <customData>
@@ -53,6 +54,14 @@
                                     value='\{"columnKey": "actions", "columnIndex": 0}' />
                             </customData>
                             <Text text="{i18n>welcome.actions}" />
+                        </Column>
+                        <!-- Same columnKey as the property: replaces the generated "Status" column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey": "StVettQuest", "leadingProperty": "StVettQuest", "additionalProperty": "StVettQuestDesc", "sortProperty": "StVettQuest", "filterProperty": "StVettQuest", "columnIndex": 5}' />
+                            </customData>
+                            <Text text="{i18n>welcome.status}" />
                         </Column>
                     </columns>
                     <items>
@@ -68,6 +77,11 @@
                                     <Button icon="sap-icon://copy" type="Transparent"
                                         tooltip="{i18n>welcome.copy}" press=".onCopyQuestionnaire" />
                                 </HBox>
+                                <ObjectStatus
+                                    text="{parts: ['StVettQuest', 'StVettQuestDesc'], formatter: 'formatter.statusText'}"
+                                    state="{path: 'StVettQuest', formatter: 'formatter.statusState'}"
+                                    icon="{path: 'StVettQuest', formatter: 'formatter.statusIcon'}"
+                                    inverted="true" />
                             </cells>
                         </ColumnListItem>
                     </items>
