@@ -1,13 +1,14 @@
 sap.ui.define([
     "sap/base/Log",
     "sap/ui/model/odata/type/Decimal",
-    "sap/ui/model/type/String"
-], (Log, Decimal, StringType) => {
+    "braskem/zui5vetting/model/ZeroAsEmptyType"
+], (Log, Decimal, ZeroAsEmptyType) => {
     "use strict";
 
     // Formats of the form fields taken from the service metadata, so the screen follows the backend
     // (lengths, precision and scale) without hard-coding them in the view:
     // - Edm.String  -> maxLength on Input/TextArea; on Select it is kept to be checked before saving
+    //                  Selects and digit-only inputs show NUMC "00"/"000" as empty (ZeroAsEmptyType)
     // - Edm.Decimal -> odata Decimal type with the precision/scale of the property (e.g. 6,3 = up to 3 integer digits)
 
     function getProperty(oMetaModel, sEntitySet, sProperty) {
@@ -22,6 +23,7 @@ sap.ui.define([
         if (oProperty.type === "Edm.String" && iMaxLength) {
             if (oField.isA("sap.m.Select")) {
                 oField.data("maxLength", iMaxLength)
+                oField.bindProperty("selectedKey", { path: oPart.path, model: oPart.model, type: new ZeroAsEmptyType() })
                 return
             }
             oField.setMaxLength(iMaxLength)
@@ -31,7 +33,7 @@ sap.ui.define([
                 oField.bindProperty("value", {
                     path: oPart.path,
                     model: oPart.model,
-                    type: new StringType({}, { maxLength: iMaxLength, search: "^[0-9]*$" })
+                    type: new ZeroAsEmptyType({}, { maxLength: iMaxLength, search: "^[0-9]*$" })
                 })
             }
         } else if (oProperty.type === "Edm.Decimal") {

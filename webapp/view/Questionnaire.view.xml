@@ -405,7 +405,7 @@
                                         </VBox>
                                     </VBox>
                                     <VBox
-                                        visible="{= !!${q1>Quest216} &amp;&amp; ${q1>Quest216} !== '18' }">
+                                        visible="{= parseInt(${q1>Quest216}, 10) > 0 &amp;&amp; ${q1>Quest216} !== '18' }">
                                         <layoutData>
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
