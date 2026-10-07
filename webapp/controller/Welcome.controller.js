@@ -33,7 +33,26 @@ sap.ui.define([
         onBeforeRebindTable(oEvent) {
             const oBindingParams = oEvent.getParameter("bindingParams")
             oBindingParams.parameters = { ...oBindingParams.parameters, operationMode: "Client" }
+            this._toUtcDateFilters(oBindingParams.filters)
             oBindingParams.filters.push(OWNER_FILTER)
+        },
+
+        // DtQuest is a date saved as UTC midnight (Edm.DateTime without display-format Date). The dates chosen in the
+        // filter bar are local (in Brazil midnight = 03:00 UTC), so they are moved to the same calendar day in UTC
+        _toUtcDateFilters(aFilters) {
+            const toUtc = (vValue, bEndOfDay) => (vValue instanceof Date
+                ? new Date(Date.UTC(vValue.getFullYear(), vValue.getMonth(), vValue.getDate(),
+                    ...(bEndOfDay ? [23, 59, 59, 999] : [0, 0, 0, 0])))
+                : vValue)
+
+            aFilters.forEach((oFilter) => {
+                if (oFilter.aFilters) {
+                    this._toUtcDateFilters(oFilter.aFilters)
+                } else if (oFilter.sPath === "DtQuest") {
+                    oFilter.oValue1 = toUtc(oFilter.oValue1, oFilter.sOperator === "LE")
+                    oFilter.oValue2 = toUtc(oFilter.oValue2, true)
+                }
+            })
         },
 
         onRefreshPage(oEvent) {

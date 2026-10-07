@@ -13,14 +13,14 @@
                 <Label text="{i18n>questionnaire.upload.description}" />
                 <Input id="uploadDescription" maxLength="60" />
                 <Label text="{i18n>questionnaire.upload.file}" />
-                <u:FileUploader id="uploadFile" width="100%" sendXHR="true" useMultipart="false"
-                    httpRequestMethod="Post" uploadComplete=".onUploadComplete"
+                <!-- Only chooses the file: it is sent with the questionnaire (onConfirmDocument / _uploadPendingFiles) -->
+                <u:FileUploader id="uploadFile" width="100%" change=".onFileChange"
                     placeholder="{i18n>questionnaire.upload.filePlaceholder}" />
             </form:SimpleForm>
         </content>
         <beginButton>
             <Button id="uploadDocumentButton" text="{i18n>questionnaire.upload.send}" type="Emphasized"
-                press=".onUploadDocument" />
+                press=".onConfirmDocument" />
         </beginButton>
         <endButton>
             <Button text="{i18n>messages.close}" press=".onCloseUploadDialog" />

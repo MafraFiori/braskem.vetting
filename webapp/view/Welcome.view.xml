@@ -17,7 +17,13 @@
                     entitySet="QuestionnairesSet"
                     enableBasicSearch="false"
                     basicSearchFieldName="IdQuest"
-                    persistencyKey="UniqueAndStablePersistencyKey" />
+                    persistencyKey="UniqueAndStablePersistencyKey">
+                    <sfb:controlConfiguration>
+                        <!-- Values from the value list of the annotations (StatusSet) -->
+                        <sfb:ControlConfiguration key="StVettQuest" controlType="dropDownList" />
+                        <sfb:ControlConfiguration key="DtQuest" controlType="date" filterType="interval" />
+                    </sfb:controlConfiguration>
+                </sfb:SmartFilterBar>
 
             </f:DynamicPageHeader>
         </f:header>
@@ -53,8 +59,19 @@
                 </smartTable:customToolbar>
                 <Table growing="true" growingThreshold="100" mode="None" id="table2"
                     enableBusyIndicator="true" busyIndicatorDelay="100"
-                    core:require="{ formatter: 'braskem/zui5vetting/model/formatter' }">
+                    core:require="{
+                        formatter: 'braskem/zui5vetting/model/formatter',
+                        DateType: 'sap/ui/model/odata/type/DateTime'
+                    }">
                     <columns>
+                        <!-- DtQuest is a date saved as UTC midnight: shown as a date (otherwise previous day 21:00 in Brazil) -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey": "DtQuest", "leadingProperty": "DtQuest", "sortProperty": "DtQuest", "filterProperty": "DtQuest", "type": "date", "columnIndex": 2}' />
+                            </customData>
+                            <Text text="{i18n>welcome.changedOn}" />
+                        </Column>
                         <!-- Same columnKey as the property: replaces the generated "Status" column -->
                         <Column width="10rem" minScreenWidth="Tablet" demandPopin="true">
                             <customData>
@@ -74,6 +91,7 @@
                     <items>
                         <ColumnListItem>
                             <cells>
+                                <Text text="{path: 'DtQuest', type: 'DateType', constraints: {displayFormat: 'Date'}}" />
                                 <ObjectStatus
                                     text="{parts: ['StVettQuest', 'StVettQuestDesc'], formatter: '.formatStatusText'}"
                                     state="{path: 'StVettQuest', formatter: 'formatter.statusState'}"

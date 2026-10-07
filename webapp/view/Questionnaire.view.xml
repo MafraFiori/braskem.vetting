@@ -1818,20 +1818,16 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
-                            <!-- Files of the questionnaire (Questionnaires_filesSet, key IdQuest + Filetype).
-                                 Bound by the controller (_bindFiles) once the questionnaire has an IdQuest -->
-                            <Table id="filesTable"
-                                items="{path: '/Questionnaires_filesSet', suspended: true, templateShareable: true}"
+                            <!-- Files of the questionnaire (Questionnaires_filesSet, key IdQuest + Filetype):
+                                 saved ones + pending ones, sent when the questionnaire is saved -->
+                            <Table id="filesTable" items="{files>/items}"
                                 noDataText="{i18n>questionnaire.noDocuments}">
                                 <headerToolbar>
                                     <OverflowToolbar style="Clear">
-                                        <Text text="{i18n>questionnaire.upload.saveFirst}"
-                                            visible="{= ${form>/editable} &amp;&amp; !${form>/idQuest} }" />
                                         <ToolbarSpacer />
                                         <Button text="{i18n>questionnaire.addDocument}"
                                             icon="sap-icon://add" type="Emphasized"
                                             visible="{form>/editable}"
-                                            enabled="{= !!${form>/idQuest} }"
                                             press=".onAddDocument" />
                                     </OverflowToolbar>
                                 </headerToolbar>
@@ -1852,13 +1848,19 @@
                                 <items>
                                     <ColumnListItem vAlign="Middle">
                                         <cells>
-                                            <Link text="{Filename}" press=".onDownloadDocument" />
-                                            <Text text="{DescrFiletype}" />
-                                            <Text text="{Descricao}" />
+                                            <VBox>
+                                                <Link text="{files>Filename}" enabled="{= !${files>pending} }"
+                                                    press=".onDownloadDocument" />
+                                                <ObjectStatus text="{i18n>questionnaire.upload.pending}"
+                                                    state="Warning" visible="{files>pending}" />
+                                            </VBox>
+                                            <Text text="{files>DescrFiletype}" />
+                                            <Text text="{files>Descricao}" />
                                             <HBox justifyContent="End">
                                                 <Button icon="sap-icon://download"
                                                     type="Transparent"
                                                     tooltip="{i18n>common.download}"
+                                                    visible="{= !${files>pending} }"
                                                     press=".onDownloadDocument" />
                                                 <Button icon="sap-icon://delete" type="Transparent"
                                                     tooltip="{i18n>common.delete}"
