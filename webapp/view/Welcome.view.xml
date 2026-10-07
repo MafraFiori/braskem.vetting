@@ -48,25 +48,30 @@
                     enableBusyIndicator="true" busyIndicatorDelay="100"
                     core:require="{ formatter: 'braskem/zui5vetting/model/formatter' }">
                     <columns>
+                        <!-- Same columnKey as the property: replaces the generated "Status" column -->
+                        <Column width="10rem">
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey": "StVettQuest", "leadingProperty": "StVettQuest", "additionalProperty": "StVettQuestDesc", "sortProperty": "StVettQuest", "filterProperty": "StVettQuest", "columnIndex": 6}' />
+                            </customData>
+                            <Text text="{i18n>welcome.status}" />
+                        </Column>
                         <Column width="9rem">
                             <customData>
                                 <core:CustomData key="p13nData"
-                                    value='\{"columnKey": "actions", "columnIndex": 0}' />
+                                    value='\{"columnKey": "actions", "columnIndex": 7}' />
                             </customData>
                             <Text text="{i18n>welcome.actions}" />
-                        </Column>
-                        <!-- Same columnKey as the property: replaces the generated "Status" column -->
-                        <Column>
-                            <customData>
-                                <core:CustomData key="p13nData"
-                                    value='\{"columnKey": "StVettQuest", "leadingProperty": "StVettQuest", "additionalProperty": "StVettQuestDesc", "sortProperty": "StVettQuest", "filterProperty": "StVettQuest", "columnIndex": 5}' />
-                            </customData>
-                            <Text text="{i18n>welcome.status}" />
                         </Column>
                     </columns>
                     <items>
                         <ColumnListItem>
                             <cells>
+                                <ObjectStatus
+                                    text="{parts: ['StVettQuest', 'StVettQuestDesc'], formatter: '.formatStatusText'}"
+                                    state="{path: 'StVettQuest', formatter: 'formatter.statusState'}"
+                                    icon="{path: 'StVettQuest', formatter: 'formatter.statusIcon'}"
+                                    inverted="true" />
                                 <HBox>
                                     <Button icon="sap-icon://show" type="Transparent"
                                         tooltip="{i18n>welcome.display}" press=".onDisplayQuestionnaire" />
@@ -77,11 +82,6 @@
                                     <Button icon="sap-icon://copy" type="Transparent"
                                         tooltip="{i18n>welcome.copy}" press=".onCopyQuestionnaire" />
                                 </HBox>
-                                <ObjectStatus
-                                    text="{parts: ['StVettQuest', 'StVettQuestDesc'], formatter: '.formatStatusText'}"
-                                    state="{path: 'StVettQuest', formatter: 'formatter.statusState'}"
-                                    icon="{path: 'StVettQuest', formatter: 'formatter.statusIcon'}"
-                                    inverted="true" />
                             </cells>
                         </ColumnListItem>
                     </items>
