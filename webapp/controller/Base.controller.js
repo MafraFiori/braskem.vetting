@@ -1,7 +1,8 @@
 sap.ui.define([
   "sap/ui/core/mvc/Controller",
-  "sap/ui/core/Fragment"
-], (BaseController, Fragment) => {
+  "sap/ui/core/Fragment",
+  "sap/ui/core/EventBus"
+], (BaseController, Fragment, EventBus) => {
   "use strict";
 
   return BaseController.extend("braskem.zui5vetting.controller.Base", {
@@ -15,9 +16,43 @@ sap.ui.define([
     },
 
     // ---- Messages (MessageView dialog over the "messages" model of the Component) ----
+    // Every message of the app goes to the messages button (no MessageBox / MessageToast)
 
     addMessage(mMessage) {
         this.getOwnerComponent().addMessage(mMessage)
+    },
+
+    // Call in onInit / onExit of the views that have the messages button
+    attachMessages() {
+        EventBus.getInstance().subscribe("messages", "added", this._onMessageAdded, this)
+    },
+
+    detachMessages() {
+        EventBus.getInstance().unsubscribe("messages", "added", this._onMessageAdded, this)
+    },
+
+    // Errors and warnings open the dialog, only in the view being displayed; success / info just update the button
+    _onMessageAdded(sChannel, sEvent, oData) {
+        if (!["Error", "Warning"].includes(oData?.message?.type)) {
+            return
+        }
+        const oApp = this.getOwnerComponent().getRootControl()?.byId("app")
+        if (oApp && oApp.getCurrentPage() !== this.getView()) {
+            return
+        }
+        this.openMessageDialog()
+    },
+
+    // Colour of the messages button: the most severe message type
+    formatMessageButtonType(aMessages) {
+        const aTypes = (aMessages || []).map((oMessage) => oMessage.type)
+        if (aTypes.includes("Error")) {
+            return "Negative"
+        }
+        if (aTypes.includes("Warning")) {
+            return "Critical"
+        }
+        return aTypes.length ? "Success" : "Default"
     },
 
     onMessagePopoverPress() {

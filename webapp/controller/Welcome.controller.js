@@ -13,12 +13,18 @@ sap.ui.define([
 
         onInit() {
             this.getRouter().getRoute("RouteWelcome").attachPatternMatched(this._onWelcomeMatched, this)
+            this.attachMessages()
+        },
+
+        onExit() {
+            this.detachMessages()
         },
 
         _onWelcomeMatched() {
             const oSmartTable = this.byId("smartTable")
             if (oSmartTable.isInitialised()) {
-                oSmartTable.rebindTable()
+                // Forced: the filters did not change, but a questionnaire may have been saved
+                oSmartTable.rebindTable(true)
             }
         },
 
@@ -32,7 +38,7 @@ sap.ui.define([
 
         onRefreshPage(oEvent) {
             let SmartTable = this.getView().byId("smartTable")
-            SmartTable.rebindTable()
+            SmartTable.rebindTable(true)
         },
 
         onCreateQuestionnaires(oEvent) {

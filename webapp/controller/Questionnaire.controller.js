@@ -1,13 +1,10 @@
 sap.ui.define([
     "./Base.controller",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageBox",
-    "sap/m/MessageToast",
-    "sap/ui/core/EventBus",
     "sap/ui/core/Element",
     "sap/ui/core/Messaging",
     "braskem/zui5vetting/model/fieldFormats"
-], (BaseController, JSONModel, MessageBox, MessageToast, EventBus, Element, Messaging, fieldFormats) => {
+], (BaseController, JSONModel, Element, Messaging, fieldFormats) => {
     "use strict";
 
     // The form reads two entities: q1> = Questionnaires_1Set (sections 1-6), q2> = Questionnaires_2Set (sections 7-13)
@@ -59,8 +56,8 @@ sap.ui.define([
             // Lengths / precision / scale of the fields from the service metadata
             fieldFormats.apply(oView, oModel, Object.fromEntries(Object.entries(ENTITIES).map(([sName, oEntity]) => [sName, oEntity.path.slice(1)])))
 
-            // Opens the MessageView whenever a new message arrives (OData errors, save errors)
-            EventBus.getInstance().subscribe("messages", "added", this.openMessageDialog, this)
+            // Opens the MessageView when an error / warning arrives (OData errors, save errors)
+            this.attachMessages()
 
             this._mContexts = {}
             this.getRouter().getRoute("RouteCreateQuestionnaires").attachPatternMatched(this.newObject, this)
@@ -68,7 +65,7 @@ sap.ui.define([
         },
 
         onExit() {
-            EventBus.getInstance().unsubscribe("messages", "added", this.openMessageDialog, this)
+            this.detachMessages()
         },
 
         newObject() {
@@ -248,11 +245,11 @@ sap.ui.define([
                 await this._submitEntity("q2")
 
                 if (sStatus === STATUS.DRAFT) {
-                    MessageToast.show(this.getText("questionnaire.msg.draftSaved", [sIdQuest]))
+                    this.addMessage({ type: "Success", title: this.getText("questionnaire.msg.draftSaved", [sIdQuest]) })
                 } else {
-                    MessageBox.success(this.getText("questionnaire.msg.saveSuccess", [sIdQuest]), {
-                        onClose: () => this.navTo("RouteWelcome")
-                    })
+                    // The message stays in the messages button of the list
+                    this.addMessage({ type: "Success", title: this.getText("questionnaire.msg.saveSuccess", [sIdQuest]) })
+                    this.navTo("RouteWelcome")
                 }
             } catch (oError) {
                 // Failed OData requests are already added by the requestFailed handler (models.attachErrorHandling)

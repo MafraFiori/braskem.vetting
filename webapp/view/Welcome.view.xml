@@ -40,6 +40,11 @@
                 <smartTable:customToolbar>
                     <OverflowToolbar>
                         <ToolbarSpacer />
+                        <Button icon="sap-icon://message-popup"
+                            type="{path: 'messages>/messages', formatter: '.formatMessageButtonType'}"
+                            text="{= ${messages>/messages}.length > 0 ? ${messages>/messages}.length : '' }"
+                            tooltip="{i18n>messages.title}"
+                            press=".onMessagePopoverPress" />
                         <Button text="Create questionnaire" icon="sap-icon://add" 
                         press="onCreateQuestionnaires"/>
                         <Button text="Refresh page" icon="sap-icon://synchronize"

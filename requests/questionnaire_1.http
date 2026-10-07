@@ -194,3 +194,7 @@ Accept: application/json
 ###
 GET {{host}}{{service}}/Questionnaires_2Set('{{baseline.response.body.$.d.IdQuest}}')
 Accept: application/json
+
+### 12. List (Welcome): questionnaires of the owner, as returned by the RFC of QuestionnairesSet
+GET {{host}}{{service}}/QuestionnairesSet?$filter=LoginOwner eq 'SVC_BTP'&$select=IdQuest,LoginOwner,StVettQuest,DtQuest
+Accept: application/json
