@@ -27,7 +27,8 @@
                 entitySet="QuestionnairesSet"
                 smartFilterId="smartFilterBar"
                 tableType="Table"
-                enableAutoColumnWidth="true"
+                enableAutoColumnWidth="false"
+                demandPopin="true"
                 useTablePersonalisation="true"
                 header="{i18n>Results}"
                 requestAtLeastFields="IdQuest,StVettQuest,StVettQuestDesc"
@@ -49,7 +50,7 @@
                     core:require="{ formatter: 'braskem/zui5vetting/model/formatter' }">
                     <columns>
                         <!-- Same columnKey as the property: replaces the generated "Status" column -->
-                        <Column width="10rem">
+                        <Column width="10rem" minScreenWidth="Tablet" demandPopin="true">
                             <customData>
                                 <core:CustomData key="p13nData"
                                     value='\{"columnKey": "StVettQuest", "leadingProperty": "StVettQuest", "additionalProperty": "StVettQuestDesc", "sortProperty": "StVettQuest", "filterProperty": "StVettQuest", "columnIndex": 6}' />
