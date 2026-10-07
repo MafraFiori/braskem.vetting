@@ -86,6 +86,13 @@
                     <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst"/>
                 </Annotation>
             </Annotations>
+            <!-- Value help of the status (StatusSet, entity type Status): description shown in the dropdown -->
+            <Annotations Target="SAP.Status/DomvalueL">
+                <Annotation Term="Common.Label" String="Status"/>
+                <Annotation Term="Common.Text" Path="Ddtext">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst"/>
+                </Annotation>
+            </Annotations>
             <Annotations Target="SAP.Questionnaires/StVettQuestDesc">
                 <Annotation Term="Common.Label" String="Status Description"/>
             </Annotations>

@@ -20,7 +20,8 @@
                     persistencyKey="UniqueAndStablePersistencyKey">
                     <sfb:controlConfiguration>
                         <!-- Values from the value list of the annotations (StatusSet) -->
-                        <sfb:ControlConfiguration key="StVettQuest" controlType="dropDownList" />
+                        <sfb:ControlConfiguration key="StVettQuest" controlType="dropDownList"
+                            displayBehaviour="descriptionAndId" />
                         <sfb:ControlConfiguration key="DtQuest" controlType="date" filterType="interval" />
                     </sfb:controlConfiguration>
                 </sfb:SmartFilterBar>
