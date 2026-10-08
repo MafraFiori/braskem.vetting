@@ -40,8 +40,11 @@ sap.ui.define([
     // Controls checked by the required-field validation
     const FIELD_TYPES = ["sap.m.InputBase", "sap.m.Select", "sap.m.RadioButtonGroup"]
 
-    // Files of the questionnaire (section 14). Deletes are sent at once (not deferred like the questionnaire changes)
-    const FILES = { path: "/Questionnaires_filesSet", groupId: "files" }
+    // Files of the questionnaire (section 14):
+    // - path: media entity, used for upload (CREATE_STREAM), download ($value / GET_STREAM) and delete
+    // - listPath: same data without media, used to list the files (a media entity set cannot be listed without a content type)
+    // Deletes are sent at once (not deferred like the questionnaire changes)
+    const FILES = { path: "/Questionnaires_filesSet", listPath: "/FilesSet", groupId: "files" }
 
     return BaseController.extend("braskem.zui5vetting.controller.Questionnaire", {
 
@@ -401,7 +404,7 @@ sap.ui.define([
             const aPending = oFiles.getProperty("/items").filter((oFile) => oFile.pending)
 
             return new Promise((resolve) => {
-                this.getOwnerComponent().getModel().read(FILES.path, {
+                this.getOwnerComponent().getModel().read(FILES.listPath, {
                     filters: [new Filter("IdQuest", FilterOperator.EQ, sIdQuest)],
                     success: (oData) => {
                         oFiles.setProperty("/items", [...oData.results.map((oFile) => ({ ...oFile, pending: false })), ...aPending])
