@@ -24,7 +24,7 @@
             <uxap:ObjectPageDynamicHeaderTitle>
                 <uxap:breadcrumbs>
                     <Breadcrumbs currentLocationText="{i18n>pages.VettingQuestionnaires}">
-                        <Link text="{i18n>menu.Welcome}" press="navTo('RouteWelcome')" />
+                        <Link text="{i18n>menu.Welcome}" press=".onNavHome" />
                     </Breadcrumbs>
                 </uxap:breadcrumbs>
                 <uxap:heading>

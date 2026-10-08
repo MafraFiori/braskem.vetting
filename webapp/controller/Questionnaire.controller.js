@@ -7,9 +7,13 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/m/library",
+    "sap/m/Dialog",
+    "sap/m/Button",
+    "sap/m/Text",
     "braskem/zui5vetting/model/fieldFormats",
     "braskem/zui5vetting/model/models"
-], (BaseController, JSONModel, Element, Messaging, Fragment, Filter, FilterOperator, mobileLibrary, fieldFormats, models) => {
+], (BaseController, JSONModel, Element, Messaging, Fragment, Filter, FilterOperator, mobileLibrary, Dialog, Button, Text,
+    fieldFormats, models) => {
     "use strict";
 
     // The form reads two entities: q1> = Questionnaires_1Set (sections 1-6), q2> = Questionnaires_2Set (sections 7-13)
@@ -71,6 +75,24 @@ sap.ui.define([
             // Opens the MessageView when an error / warning arrives (OData errors, save errors)
             this.attachMessages()
 
+            // Unsaved changes: any change made by the user in a field of the form
+            oView.findAggregatedObjects(true, (oControl) => oControl.isA([...FIELD_TYPES, "sap.m.CheckBox"]))
+                .forEach((oField) => {
+                    const sEvent = oField.isA(["sap.m.RadioButtonGroup", "sap.m.CheckBox"]) ? "select" : "change"
+                    oField.attachEvent(sEvent, this._onFieldChanged, this)
+                    if (oField.isA(["sap.m.Input", "sap.m.TextArea"])) {
+                        oField.attachLiveChange(this._onFieldChanged, this)
+                    }
+                })
+            // Closing / reloading the browser tab
+            this._fnBeforeUnload = (oEvent) => {
+                if (this._isDisplayed() && this._hasUnsavedChanges()) {
+                    oEvent.preventDefault()
+                    oEvent.returnValue = ""
+                }
+            }
+            window.addEventListener("beforeunload", this._fnBeforeUnload)
+
             // Files of section 14: the ones already in the backend + the ones added and not sent yet (pending: true)
             oView.setModel(new JSONModel({ items: [] }), "files")
 
@@ -81,6 +103,8 @@ sap.ui.define([
 
         onExit() {
             this.detachMessages()
+            window.removeEventListener("beforeunload", this._fnBeforeUnload)
+            this._setDirty(false)
         },
 
         newObject() {
@@ -134,6 +158,7 @@ sap.ui.define([
                 q5_2NotApplicable: false,
                 editable: sMode !== MODE.DISPLAY
             })
+            this._setDirty(false)
             this.getView().getModel("files").setData({ items: [] })
             Messaging.removeMessages(this._getValidationMessages())
             this.getView().findAggregatedObjects(true, (oControl) => oControl.isA(FIELD_TYPES))
@@ -289,6 +314,8 @@ sap.ui.define([
                 // 3rd: the files added in section 14, with the same IdQuest
                 const bFilesSent = await this._uploadPendingFiles(sIdQuest)
                 await this._loadFiles(sIdQuest)
+
+                this._setDirty(false)
 
                 if (sStatus === STATUS.DRAFT) {
                     this.addMessage({ type: "Success", title: this.getText("questionnaire.msg.draftSaved", [sIdQuest]) })
@@ -594,6 +621,72 @@ sap.ui.define([
                     this.addMessage({ type: "Success", title: this.getText("questionnaire.msg.documentDeleted", [oFile.Filename]) })
                     this._loadFiles(oFile.IdQuest)
                 }
+            })
+        },
+
+        // ---- Unsaved changes ----
+
+        _onFieldChanged() {
+            if (this.getView().getModel("form").getProperty("/editable")) {
+                this._setDirty(true)
+            }
+        },
+
+        // Also informs the Fiori launchpad, which then asks before leaving the app (shell back / home / other app)
+        _setDirty(bDirty) {
+            this._bDirty = bDirty
+            window.sap?.ushell?.Container?.setDirtyFlag?.(bDirty)
+        },
+
+        // Changed fields or files added and not sent yet
+        _hasUnsavedChanges() {
+            return this._bDirty || this.getView().getModel("files").getProperty("/items").some((oFile) => oFile.pending)
+        },
+
+        _isDisplayed() {
+            return this.getOwnerComponent().getRootControl()?.byId("app")?.getCurrentPage() === this.getView()
+        },
+
+        // Link "Home" of the header: asks before leaving with unsaved changes
+        async onNavHome() {
+            if (this._hasUnsavedChanges() && !(await this._confirmLeave())) {
+                return
+            }
+            this._setDirty(false)
+            this.navTo("RouteWelcome")
+        },
+
+        /**
+         * Asks whether to leave without saving.
+         * @returns {Promise<boolean>} true = leave without saving, false = keep editing
+         */
+        _confirmLeave() {
+            return new Promise((resolve) => {
+                const oDialog = new Dialog({
+                    type: "Message",
+                    state: "Warning",
+                    title: this.getText("questionnaire.unsaved.title"),
+                    content: new Text({ text: this.getText("questionnaire.unsaved.text") }),
+                    beginButton: new Button({
+                        text: this.getText("questionnaire.unsaved.leave"),
+                        type: "Emphasized",
+                        press: () => {
+                            resolve(true)
+                            oDialog.close()
+                        }
+                    }),
+                    endButton: new Button({
+                        text: this.getText("questionnaire.unsaved.stay"),
+                        press: () => oDialog.close()
+                    }),
+                    // Escape / "Keep editing": stays on the questionnaire
+                    afterClose: () => {
+                        resolve(false)
+                        oDialog.destroy()
+                    }
+                })
+                this.getView().addDependent(oDialog)
+                oDialog.open()
             })
         },
 
