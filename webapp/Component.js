@@ -24,6 +24,7 @@ sap.ui.define([
 
             // app messages, shown by the MessageView dialog
             this._aRecentMessageKeys = []
+            this._aIgnoredRequests = []
             this.setModel(new JSONModel({ messages: [] }), "messages")
             models.attachErrorHandling(this.getModel(), this)
 
@@ -56,6 +57,22 @@ sap.ui.define([
             oMessagesModel.setProperty("/messages", [oNewMessage, ...oMessagesModel.getProperty("/messages")])
 
             EventBus.getInstance().publish("messages", "added", { message: oNewMessage })
+        },
+
+        /**
+         * Failure of a request that the caller expects and handles (e.g. part 2 not created yet): not added to the messages.
+         * @param {string} sUrlPart part of the request URL, e.g. "Questionnaires_2Set('005988')"
+         * @returns {function} call it when the request is finished, to stop ignoring
+         */
+        ignoreRequestFailure(sUrlPart) {
+            this._aIgnoredRequests.push(sUrlPart)
+            return () => {
+                this._aIgnoredRequests = this._aIgnoredRequests.filter((sIgnored) => sIgnored !== sUrlPart)
+            }
+        },
+
+        isRequestFailureIgnored(sUrl) {
+            return this._aIgnoredRequests.some((sIgnored) => (sUrl || "").includes(sIgnored))
         },
 
         clearMessages() {

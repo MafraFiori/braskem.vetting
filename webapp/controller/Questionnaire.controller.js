@@ -106,14 +106,18 @@ sap.ui.define([
 
                 if (sMode === MODE.COPY) {
                     this._createEntries(Object.fromEntries(Object.entries(mContexts).map(([sName, oContext]) => {
-                        const oData = { ...oContext.getObject() }
+                        const oData = { ...oContext?.getObject() }
                         NOT_COPIED.forEach((sField) => delete oData[sField])
                         return [sName, oData]
                     })))
                 } else {
                     Object.entries(mContexts).forEach(([sName, oContext]) => {
-                        this._mContexts[sName] = oContext
-                        oView.setBindingContext(oContext, sName)
+                        // Part 2 not created yet (draft): empty, created by the next save with the same IdQuest
+                        this._mContexts[sName] = oContext || this.getOwnerComponent().getModel().createEntry(ENTITIES[sName].path, {
+                            groupId: ENTITIES[sName].groupId,
+                            properties: { IdQuest: sIdQuest }
+                        })
+                        oView.setBindingContext(this._mContexts[sName], sName)
                     })
                     this._loadFiles(sIdQuest)
                 }
@@ -154,16 +158,37 @@ sap.ui.define([
             })
         },
 
-        // Reads Questionnaires_1 and Questionnaires_2 of the IdQuest from the backend
+        /**
+         * Reads Questionnaires_1 and Questionnaires_2 of the IdQuest from the backend.
+         * Part 2 only exists after the first complete save: for a draft ("Em Edição") it may be missing,
+         * then q2 is null and no error is shown. For the other status a missing part is an error.
+         * @returns {Promise<{q1: sap.ui.model.Context, q2: sap.ui.model.Context|null}>} rejected when not found
+         */
         async _readEntities(sIdQuest) {
-            const oModel = this.getOwnerComponent().getModel()
+            const oComponent = this.getOwnerComponent()
+            const oModel = oComponent.getModel()
             await oModel.metadataLoaded()
 
-            const aContexts = await Promise.all(Object.values(ENTITIES).map((oEntity) => new Promise((resolve, reject) => {
-                const sPath = oModel.createKey(oEntity.path, { IdQuest: sIdQuest })
-                oModel.createBindingContext(sPath, null, {}, (oContext) => (oContext ? resolve(oContext) : reject()), true)
-            })))
-            return Object.fromEntries(Object.keys(ENTITIES).map((sName, i) => [sName, aContexts[i]]))
+            const read = (oEntity) => new Promise((resolve) => {
+                oModel.createBindingContext(oModel.createKey(oEntity.path, { IdQuest: sIdQuest }), null, {}, resolve, true)
+            })
+
+            const oContext1 = await read(ENTITIES.q1)
+            if (!oContext1) {
+                throw new Error(`Questionnaire ${sIdQuest} not found`)
+            }
+
+            const bDraft = oContext1.getProperty("StatusQuest") === STATUS.DRAFT
+            const fnStopIgnoring = bDraft
+                ? oComponent.ignoreRequestFailure(oModel.createKey(ENTITIES.q2.path, { IdQuest: sIdQuest }).slice(1))
+                : () => {}
+            const oContext2 = await read(ENTITIES.q2)
+            fnStopIgnoring()
+
+            if (!oContext2 && !bDraft) {
+                throw new Error(`Part 2 of questionnaire ${sIdQuest} not found`)
+            }
+            return { q1: oContext1, q2: oContext2 }
         },
 
         // Throws away what was not saved for the entity: a new record not sent, or pending changes of an existing one

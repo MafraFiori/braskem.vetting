@@ -75,6 +75,10 @@ function (JSONModel, Device) {
                 if (!oResponse || Number(oResponse.statusCode) === 0) {
                     return
                 }
+                // Failure expected and handled by the caller (Component#ignoreRequestFailure)
+                if (oComponent.isRequestFailureIgnored(oEvent.getParameter("url"))) {
+                    return
+                }
                 oComponent.addMessage({
                     type: "Error",
                     title: oBundle.getText("messages.requestFailed", [oResponse.statusCode || "?"]),
