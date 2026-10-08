@@ -7,7 +7,7 @@
                 <Label text="{i18n>questionnaire.upload.filetype}" />
                 <!-- Document types from the backend value help; loaded when the dialog is opened -->
                 <Select id="uploadFiletype" width="100%" forceSelection="false"
-                    items="{path: '/FileTypesSet', templateShareable: false}">
+                    items="{path: '/TypeFilesSet', templateShareable: false}">
                     <core:ListItem key="{DomvalueL}" text="{Ddtext}" />
                 </Select>
                 <Label text="{i18n>questionnaire.upload.description}" />
