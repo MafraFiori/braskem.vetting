@@ -1,0 +1,27 @@
+trigger:
+  branches:
+    include:
+      - homolog
+  paths:
+    exclude:
+      - /pipelines
+
+pool:
+  vmImage: ubuntu-latest
+
+resources:
+  repositories:
+  - repository: templates
+    type: git
+    name: DevChapter/pipelines-templates
+    ref: refs/tags/v1
+
+steps:
+- checkout: self
+
+- template: templates/btp-node.yaml@templates
+  parameters:
+    nodeVersion: '20.x'
+    cfSpace: "Vetting-QAS"
+    #Fortify
+    runFortifyScan: false
