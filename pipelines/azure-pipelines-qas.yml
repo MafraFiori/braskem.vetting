@@ -14,14 +14,12 @@ resources:
   - repository: templates
     type: git
     name: DevChapter/pipelines-templates
-    ref: refs/tags/v1
+    ref: refs/tags/v2
 
 steps:
 - checkout: self
 
 - template: templates/btp-node.yaml@templates
   parameters:
-    nodeVersion: '20.x'
+    cfOrg: "$(CF-ORG-QAS)"
     cfSpace: "Vetting-QAS"
-    #Fortify
-    runFortifyScan: false
