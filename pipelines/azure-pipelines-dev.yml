@@ -14,7 +14,7 @@ resources:
   - repository: templates
     type: git
     name: DevChapter/pipelines-templates
-    ref: refs/tags/v2
+    ref: refs/tags/v1
 
 steps:
 - checkout: self
