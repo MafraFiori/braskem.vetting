@@ -21,5 +21,4 @@ steps:
 
 - template: templates/btp-node.yaml@templates
   parameters:
-    cfOrg: "$(CF-ORG-QAS)"
     cfSpace: "Vetting-QAS"
