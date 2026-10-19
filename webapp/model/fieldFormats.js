@@ -1,14 +1,16 @@
 sap.ui.define([
     "sap/base/Log",
     "sap/ui/model/odata/type/Decimal",
-    "braskem/zui5vetting/model/ZeroAsEmptyType"
-], (Log, Decimal, ZeroAsEmptyType) => {
+    "braskem/zui5vetting/model/ZeroAsEmptyType",
+    "braskem/zui5vetting/model/EmailType"
+], (Log, Decimal, ZeroAsEmptyType, EmailType) => {
     "use strict";
 
     // Formats of the form fields taken from the service metadata, so the screen follows the backend
     // (lengths, precision and scale) without hard-coding them in the view:
     // - Edm.String  -> maxLength on Input/TextArea; on Select it is kept to be checked before saving
     //                  Selects and digit-only inputs show NUMC "00"/"000" as empty (ZeroAsEmptyType)
+    //                  Inputs of type "Email" only accept an e-mail address (EmailType)
     // - Edm.Decimal -> odata Decimal type with the precision/scale of the property (e.g. 6,3 = up to 3 integer digits)
 
     function getProperty(oMetaModel, sEntitySet, sProperty) {
@@ -17,10 +19,20 @@ sap.ui.define([
         return oEntityType && oMetaModel.getODataProperty(oEntityType, sProperty)
     }
 
-    function applyToField(oField, oPart, oProperty) {
+    function applyToField(oField, oPart, oProperty, oBundle) {
         const iMaxLength = parseInt(oProperty.maxLength, 10)
 
-        if (oProperty.type === "Edm.String" && iMaxLength) {
+        if (oProperty.type === "Edm.String" && oField.getType?.() === "Email") {
+            if (iMaxLength) {
+                oField.setMaxLength(iMaxLength)
+            }
+            oField.bindProperty("value", {
+                path: oPart.path,
+                model: oPart.model,
+                type: new EmailType({ invalidText: oBundle?.getText("questionnaire.msg.invalidEmail") },
+                    iMaxLength ? { maxLength: iMaxLength } : {})
+            })
+        } else if (oProperty.type === "Edm.String" && iMaxLength) {
             if (oField.isA("sap.m.Select")) {
                 oField.data("maxLength", iMaxLength)
                 oField.bindProperty("selectedKey", { path: oPart.path, model: oPart.model, type: new ZeroAsEmptyType() })
@@ -63,6 +75,7 @@ sap.ui.define([
             const oMetaModel = oModel.getMetaModel()
 
             return oMetaModel.loaded().then(() => {
+                const oBundle = oView.getModel("i18n")?.getResourceBundle()
                 oView.findAggregatedObjects(true, (oControl) => oControl.isA(["sap.m.Input", "sap.m.TextArea", "sap.m.Select"]))
                     .forEach((oField) => {
                         const oInfo = oField.getBindingInfo(oField.isA("sap.m.Select") ? "selectedKey" : "value")
@@ -73,7 +86,7 @@ sap.ui.define([
 
                         const oProperty = getProperty(oMetaModel, mEntitySets[oPart.model], oPart.path)
                         if (oProperty) {
-                            applyToField(oField, oPart, oProperty)
+                            applyToField(oField, oPart, oProperty, oBundle)
                         } else {
                             Log.warning(`Property ${oPart.path} not found in ${mEntitySets[oPart.model]}`, null, "braskem.zui5vetting")
                         }
