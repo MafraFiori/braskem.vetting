@@ -19,9 +19,19 @@
                     basicSearchFieldName="IdQuest"
                     persistencyKey="UniqueAndStablePersistencyKey">
                     <sfb:controlConfiguration>
-                        <!-- Values from the value list of the annotations (StatusSet) -->
-                        <sfb:ControlConfiguration key="StVettQuest" controlType="dropDownList"
-                            displayBehaviour="descriptionAndId" />
+                        <!-- Status domain values with the same i18n texts as the list (the StatusSet value list
+                             shows the backend descriptions). The filter is added in onBeforeRebindTable -->
+                        <sfb:ControlConfiguration key="StVettQuest" label="{i18n>welcome.status}">
+                            <sfb:customControl>
+                                <MultiComboBox id="statusFilter" selectionFinish=".onStatusFilterChange">
+                                    <core:Item key="01" text="{i18n>status.01}" />
+                                    <core:Item key="02" text="{i18n>status.02}" />
+                                    <core:Item key="03" text="{i18n>status.03}" />
+                                    <core:Item key="04" text="{i18n>status.04}" />
+                                    <core:Item key="05" text="{i18n>status.05}" />
+                                </MultiComboBox>
+                            </sfb:customControl>
+                        </sfb:ControlConfiguration>
                         <sfb:ControlConfiguration key="DtQuest" controlType="date" filterType="interval" />
                     </sfb:controlConfiguration>
                 </sfb:SmartFilterBar>
