@@ -12,6 +12,12 @@ sap.ui.define([
     //                  Selects and digit-only inputs show NUMC "00"/"000" as empty (ZeroAsEmptyType)
     //                  Inputs of type "Email" only accept an e-mail address (EmailType)
     // - Edm.Decimal -> odata Decimal type with the precision/scale of the property (e.g. 6,3 = up to 3 integer digits)
+    // Numbers always use decimal comma (1.234,56), whatever the user's locale.
+    // app:scale="n" on an Input changes the decimal places: on an Edm.Decimal it keeps the integer digits
+    // (e.g. 4,2 with scale 0 = integers up to 2 digits); on an Edm.String it turns the text into a decimal number
+    // with n places, stored as "1234.50"
+
+    const NUMBER_FORMAT = { decimalSeparator: ",", groupingSeparator: "." }
 
     function getProperty(oMetaModel, sEntitySet, sProperty) {
         const oEntitySet = oMetaModel.getODataEntitySet(sEntitySet)
@@ -19,8 +25,20 @@ sap.ui.define([
         return oEntityType && oMetaModel.getODataProperty(oEntityType, sProperty)
     }
 
+    function bindDecimal(oField, oPart, iPrecision, iScale) {
+        // Text input: a Number input rejects the decimal comma
+        oField.setType?.("Text")
+        oField.bindProperty("value", {
+            path: oPart.path,
+            model: oPart.model,
+            type: new Decimal(NUMBER_FORMAT, { precision: iPrecision, scale: iScale })
+        })
+    }
+
     function applyToField(oField, oPart, oProperty, oBundle) {
         const iMaxLength = parseInt(oProperty.maxLength, 10)
+        // NaN when the field has no app:scale
+        const iScaleOverride = parseInt(oField.data("scale"), 10)
 
         if (oProperty.type === "Edm.String" && oField.getType?.() === "Email") {
             if (iMaxLength) {
@@ -32,6 +50,9 @@ sap.ui.define([
                 type: new EmailType({ invalidText: oBundle?.getText("questionnaire.msg.invalidEmail") },
                     iMaxLength ? { maxLength: iMaxLength } : {})
             })
+        } else if (oProperty.type === "Edm.String" && iMaxLength && Number.isInteger(iScaleOverride)) {
+            // Room for the decimal point in the stored text
+            bindDecimal(oField, oPart, iMaxLength - 1, iScaleOverride)
         } else if (oProperty.type === "Edm.String" && iMaxLength) {
             if (oField.isA("sap.m.Select")) {
                 oField.data("maxLength", iMaxLength)
@@ -49,16 +70,9 @@ sap.ui.define([
                 })
             }
         } else if (oProperty.type === "Edm.Decimal") {
-            // Text input: the Decimal type formats with the user's locale (decimal comma), which a Number input rejects
-            oField.setType?.("Text")
-            oField.bindProperty("value", {
-                path: oPart.path,
-                model: oPart.model,
-                type: new Decimal({}, {
-                    precision: parseInt(oProperty.precision, 10),
-                    scale: parseInt(oProperty.scale, 10) || 0
-                })
-            })
+            const iScale = parseInt(oProperty.scale, 10) || 0
+            const iFieldScale = Number.isInteger(iScaleOverride) ? iScaleOverride : iScale
+            bindDecimal(oField, oPart, parseInt(oProperty.precision, 10) - iScale + iFieldScale, iFieldScale)
         }
     }
 

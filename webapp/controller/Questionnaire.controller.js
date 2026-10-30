@@ -51,6 +51,10 @@ sap.ui.define([
     // - typesPath: document types (code DomvalueL, text Ddtext), used for the "Type" column and the upload dialog
     const FILES = { path: "/Questionnaires_filesSet", listPath: "/FilesSet", typesPath: "/TypeFilesSet", groupId: "files" }
 
+    // 2.15 Classification society: the "Others" value shows 2.15.1. Found by the text of the domain value
+    // (EN / PT / ES logon language), so the key of the domain is not hard-coded
+    const CLASS_SOCIETY = { path: "/CodSociedClassSet", othersText: /^(others?|outros?|otros?)$/i }
+
     return BaseController.extend("braskem.zui5vetting.controller.Questionnaire", {
 
         onInit() {
@@ -59,6 +63,9 @@ sap.ui.define([
 
             // UI-only state, without a field in the entities
             oView.setModel(new JSONModel(), "form")
+            // Values read once from the backend, kept between questionnaires
+            oView.setModel(new JSONModel({ classSocietyOthersKey: "" }), "config")
+            this._loadClassSocietyOthersKey()
 
             oModel.setDeferredGroups([...oModel.getDeferredGroups(), ...Object.values(ENTITIES).map((oEntity) => oEntity.groupId)])
             // Changes of records that already exist (edit, or a draft saved again) go to the same group as the create
@@ -444,6 +451,16 @@ sap.ui.define([
                     },
                     error: reject
                 })
+            })
+        },
+
+        _loadClassSocietyOthersKey() {
+            this.getOwnerComponent().getModel().read(CLASS_SOCIETY.path, {
+                success: (oData) => {
+                    const oOthers = oData.results.find((oValue) => CLASS_SOCIETY.othersText.test(oValue.Ddtext.trim()))
+                    this.getView().getModel("config").setProperty("/classSocietyOthersKey", oOthers?.DomvalueL || "")
+                }
+                // On error the reason was already added to the messages by the requestFailed handler
             })
         },
 

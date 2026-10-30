@@ -93,14 +93,14 @@
                             <form:FormElement label="{i18n>questionnaire.braskemContact}">
                                 <Input value="{q1>ReqName}"
                                     placeholder="{i18n>questionnaire.placeholder.braskemContactName}"
-                                    editable="false" />
+                                    editable="{form>/editable}" />
                             </form:FormElement>
                         </form:FormContainer>
                         <form:FormContainer>
                             <form:FormElement label="{i18n>questionnaire.braskemContactEmail}">
-                                <Input value="{q1>ReqSmtp}"
+                                <Input value="{q1>ReqSmtp}" type="Email"
                                     placeholder="{i18n>questionnaire.placeholder.braskemEmail}"
-                                    editable="false" />
+                                    editable="{form>/editable}" />
                             </form:FormElement>
                         </form:FormContainer>
                     </form:formContainers>
@@ -146,12 +146,41 @@
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
                                         <Label text="{i18n>questionnaire.q1_2}" required="true"
-                                            wrapping="true" />
-                                        <Select editable="{form>/editable}" selectedKey="{q1>Quest121}" width="100%"
-                                            forceSelection="false" class="vetCtrlS"
-                                            items="{/PonPortosSet}">
-                                            <core:ListItem key="{CodPorto}" text="{Nome}" />
-                                        </Select>
+                                            wrapping="true" app:requiredMode="any" />
+                                        <l:Grid defaultSpan="XL3 L3 M6 S12" containerQuery="true"
+                                            vSpacing="0.5" hSpacing="1" class="vetInnerGrid">
+                                            <l:content>
+                                                <Select editable="{form>/editable}" selectedKey="{q1>Quest121}" width="100%"
+                                                    forceSelection="false"
+                                                    items="{path: '/PonPortosSet', templateShareable: true}">
+                                                    <core:ListItem key="{CodPorto}" text="{Nome}" />
+                                                </Select>
+                                                <Select editable="{form>/editable}" selectedKey="{q1>Quest122}" width="100%"
+                                                    forceSelection="false"
+                                                    items="{path: '/PonPortosSet', templateShareable: true}">
+                                                    <core:ListItem key="{CodPorto}" text="{Nome}" />
+                                                </Select>
+                                                <Select editable="{form>/editable}" selectedKey="{q1>Quest123}" width="100%"
+                                                    forceSelection="false"
+                                                    items="{path: '/PonPortosSet', templateShareable: true}">
+                                                    <core:ListItem key="{CodPorto}" text="{Nome}" />
+                                                </Select>
+                                                <Select editable="{form>/editable}" selectedKey="{q1>Quest124}" width="100%"
+                                                    forceSelection="false"
+                                                    items="{path: '/PonPortosSet', templateShareable: true}">
+                                                    <layoutData>
+                                                        <l:GridData linebreakXL="true"
+                                                            linebreakL="true" />
+                                                    </layoutData>
+                                                    <core:ListItem key="{CodPorto}" text="{Nome}" />
+                                                </Select>
+                                                <Select editable="{form>/editable}" selectedKey="{q1>Quest125}" width="100%"
+                                                    forceSelection="false"
+                                                    items="{path: '/PonPortosSet', templateShareable: true}">
+                                                    <core:ListItem key="{CodPorto}" text="{Nome}" />
+                                                </Select>
+                                            </l:content>
+                                        </l:Grid>
                                     </VBox>
                                     <VBox class="vetField">
                                         <layoutData>
@@ -382,6 +411,17 @@
                                             items="{/CodSociedClassSet}">
                                             <core:ListItem key="{DomvalueL}" text="{Ddtext}" />
                                         </Select>
+                                    </VBox>
+                                    <VBox
+                                        visible="{= !!${config>/classSocietyOthersKey} &amp;&amp; ${q1>Quest215} === ${config>/classSocietyOthersKey} }">
+                                        <layoutData>
+                                            <l:GridData span="XL12 L12 M12 S12" />
+                                        </layoutData>
+                                        <VBox class="vetField">
+                                            <Label text="{i18n>questionnaire.q2_15_1}"
+                                                required="true" wrapping="true" />
+                                            <Input editable="{form>/editable}" value="{q1>Quest2151}" class="vetCtrlS" />
+                                        </VBox>
                                     </VBox>
                                     <VBox class="vetField">
                                         <layoutData>
@@ -665,20 +705,20 @@
                                                     <cells>
                                                         <Label text="{i18n>questionnaire.q4_4}"
                                                             required="true" wrapping="true" />
-                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest44A}" />
-                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest44B}" />
-                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest44C}" />
-                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest44D}" />
+                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest44A}" app:scale="0" />
+                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest44B}" app:scale="0" />
+                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest44C}" app:scale="0" />
+                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest44D}" app:scale="0" />
                                                     </cells>
                                                 </ColumnListItem>
                                                 <ColumnListItem vAlign="Middle">
                                                     <cells>
                                                         <Label text="{i18n>questionnaire.q4_5}"
                                                             required="true" wrapping="true" />
-                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest45A}" />
-                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest45B}" />
-                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest45C}" />
-                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest45D}" />
+                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest45A}" app:scale="0" />
+                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest45B}" app:scale="0" />
+                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest45C}" app:scale="0" />
+                                                        <Input editable="{form>/editable}" type="Number" value="{q1>Quest45D}" app:scale="0" />
                                                     </cells>
                                                 </ColumnListItem>
                                                 <ColumnListItem vAlign="Middle">
@@ -1182,8 +1222,7 @@
                                         <layoutData>
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
-                                        <Title text="{i18n>questionnaire.q8_10}" level="H6"
-                                            titleStyle="H6" wrapping="true" />
+                                        <Label text="{i18n>questionnaire.q8_10}" wrapping="true" />
                                     </VBox>
                                     <VBox class="vetField">
                                         <layoutData>
@@ -1275,7 +1314,7 @@
                                         <Label text="{i18n>questionnaire.q8_12}" required="true"
                                             wrapping="true" />
                                         <Input editable="{form>/editable}" value="{q2>Quest_8_1_2}" type="Number"
-                                            class="vetCtrlS" />
+                                            app:scale="2" class="vetCtrlS" />
                                     </VBox>
                                     <VBox class="vetField">
                                         <layoutData>
