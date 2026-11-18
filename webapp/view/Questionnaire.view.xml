@@ -1328,8 +1328,7 @@
                                         <layoutData>
                                             <l:GridData span="XL12 L12 M12 S12" />
                                         </layoutData>
-                                        <Title text="{i18n>questionnaire.q8_14}" level="H6"
-                                            titleStyle="H6" wrapping="true" />
+                                        <Label text="{i18n>questionnaire.q8_14}" wrapping="true" />
                                     </VBox>
                                     <VBox class="vetField">
                                         <layoutData>
@@ -1857,6 +1856,52 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection>
                         <uxap:blocks>
+                          <VBox>
+                            <!-- Required documents: rule of the type of contract (1.7) + type of vessel (2.5), see REQUIRED_FILES
+                                 in the controller. A row is shown only when its rule applies -->
+                            <MessageStrip type="Information" showIcon="true" class="sapUiSmallMarginBottom"
+                                text="{i18n>questionnaire.requiredDocuments.selectFirst}"
+                                visible="{= !${q1>Quest17} &amp;&amp; !${q1>Quest25} }" />
+                            <Table id="requiredFilesTable" items="{config>/requiredFileTypes}"
+                                visible="{= !!${q1>Quest17} || !!${q1>Quest25} }"
+                                class="sapUiMediumMarginBottom">
+                                <headerToolbar>
+                                    <OverflowToolbar style="Clear">
+                                        <Title text="{i18n>questionnaire.requiredDocuments}" level="H4" />
+                                    </OverflowToolbar>
+                                </headerToolbar>
+                                <infoToolbar>
+                                    <OverflowToolbar design="Info">
+                                        <Text text="{i18n>questionnaire.requiredDocuments.info}" wrapping="true" />
+                                    </OverflowToolbar>
+                                </infoToolbar>
+                                <columns>
+                                    <Column>
+                                        <Text text="{i18n>questionnaire.column.document}" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="{i18n>questionnaire.column.status}" />
+                                    </Column>
+                                    <Column hAlign="End" width="7rem">
+                                        <Text text="{i18n>questionnaire.column.actions}" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem vAlign="Middle"
+                                        visible="{parts: ['config>rule', 'q1>Quest17', 'q1>Quest25'], formatter: '.isRuleRequired'}">
+                                        <cells>
+                                            <Text text="{config>Ddtext}" />
+                                            <ObjectStatus
+                                                text="{parts: ['config>Filetype', 'files>/items'], formatter: '.formatRequiredFileStatus'}"
+                                                state="{parts: ['config>Filetype', 'files>/items'], formatter: '.formatRequiredFileState'}" />
+                                            <Button icon="sap-icon://add" type="Transparent"
+                                                tooltip="{i18n>questionnaire.addDocument}"
+                                                visible="{parts: ['config>Filetype', 'files>/items', 'form>/editable'], formatter: '.isRequiredFileAddable'}"
+                                                press=".onAddRequiredDocument" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
                             <!-- Files of the questionnaire (Questionnaires_filesSet, key IdQuest + Filetype):
                                  saved ones + pending ones, sent when the questionnaire is saved -->
                             <Table id="filesTable" items="{files>/items}"
@@ -1910,6 +1955,7 @@
                                     </ColumnListItem>
                                 </items>
                             </Table>
+                          </VBox>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>

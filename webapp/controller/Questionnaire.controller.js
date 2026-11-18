@@ -55,6 +55,23 @@ sap.ui.define([
     // (EN / PT / ES logon language), so the key of the domain is not hard-coded
     const CLASS_SOCIETY = { path: "/CodSociedClassSet", othersText: /^(others?|outros?|otros?)$/i }
 
+    // 14. Required documents (Braskem rule): the ones of the type of contract (1.7) + the ones of the type of vessel (2.5).
+    // Document types, contracts and vessel types are recognized by their key or English text (read with sap-language=EN),
+    // so the rule works in any logon language and the keys of the domains are not hard-coded.
+    // The order of the list on the screen is the order below
+    const REQUIRED_FILES = {
+        contractsPath: "/ContractKindsSet",
+        shipTypesPath: "/ShipTypesSet",
+        rules: {
+            // Every contract and vessel type: required as soon as 1.7 or 2.5 is filled
+            always: { files: [/class status/i, /port state/i, /q88/i] },
+            // Time Charter / Bareboat / Braskem Fleet (Spot / COA only need the "always" ones)
+            charter: { contract: /time\s*charter|bare\s*boat|braskem\s*fleet/i, files: [/cargo diagram/i, /fire fighting/i, /general arrangement/i, /manifold/i, /mooring/i] },
+            // Gas / Gas-Chemical (Chemical / OBO / Oil / Oil-Chemical / Others only need the "always" ones)
+            gas: { shipType: /gas/i, files: [/emergency closure/i, /test certificate/i] }
+        }
+    }
+
     return BaseController.extend("braskem.zui5vetting.controller.Questionnaire", {
 
         onInit() {
@@ -64,8 +81,9 @@ sap.ui.define([
             // UI-only state, without a field in the entities
             oView.setModel(new JSONModel(), "form")
             // Values read once from the backend, kept between questionnaires
-            oView.setModel(new JSONModel({ classSocietyOthersKey: "" }), "config")
+            oView.setModel(new JSONModel({ classSocietyOthersKey: "", requiredFileTypes: [], charterContracts: [], gasShipTypes: [] }), "config")
             this._loadClassSocietyOthersKey()
+            this._loadRequiredFilesConfig()
 
             oModel.setDeferredGroups([...oModel.getDeferredGroups(), ...Object.values(ENTITIES).map((oEntity) => oEntity.groupId)])
             // Changes of records that already exist (edit, or a draft saved again) go to the same group as the create
@@ -246,7 +264,7 @@ sap.ui.define([
         },
 
         onSaveSubmit() {
-            if (!this._validateFieldFormats() || !this._validateRequiredFields()) {
+            if (!this._validateFieldFormats() || !this._validateRequiredFields() || !this._validateRequiredFiles()) {
                 return
             }
             return this._save(STATUS.SUBMITTED)
@@ -466,6 +484,115 @@ sap.ui.define([
             })
         },
 
+        // ---- Section 14: required documents (REQUIRED_FILES) ----
+
+        /**
+         * Values of a value help in English (fetch with sap-language=EN, outside the ODataModel, so the texts
+         * of the Selects in the logon language are not overwritten). Falls back to the logon language.
+         * @returns {Promise<object[]>} entries with DomvalueL / Ddtext
+         */
+        async _readValuesEN(sPath) {
+            const oModel = this.getOwnerComponent().getModel()
+            try {
+                const oResponse = await fetch(`${oModel.sServiceUrl}${sPath}?$format=json&sap-language=EN`, {
+                    headers: { Accept: "application/json" },
+                    credentials: "same-origin"
+                })
+                if (!oResponse.ok) {
+                    throw new Error(oResponse.statusText)
+                }
+                return (await oResponse.json()).d.results
+            } catch {
+                return new Promise((resolve) => {
+                    oModel.read(sPath, {
+                        success: (oData) => resolve(oData.results),
+                        error: () => resolve([])
+                    })
+                })
+            }
+        },
+
+        // Which document types / contracts / vessel types each rule of REQUIRED_FILES refers to (config model)
+        async _loadRequiredFilesConfig() {
+            const { rules } = REQUIRED_FILES
+            const [aFileTypes, aContracts, aShipTypes, mTypeTexts] = await Promise.all([
+                this._readValuesEN(FILES.typesPath),
+                this._readValuesEN(REQUIRED_FILES.contractsPath),
+                this._readValuesEN(REQUIRED_FILES.shipTypesPath),
+                this._getFileTypeTexts()
+            ])
+            const keysMatching = (aValues, rText) => aValues
+                .filter((oValue) => rText.test(oValue.DomvalueL) || rText.test(oValue.Ddtext))
+                .map((oValue) => oValue.DomvalueL)
+
+            const aRequiredTypes = Object.entries(rules).flatMap(([sRule, oRule]) => oRule.files.flatMap((rFile) => {
+                const oType = aFileTypes.find((oValue) => rFile.test(oValue.Ddtext))
+                return oType ? [{ Filetype: oType.DomvalueL, Ddtext: mTypeTexts[oType.DomvalueL] || oType.Ddtext, rule: sRule }] : []
+            }))
+
+            this.getView().getModel("config").setData({
+                requiredFileTypes: aRequiredTypes,
+                charterContracts: keysMatching(aContracts, rules.charter.contract),
+                gasShipTypes: keysMatching(aShipTypes, rules.gas.shipType)
+            }, true)
+        },
+
+        // Whether a rule of REQUIRED_FILES applies to the type of contract (1.7) and type of vessel (2.5)
+        isRuleRequired(sRule, sContract, sShipType) {
+            const oConfig = this.getView().getModel("config")
+            switch (sRule) {
+                case "always":
+                    return !!(sContract || sShipType)
+                case "charter":
+                    return !!sContract && oConfig.getProperty("/charterContracts").includes(sContract)
+                case "gas":
+                    return !!sShipType && oConfig.getProperty("/gasShipTypes").includes(sShipType)
+                default:
+                    return false
+            }
+        },
+
+        // "sent" / "pending" / "missing" of a required document type, from the files of the questionnaire
+        _getFileStatus(sFiletype, aFiles) {
+            const oFile = (aFiles || []).find((oItem) => oItem.Filetype === sFiletype)
+            return !oFile ? "missing" : oFile.pending ? "pending" : "sent"
+        },
+
+        formatRequiredFileStatus(sFiletype, aFiles) {
+            return this.getText(`questionnaire.requiredDocuments.${this._getFileStatus(sFiletype, aFiles)}`)
+        },
+
+        formatRequiredFileState(sFiletype, aFiles) {
+            return { sent: "Success", pending: "Warning", missing: "Error" }[this._getFileStatus(sFiletype, aFiles)]
+        },
+
+        isRequiredFileAddable(sFiletype, aFiles, bEditable) {
+            return !!bEditable && this._getFileStatus(sFiletype, aFiles) === "missing"
+        },
+
+        // Submit: every required document of the contract / vessel type must be added (a pending one is sent by the save)
+        _validateRequiredFiles() {
+            const oContext = this._mContexts.q1
+            const sContract = oContext.getProperty("Quest17")
+            const sShipType = oContext.getProperty("Quest25")
+            const aFiles = this.getView().getModel("files").getProperty("/items")
+            const aMissing = this.getView().getModel("config").getProperty("/requiredFileTypes")
+                .filter((oType) => this.isRuleRequired(oType.rule, sContract, sShipType)
+                    && this._getFileStatus(oType.Filetype, aFiles) === "missing")
+
+            if (!aMissing.length) {
+                return true
+            }
+
+            this.addMessage({
+                type: "Error",
+                title: this.getText("questionnaire.msg.requiredFilesTitle", [aMissing.length]),
+                description: aMissing.map((oType) => oType.Ddtext).join("\n")
+            })
+            this._focusField(this.byId("requiredFilesTable"))
+            return false
+        },
+
         // ---- Section 14: files (Questionnaires_filesSet) ----
         // Added files stay pending on the screen and are sent when the questionnaire is saved (after part 1, before part 2),
         // with the IdQuest generated by the backend - also for a new questionnaire
@@ -564,6 +691,15 @@ sap.ui.define([
         },
 
         onAddDocument() {
+            this._openUploadDialog("")
+        },
+
+        // "Add" of a required document: the dialog opens with its type selected
+        onAddRequiredDocument(oEvent) {
+            this._openUploadDialog(oEvent.getSource().getBindingContext("config").getProperty("Filetype"))
+        },
+
+        _openUploadDialog(sFiletype) {
             if (!this._pUploadDialog) {
                 this._pUploadDialog = Fragment.load({
                     id: this.getView().getId(),
@@ -576,7 +712,7 @@ sap.ui.define([
             }
             this._pUploadDialog.then((oDialog) => {
                 this._oSelectedFile = null
-                this.byId("uploadFiletype").setSelectedKey("").setValueState("None")
+                this.byId("uploadFiletype").setSelectedKey(sFiletype).setValueState("None")
                 this.byId("uploadDescription").setValue("")
                 this.byId("uploadFile").clear().setValueState("None")
                 oDialog.open()
